@@ -1,8 +1,20 @@
 # Software Requirements 
 
-#### CamRent
+### CamRent
 
-### Dev Group 1
+> Version 0.1
+
+> lnwDev co. ltd
+
+> 08-15-2023
+
+<p>
+    <a href="https://github.com/bitcoindevkit/bdk-ffi/blob/master/LICENSE"><img alt="MIT or Apache-2.0 Licensed" src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg"/></a>
+    <a href="https://github.com/rushmi0/CamRent/pulse"><img alt="GitHub" src="https://github.com/bitcoindevkit/bdk-ffi/workflows/CI/badge.svg"></a>
+    <a href="https://discord.gg/advubF752t"><img alt="Chat on Discord" src="https://img.shields.io/discord/753336465005608961?logo=discord"></a>
+</p>
+
+### Prepared by Dev 1
  + 2013111089	 นายวัชรพล พงษ์วิลัย
  +  2113110668	 นายศุภวิชญ์ คมขำ
  + 2113110700	 นายอภิรักษ์ ฉิมหิรัญ
