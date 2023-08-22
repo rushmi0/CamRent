@@ -3,7 +3,7 @@
 ### CamRent
 
 <div align="center">
-  <span><img src="https://github.com/rushmi0/CamRent/assets/120770468/3a32f5b1-43e3-4349-afbe-4dc085270d97" height=512 width=512 /></span>
+  <span><img src="https://github.com/rushmi0/CamRent/assets/120770468/48fe12a9-e822-4050-aaab-11a518934344" height=512 width=512 /></span>
 </div>
 
 
