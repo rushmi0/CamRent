@@ -36,6 +36,14 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
 
 
 ****
+**Contact Table:**
+
+- ContactID (**PK**)
+  + Email
+  + PhoneNumber
+
+
+****
 **Address Table:**
 
 - AddressID (**PK**)
@@ -44,14 +52,6 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
     + Province
     + PostalNumber
     + StreetName
-
-
-****
-**Contact Table:**
-
-- ContactID (**PK**)
-    + Email
-    + PhoneNumber
 
 
 ****
@@ -71,6 +71,8 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
     + Quantity
     + Duration
     + CustomerID (**FK** from Customers)
+    + ContactID (**FK** from Customers)
+    + AddressID (**FK** from Customers)
 
 
 ****
