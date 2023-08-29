@@ -1,35 +1,38 @@
-<b style="color: #272323">Customers Table:</b>
+# Database Design
 
-- <b style="color: #98A8F8">CustomerID (Primary Key)</b>
+
+**Customers Table:**
+
+- CustomerID (**PK**)
     + UserName
     + FirstName
     + LastName
     + ImageProfile
     + AuthKey
-    + <b style="color: #FB2C72">ContactID (Foreign key from Contact)</b> 
-    + <b style="color: #FB2C72">AddressID (Foreign key from Address)</b>
+    + ContactID (**FK** from Contact)
+    + AddressID (**FK** from Address)
 
 
 ****
-<b style="color: #272323">Stores Table:</b>
+**Stores Table:**
 
-- <b style="color: #98A8F8">StoreID (Primary Key)</b>
+- StoreID (**PK**)
     + StoreName
     + FirstName
     + LastName
     + PaymentMethod
     + ImageStore
     + AuthKey
-    + ContactID (Foreign key from Address)
-    + AddressID (Foreign key from Address)
-    + ProductID (Foreign key from Address)
-    + ScoreID (Foreign key from Address)
+    + ContactID (**FK** from Address)
+    + AddressID (**FK** from Address)
+    + ProductID (**FK** from Address)
+    + ScoreID (**FK** from Address)
 
 
 ****
-<b style="color: #272323">Address Table:</b>
+**Address Table:**
 
-- <b style="color: #98A8F8">AddressID (Primary Key)</b>
+- AddressID (**PK**)
     + LocationName
     + City
     + Province
@@ -38,48 +41,48 @@
 
 
 ****
-<b style="color: #272323">Contact Table:</b>
+**Contact Table:**
 
-- <b style="color: #98A8F8">ContactID (Primary Key)</b>
+- ContactID (**PK**)
     + Email
     + PhoneNumber
 
 
 ****
-<b style="color: #272323">CreditScore Table:</b>
+**CreditScore Table:**
 
-- <b style="color: #98A8F8">ScoreID (Primary Key)</b>
-    + StoreID (Foreign key from Stores)
-    + CustomerID (Foreign key from Customers)
+- ScoreID (**PK**)
+    + StoreID (**FK** from Stores)
+    + CustomerID (**FK** from Customers)
     + Score
 
 
 ****
-<b style="color: #272323">Cart Table:</b>
+**Cart Table:**
 
-- <b style="color: #98A8F8">CartID (Primary Key)</b>
-    + ProductID (Foreign key from Address)
+- CartID (**PK**)
+    + ProductID (**FK** from Address)
     + Quantity
     + Duration
-    + CustomerID (Foreign key from Customers)
+    + CustomerID (**FK** from Customers)
 
 
 ****
-<b style="color: #272323">Transactions Table:</b>
+**Transactions Table:**
 
-- <b style="color: #98A8F8">TxID</B>
+- TxID
    + TotalPrice
    + Status
    + TimeSpam 
-   + CartID (Foreign key from Cart)
-   + ProductID (Foreign key from Cart)
-   + CustomerID (Foreign key from Cart)
+   + CartID (**FK** from Cart)
+   + ProductID (**FK** from Cart)
+   + CustomerID (**FK** from Cart)
 
 
 ****
-<b style="color: #272323">Products Table:</b>
+**Products Table:**
 
-- <b style="color: #98A8F8">ProductID (Primary Key)</b>
+- ProductID (**PK**)
     + ProductName (not null)
     + Image1 (not null)
     + Image2
@@ -90,4 +93,4 @@
     + SpecDetail (json)
     + DESC
     + ProductStatus 
-    + StoreID (Foreign key from Stores)
+    + StoreID (**FK** from Stores)
