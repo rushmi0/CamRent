@@ -4,29 +4,25 @@
     + UserName
     + FirstName
     + LastName
-    + Email
-    + PhoneNumber
-    + ImagePath
+    + ImageProfile
     + AuthKey
+    + ContactID (Foreign key referencing Address)
     + AddressID (Foreign key referencing Address)
 
 
-
 **Stores Table:**
-
 
 - StoreID (Primary Key)
     + StoreName
     + FirstName
     + LastName
-    + Details (json)
     + PaymentMethod
-    + Email
-    + PhoneNumber
-    + ImagePath
+    + ImageStore
     + AuthKey
+    + ContactID (Foreign key referencing Address)
     + AddressID (Foreign key referencing Address)
-
+    + ProductID (Foreign key referencing Address)
+    + ScoreID (Foreign key referencing Address)
 
 
 **Address Table:**
@@ -36,14 +32,17 @@
     + City
     + Province
     + PostalNumber
+    + StreetName
 
 
+**Contact Table:**
+
+- ContactID (Primary Key)
+    + Email
+    + PhoneNumber
 
 
 **CreditScore Table:**
-
-Customers can rate multiple restaurants,
-each restaurant can receive points from multiple customers.
 
 - ScoreID (Primary Key)
     + StoreID (Foreign key referencing Stores)
@@ -51,40 +50,35 @@ each restaurant can receive points from multiple customers.
     + Score
 
 
+**Cart Table:**
 
-**ContractAlders Table:**
-
-- AlderID (Primary Key)
+- CartID (Primary Key)
+    + ProductID (Foreign key referencing Address)
     + Quantity
-    + Price
     + Duration
     + CustomerID (Foreign key referencing Customers)
 
+
+**Transactions Table:**
+
+- TxID
+   + TotalPrice
+   + Status
+   + TimeSpam
+   + CartID
 
 
 **Products Table:**
 
 - ProductID (Primary Key)
-
-    + ProductName
-    + ProductType
-    + ProductPrice
-    + Details (json)
-    + ProductStatus
+    + ProductName (not null)
+    + Image1 (not null)
+    + Image2
+    + Image3
+    + Image4
+    + Type (Lens Filters, Lens, Tripod, Flash, Flash Diffuser, (Compact, Mirrorless, DSLR))
+    + Price
+    + SpecDetail (json)
+    + DESC
+    + ProductStatus 
     + StoreID (Foreign key referencing Stores)
-
-
-
-**Camera Table:**
-
-- CameraID (Primary Key)
-    + Type
-    + Image
-    + Name
-    + Details (json)
-
-
-**LensFilters  Table:**
-
-- FilterID (Primary Key)
-    + Name
