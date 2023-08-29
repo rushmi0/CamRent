@@ -13,10 +13,12 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
     + UserName
     + FirstName
     + LastName
+    + Email
+    + PhoneNumber
     + ImageProfile
     + AuthKey
-    + ContactID (**FK** from Contact)
-    + AddressID (**FK** from Address)
+    + ContactID (**PK, PK,FK** from Contact)
+    + AddressID (**PK, PK,FK** from Address)
 
 
 ****
@@ -26,21 +28,15 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
     + StoreName
     + FirstName
     + LastName
+    + Email
+    + PhoneNumber
     + PaymentMethod
     + ImageStore
     + AuthKey
-    + ContactID (**FK** from Address)
-    + AddressID (**FK** from Address)
-    + ProductID (**FK** from Address)
-    + ScoreID (**FK** from Address)
-
-
-****
-**Contact Table:**
-
-- ContactID (**PK**)
-  + Email
-  + PhoneNumber
+    + ContactID (**PK,FK** from Address)
+    + AddressID (**PK,FK** from Address)
+    + ProductID (**PK,FK** from Address)
+    + ScoreID (**PK,FK** from Address)
 
 
 ****
@@ -58,8 +54,8 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
 **CreditScore Table:**
 
 - ScoreID (**PK**)
-    + StoreID (**FK** from Stores)
-    + CustomerID (**FK** from Customers)
+    + StoreID (**PK,FK** from Stores)
+    + CustomerID (**PK,FK** from Customers)
     + Score
 
 
@@ -67,12 +63,12 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
 **Cart Table:**
 
 - CartID (**PK**)
-    + ProductID (**FK** from Address)
+    + ProductID (**PK,FK** from Address)
     + Quantity
     + Duration
-    + CustomerID (**FK** from Customers)
-    + ContactID (**FK** from Customers)
-    + AddressID (**FK** from Customers)
+    + CustomerID (**PK,FK** from Customers)
+    + ContactID (**PK,FK** from Contact)
+    + AddressID (**PK,FK** from Customers)
 
 
 ****
@@ -82,9 +78,11 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
    + TotalPrice
    + Status
    + TimeSpam 
-   + CartID (**FK** from Cart)
-   + ProductID (**FK** from Cart)
-   + CustomerID (**FK** from Cart)
+   + CartID (**PK,FK** from Cart)
+   + ProductID (**PK,FK** from Cart)
+   + ContactID (**PK,FK** from Cart)
+   + CustomerID (**PK,FK** from Cart)
+   + AddressID (**PK,FK** from Cart)
 
 
 ****
@@ -98,7 +96,7 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
     + Image4
     + Type
     + Price
-    + SpecDetail (json)
+    + SpecDetail 
     + DESC
     + ProductStatus 
-    + StoreID (**FK** from Stores)
+    + StoreID (**PK,FK** from Stores)
