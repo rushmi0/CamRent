@@ -7,7 +7,7 @@
     + Email
     + PhoneNumber
     + ImagePath
-    + authKey
+    + AuthKey
     + AddressID (Foreign key referencing Address)
 
 
@@ -24,7 +24,7 @@
     + Email
     + PhoneNumber
     + ImagePath
-    + authKey
+    + AuthKey
     + AddressID (Foreign key referencing Address)
 
 
