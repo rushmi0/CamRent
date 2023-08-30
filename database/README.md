@@ -7,113 +7,102 @@ SQLite เหมาะสำหรับการสร้างเว็บ Dem
 ระบบนี้ยังรองรับการทำงานทั้งในโหมดออนไลน์และออฟไลน์อย่างมีประสิทธิภาพเช่นกัน ทำให้เราสามารถใช้งานข้อมูลได้โดยต่อเนื่องไม่ว่าจะอยู่ในสถานการณ์ใดๆ และทำให้โครงการของเรามีความยืดหยุ่นในการดำเนินการต่าง ๆ ได้มากยิ่งขึ้น ดังนั้นเราเชื่อว่าการเลือกใช้ SQLite เป็นระบบจัดเก็บข้อมูลเป็นคำตอบที่เหมาะสมสำหรับ Project ของเราในทุกปัจจัย
 
 ****
-**Customers Table:**
 
-- CustomerID (PK)
-    + UserName
-    + FirstName
-    + LastName
-    + Email
-    + PhoneNumber
-    + ImageProfile
-    + AuthKey
-    + AddressID (FK from Address)
+# ฐานข้อมูลสำหรับระบบการเช่ายืมออนไลน์
 
+## People Table
+| คอลัมน์    | ประเภท    | PK หรือ FK | อ้างอิง FK  | คำอธิบาย                          |
+| :---        | :---       |:----------:| :---:         | ---                                  |
+| PersonID    | TEXT       |   **PK**   |               | รหัสบุคคล            |
+| FirstName   | TEXT       |            |               | ชื่อ                              |
+| LastName    | TEXT       |            |               | นามสกุล                           |
+| Email       | TEXT       |            |               | อีเมล                               |
+| PhoneNumber | TEXT       |            |               | เบอร์โทรศัพท์                     |
+| AddressID   | TEXT       |   **FK**   | Address | รหัสที่อยู่    |
 
-****
-**Stores Table:**
+## Customers Table
+| คอลัมน์    | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---        | :---       | :---:       | :---:         | ---                                  |
+| CustomerID | TEXT       | **PK** |               | รหัสลูกค้า           |
+| UserName   | TEXT       |             |               | ชื่อผู้ใช้                          |
+| AuthKey    | TEXT       |             |               | รหัสยืนยันตัวตน                   |
+| PersonID   | TEXT       |    **FK**    | People | รหัสบุคคล         |
 
-- StoreID (PK)
-    + StoreName
-    + FirstName
-    + LastName
-    + Email
-    + PhoneNumber
-    + PaymentMethod
-    + ImageStore
-    + AuthKey
-    + AddressID (FK from Address)
-    + ProductID (FK from Products)
-    + ScoreID (FK from CreditScore)
+## Stores Table
+| คอลัมน์      | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---          | :---       | :---:       | :---:         | ---                                  |
+| StoreID       | TEXT       | **PK** |               | รหัสร้านค้า           |
+| StoreName     | TEXT       |             |               | ชื่อร้านค้า                         |
+| PaymentMethod | TEXT       |             |               | วิธีการชำระเงิน                     |
+| AuthKey       | TEXT       |             |               | รหัสยืนยันตัวตนของร้านค้า        |
+| PersonID      | TEXT       |    **FK**   |  People | รหัสบุคคล         |
 
+## Address Table
+| คอลัมน์      | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---          | :---       | :---:       | :---:         | ---                                  |
+| AddressID    | TEXT       | **PK** |               | รหัสที่อยู่           |
+| LocationName | TEXT       |             |               | ชื่อสถานที่                         |
+| City         | TEXT       |             |               | เมือง                                |
+| Province     | TEXT       |             |               | จังหวัด                              |
+| PostalNumber | TEXT       |             |               | รหัสไปรษณีย์                         |
+| StreetName   | TEXT       |             |               | ชื่อถนน                              |
 
-****
-**Address Table:**
+## CreditScore Table
+| คอลัมน์    | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---        | :---       | :---:       | :---:         | ---                                  |
+| ScoreID     | TEXT       | **PK** |               | รหัสคะแนนเครดิต     |
+| Score       | INTEGER    |             |               | คะแนนเครดิต                           |
+| Report      | TEXT       |             |               | รายงานเครดิต                         |
+| StoreID     | TEXT       |   **FK**  |  Stores | รหัสร้านค้า      |
+| CustomerID  | TEXT       |   **FK**  |  Customers| รหัสลูกค้า  |
 
-- AddressID (PK)
-    + LocationName
-    + City
-    + Province
-    + PostalNumber
-    + StreetName
+## OrderContract Table
+| คอลัมน์    | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---        | :---       | :---:       | :---:         | ---                                  |
+| OrderID     | TEXT       | **PK** |               | รหัสสัญญาการสั่งซื้อ  |
+| Quantity    | INTEGER    |             |               | จำนวน                               |
+| Duration    | INTEGER    |             |               | ระยะเวลา                            |
+| CustomerID  | TEXT       |   **FK**  |  Customers| รหัสลูกค้า  |
+| AddressID   | TEXT       |    **FK**  |  Address | รหัสที่อยู่   |
+| ProductID   | TEXT       |   **FK**  |  Products | รหัสสินค้า     |
 
+## Transactions Table
+| คอลัมน์    | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---        | :---       | :---:       | :---:         | ---                                  |
+| TxID        | TEXT       | **PK** |               | รหัสธุรกรรม          |
+| TotalPrice  | INTEGER    |             |               | ราคารวม                              |
+| Status      | TEXT       |             |               | สถานะ                                |
+| TimeSpam    | DATETIME   |             |               | เวลาที่บันทึก                        |
+| OrderID     | TEXT       |   **FK**  |  OrderContract | รหัสสัญญาการสั่งซื้อ |
 
-**CreditScore Table:**
+## Products Table
+| คอลัมน์     | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---         | :---       | :---:       | :---:         | ---                                  |
+| ProductID    | TEXT       | **PK** |               | รหัสสินค้า            |
+| ProductName  | TEXT       |             |               | ชื่อสินค้า                           |
+| Image1       | BLOB       |             |               | รูปภาพ 1                             |
+| Image2       | BLOB       |             |               | รูปภาพ 2                             |
+| Image3       | BLOB       |             |               | รูปภาพ 3                             |
+| Image4       | BLOB       |             |               | รูปภาพ 4                             |
+| Type         | TEXT       |             |               | ประเภทสินค้า                         |
+| Price        | INTEGER    |             |               | ราคา                                 |
+| SpecDetail   | TEXT       |             |               | รายละเอียดสินค้า                   |
+| DESC         | TEXT       |             |               | คำอธิบายสินค้า                      |
+| ProductStatus| TEXT       |             |               | สถานะสินค้า                         |
+| StoreID      | TEXT       |   **FK**  |  Stores | รหัสร้านค้า      |
 
-- ScoreID (PK)
-    + StoreID (FK from Stores)
-    + CustomerID (FK from Customers)
-    + Score
-    + Report
-
-
-****
-**Cart Table:**
-
-- CartID (PK)
-    + ProductID (FK from Products)
-    + Quantity
-    + Duration
-    + CustomerID (FK from Customers)
-    + AddressID (FK from Address)
-
-
-****
-**Transactions Table:**
-
-- TxID (PK)
-    + TotalPrice
-    + Status
-    + TimeSpam
-    + CartID (FK from Cart)
-
-
-****
-**Products Table:**
-
-- ProductID (PK)
-    + ProductName
-    + Image1
-    + Image2
-    + Image3
-    + Image4
-    + Type
-    + Price
-    + SpecDetail
-    + DESC
-    + ProductStatus
-    + StoreID (FK from Stores)
-
-
-### การแสดงเส้นเชื่อมและความสัมพันธ์ระหว่าง Entity ในโครงสร้างฐานข้อมูล
-
-1. **Customers** (1) ---- (N) **Address**
-   + ลูกค้า (Customers) สามารถมีหลายที่อยู่ (Address) แต่แต่ละที่อยู่เชื่อมต่อกับลูกค้าเพียงคนเดียว (1 to N ความสัมพันธ์)
-
-2. **Stores** (1) ---- (N) **Address**
-   + ร้านค้า (Stores) สามารถมีหลายที่อยู่ (Address) แต่แต่ละที่อยู่เชื่อมต่อกับร้านค้าเพียงคนเดียว (1 to N ความสัมพันธ์)
-
-3. **Stores** (1) ---- (N) **Products**
-   + ร้านค้า (Stores) สามารถมีหลายสินค้า (Products) แต่แต่ละสินค้าเชื่อมต่อกับร้านค้าเพียงคนเดียว (1 to N ความสัมพันธ์)
-
-4. **Stores** (1) ---- (1) **CreditScore**
-   + ร้านค้า (Stores) และคะแนนเครดิต (CreditScore) เชื่อมต่อกันแบบ 1 ต่อ 1 (1 to 1 ความสัมพันธ์)
-
-5. **Customers** (1) ---- (N) **Cart**
-   + ลูกค้า (Customers) สามารถมีหลายตะกร้า (Cart) และแต่ละตะกร้าเชื่อมต่อกับลูกค้าเพียงคนเดียว (1 to N ความสัมพันธ์)
-
-6. **Products** (1) ---- (N) **Cart**
-   + สินค้า (Products) สามารถมีในหลายตะกร้า (Cart) และแต่ละตะกร้าเชื่อมต่อกับสินค้าเพียงคนเดียว (1 to N ความสัมพันธ์)
-
-7. **Cart** (1) ---- (1) **Transactions**
-   + ตะกร้า (Cart) และรายการธุรกรรม (Transactions) เชื่อมต่อกันแบบ 1 ต่อ 1 (1 to 1 ความสัมพันธ์)
+## Fine Table
+| คอลัมน์    | ประเภท    | PK หรือ FK  | อ้างอิง FK  | คำอธิบาย                           |
+| :---        | :---       | :---:       | :---:         | ---                                  |
+| Fine        | TEXT       | **PK** |               | รหัสค่าปรับ           |
+| Date        | DATETIME   |             |               | วันที่                               |
+| Description | TEXT       |             |               | คำอธิบายค่าปรับ                      |
+| Image1      | BLOB       |             |               | รูปภาพ 1                             |
+| Image2      | BLOB       |             |               | รูปภาพ 2                             |
+| Image3      | BLOB       |             |               | รูปภาพ 3                             |
+| Image4      | BLOB       |             |               | รูปภาพ 4                             |
+| PenaltyFee  | INTEGER    |             |               | ค่าปรับ                               |
+| Status      | TEXT       |             |               | สถานะ                                |
+| CustomerID  | TEXT       |   **FK**  |  Customers| รหัสลูกค้า  |
+| StoreID     | TEXT       |   **FK**  |  Stores | รหัสร้านค้า  |
+| ProductID   | TEXT       |   **FK**  |  Products | รหัสสินค้า     |
