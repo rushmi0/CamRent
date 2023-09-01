@@ -90,7 +90,7 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 |:-----------|:---------|:----------:|:-------------:|:----------:|:---------------------|
 | TxID       | TEXT     |   **PK**   |               |  TX-XXXX   | รหัสธุรกรรม          |
 | TotalPrice | INTEGER  |            |               |    9999    | ราคารวม              |
-| Status     | TEXT     |            |               |    XXXX    | สถานะ                |
+| Status     | TEXT     |            |               |   Xxxxxx   | สถานะ                |
 | TimeSpam   | DATETIME |            |               |  99:99:99  | เวลาที่บันทึก        |
 | Date       | DATETIME |            |               | 99-99-9999 | วันที่บันทึก         |
 | OrderID    | TEXT     |   **FK**   | OrderContract |  OD-XXXX   | รหัสสัญญาการสั่งซื้อ |
@@ -106,10 +106,10 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 | Image3        | BLOB    |            |            |  99999  | รูปภาพ 3              |
 | Image4        | BLOB    |            |            |  99999  | รูปภาพ 4              |
 | Type          | TEXT    |            |            | xxxxxx  | ประเภทสินค้า          |
-| Price         | INTEGER |            |            |         | ราคา                  |
-| SpecDetail    | TEXT    |            |            |         | รายละเอียดสินค้า JSON |
-| DESC          | TEXT    |            |            |         | คำอธิบายสินค้า        |
-| ProductStatus | TEXT    |            |            |         | สถานะสินค้า           |
+| Price         | INTEGER |            |            |  99999  | ราคา                  |
+| SpecDetail    | TEXT    |            |            |  JSON   | รายละเอียดสินค้า JSON |
+| DESC          | TEXT    |            |            | xxxxxx  | คำอธิบายสินค้า        |
+| ProductStatus | TEXT    |            |            | Xxxxxx  | สถานะสินค้า           |
 | StoreID       | TEXT    |   **FK**   |   Stores   | ST-XXXX | รหัสร้านค้า           |
 
 ## Fine Table
@@ -119,16 +119,16 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 | Fine        | TEXT     |   **PK**   |            |  FN-XXXX   | รหัสค่าปรับ     |
 | TimeSpam    | DATETIME |            |            |  99:99:99  | เวลาที่บันทึก   |
 | Date        | DATETIME |            |            | 99-99-9999 | วันที่บันทึก    |
-| Description | TEXT     |            |            |            | คำอธิบายค่าปรับ |
+| Description | TEXT     |            |            |   xxxxxx   | คำอธิบายค่าปรับ |
 | Image1      | BLOB     |            |            |   99999    | รูปภาพ 1        |
 | Image2      | BLOB     |            |            |   99999    | รูปภาพ 2        |
 | Image3      | BLOB     |            |            |   99999    | รูปภาพ 3        |
 | Image4      | BLOB     |            |            |   99999    | รูปภาพ 4        |
-| PenaltyFee  | INTEGER  |            |            |            | ค่าปรับ         |
-| Status      | TEXT     |            |            |            | สถานะ           |
+| PenaltyFee  | INTEGER  |            |            |   99999    | ค่าปรับ         |
+| Status      | TEXT     |            |            |   Xxxxxx   | สถานะ           |
 | CustomerID  | TEXT     |   **FK**   | Customers  |  CTM-XXXX  | รหัสลูกค้า      |
 | StoreID     | TEXT     |   **FK**   |   Stores   |  ST-XXXX   | รหัสร้านค้า     |
-| ProductID   | TEXT     |   **FK**   |  Products  |            | รหัสสินค้า      |
+| ProductID   | TEXT     |   **FK**   |  Products  |  PD-XXXX   | รหัสสินค้า      |
 
 [//]: # (Encode &#40;เข้ารหัส&#41;:)
 
