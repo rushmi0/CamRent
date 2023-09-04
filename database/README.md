@@ -37,7 +37,7 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 |:-------------|:-------|:----------:|:----------:|:--------:|:------------------|
 | CustomerID   | TEXT   |   **PK**   |            | CTM-XXXX | รหัสลูกค้า        |
 | UserName     | TEXT   |            |            |  xxxxxx  | ชื่อผู้ใช้        |
-| ProfileImage | BLOB   |            |            |  99999   | รูปของบัญชีผู้ใช้ |
+| ProfileImage | BLOB   |            |            |   img    | รูปของบัญชีผู้ใช้ |
 | AuthKey      | TEXT   |            |            | USxxxxxx | รหัสยืนยันตัวตน   |
 | PersonID     | TEXT   |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล         |
 
@@ -47,7 +47,7 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 |:--------------|:-------|:----------:|:----------:|:--------:|:--------------------------|
 | StoreID       | TEXT   |   **PK**   |            | ST-XXXX  | รหัสร้านค้า               |
 | StoreName     | TEXT   |            |            |  xxxxxx  | ชื่อร้านค้า               |
-| ProfileImage  | BLOB   |            |            |  99999   | รูปของบัญชีร้าน           |
+| ProfileImage  | BLOB   |            |            |   img    | รูปของบัญชีร้าน           |
 | PaymentMethod | TEXT   |            |            |  xxxxxx  | วิธีการชำระเงิน           |
 | AuthKey       | TEXT   |            |            | STxxxxxx | รหัสยืนยันตัวตนของร้านค้า |
 | PersonID      | TEXT   |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล                 |
@@ -101,10 +101,10 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 |:--------------|:--------|:----------:|:----------:|:-------:|:----------------------|
 | ProductID     | TEXT    |   **PK**   |            | PD-XXXX | รหัสสินค้า            |
 | ProductName   | TEXT    |            |            | Xxxxxx  | ชื่อสินค้า            |
-| Image1        | BLOB    |            |            |  99999  | รูปภาพ 1              |
-| Image2        | BLOB    |            |            |  99999  | รูปภาพ 2              |
-| Image3        | BLOB    |            |            |  99999  | รูปภาพ 3              |
-| Image4        | BLOB    |            |            |  99999  | รูปภาพ 4              |
+| Image1        | BLOB    |            |            |   img   | รูปภาพ 1              |
+| Image2        | BLOB    |            |            |   img   | รูปภาพ 2              |
+| Image3        | BLOB    |            |            |   img   | รูปภาพ 3              |
+| Image4        | BLOB    |            |            |   img   | รูปภาพ 4              |
 | Type          | TEXT    |            |            | xxxxxx  | ประเภทสินค้า          |
 | Price         | INTEGER |            |            |  99999  | ราคา                  |
 | SpecDetail    | TEXT    |            |            |  JSON   | รายละเอียดสินค้า JSON |
@@ -120,10 +120,10 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 | TimeSpam    | DATETIME |            |            |  99:99:99  | เวลาที่บันทึก   |
 | Date        | DATETIME |            |            | 99-99-9999 | วันที่บันทึก    |
 | Description | TEXT     |            |            |   xxxxxx   | คำอธิบายค่าปรับ |
-| Image1      | BLOB     |            |            |   99999    | รูปภาพ 1        |
-| Image2      | BLOB     |            |            |   99999    | รูปภาพ 2        |
-| Image3      | BLOB     |            |            |   99999    | รูปภาพ 3        |
-| Image4      | BLOB     |            |            |   99999    | รูปภาพ 4        |
+| Image1      | BLOB     |            |            |    img     | รูปภาพ 1        |
+| Image2      | BLOB     |            |            |    img     | รูปภาพ 2        |
+| Image3      | BLOB     |            |            |    img     | รูปภาพ 3        |
+| Image4      | BLOB     |            |            |    img     | รูปภาพ 4        |
 | PenaltyFee  | INTEGER  |            |            |   99999    | ค่าปรับ         |
 | Status      | TEXT     |            |            |   Xxxxxx   | สถานะ           |
 | CustomerID  | TEXT     |   **FK**   | Customers  |  CTM-XXXX  | รหัสลูกค้า      |
