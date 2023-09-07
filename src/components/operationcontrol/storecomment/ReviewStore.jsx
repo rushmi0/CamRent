@@ -6,7 +6,7 @@ function ReviewStore() {
   return (
     <Popup
       className="bg-white w-1/3 md:w-1/3 lg:w-1/4 p-3 rounded text-black"
-      trigger={<button>test</button>}
+      trigger={<button className="btn m-1">review</button>}
       modal
       nested
     >
