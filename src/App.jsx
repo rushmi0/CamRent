@@ -4,7 +4,6 @@ import "./App.css";
 import RootLayout from "./components/RootLayout";
 import Home from "./page/Home";
 import Shop from "./components/shop/Shop";
-import ReviewStore from "./components/operationcontrol/storecomment/ReviewStore";
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
             {/* every elements inside RootLayout will show Navigation Bar on the top of the page */}
             <Route index element={<Home />}></Route>
             <Route path="/shop" element={<Shop />}></Route>
-            <Route path="/test" element={<ReviewStore />}></Route>
           </Route>
           {/* RootLayout-end */}
 

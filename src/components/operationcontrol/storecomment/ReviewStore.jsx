@@ -83,7 +83,12 @@ function ReviewStore() {
             <button className="btn btn-error mr-1" onClick={() => close()}>
               Cancel
             </button>
-            <button className="btn btn-success" onClick={() => close()}>
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                close();
+              }}
+            >
               Confirm
             </button>
           </div>
