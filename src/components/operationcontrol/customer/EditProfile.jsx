@@ -2,7 +2,7 @@ import React from "react";
 
 function EditProfile() {
   return (
-    <form className="p-5 round border">
+    <form className="p-5 rounded border">
       <h1 className="text-4xl">Account Details</h1>
       <div className="grid md:grid-cols-3 lg:flex space-x-1 lg:justify-center">
         {/* image div */}
@@ -12,7 +12,7 @@ function EditProfile() {
             alt="profile img"
             className="object-cover w-80"
           />
-          <input type="file" accept="image/*" />
+          <input type="file" accept="image/*" className="file-input" />
         </div>
         {/* details div */}
         <div className="mt-3 md:col-span-2 lg:p-4 grid justify-center">
@@ -43,7 +43,7 @@ function EditProfile() {
             </b>
             <input
               type="email"
-              className="border rounded lg:col-span-3 md:w-80 lg:w-95"
+              className="border rounded lg:col-span-3 md:w-80 lg:w-95 input input-bordered"
             />
           </div>
           {/* password */}
@@ -56,7 +56,7 @@ function EditProfile() {
             </b>
             <input
               type="password"
-              className="border rounded lg:col-span-3 md:w-80 lg:w-95"
+              className="border rounded lg:col-span-3 md:w-80 lg:w-95 input input-bordered"
             />
           </div>
           {/* phone */}
@@ -66,7 +66,7 @@ function EditProfile() {
             </b>
             <input
               type="text"
-              className="border rounded lg:col-span-3 md:w-80 lg:w-95"
+              className="border rounded lg:col-span-3 md:w-80 lg:w-95 input input-bordered"
               maxLength="10"
             />
           </div>
@@ -76,33 +76,33 @@ function EditProfile() {
               <h2>Address:</h2>
             </b>
             <div className="lg:col-span-3 md:w-80 lg:w-95">
-              <textarea className="border rounded w-full" />
+              <textarea className="border rounded w-full textarea textarea-bordered" />
               <div className="grid grid-cols-4 mb-2">
                 <h3>Street:</h3>
                 <input
                   type="text"
-                  className="border rounded w-full col-span-3"
+                  className="border rounded w-full col-span-3 input input-bordered"
                 />
               </div>
               <div className="grid grid-cols-4 mb-2">
                 <h3>City:</h3>
                 <input
                   type="text"
-                  className="border rounded w-full col-span-3"
+                  className="border rounded w-full col-span-3 input input-bordered"
                 />
               </div>
               <div className="grid grid-cols-4 mb-2">
                 <h3>Province:</h3>
                 <input
                   type="text"
-                  className="border rounded w-full col-span-3"
+                  className="border rounded w-full col-span-3 input input-bordered"
                 />
               </div>
               <div className="grid grid-cols-4 mb-2">
                 <h3>Postal number:</h3>
                 <input
                   type="text"
-                  className="border rounded w-full col-span-3"
+                  className="border rounded w-full col-span-3 input input-bordered"
                   maxLength="5"
                 />
               </div>
@@ -112,7 +112,7 @@ function EditProfile() {
           <button
             id="smButton"
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            className="btn btn-info hover:bg-blue-700 rounded-full"
           >
             update
           </button>

@@ -7,7 +7,7 @@ function CustomerProfile() {
   return (
     <>
       <div className="mt-3 grid grid-cols-1 lg:grid-cols-5">
-        <div className="mb-3 lg:mb-0 lg:ml-3 round border">
+        <div className="mb-3 lg:mb-0 lg:ml-3 rounded border">
           <ul className="mx-3 text-lg">
             <a href="#">
               <li className="py-2 border-b-2">Edit profile</li>
