@@ -1,5 +1,5 @@
 .camSetBox1 {
-  @apply sm:col-span-12 row-span-4 p-5 w-[100%] h-[580px] flex justify-between rounded;
+  @apply col-span-12 row-span-4 p-5 w-[100%] h-[580px] flex justify-between rounded;
   background-color: #f0f0f0;
 }
 .camSetBox2 {

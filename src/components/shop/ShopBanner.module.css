@@ -1,0 +1,5 @@
+#shopBanner {
+    background-image: url("src/assets/Shop/shopBanner.jpg");
+    background-position: center;
+    background-size: cover;
+}

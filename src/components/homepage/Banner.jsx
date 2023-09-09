@@ -50,7 +50,7 @@ function Banner() {
                 RENT NOW
               </motion.a>
             </div>
-            <motion.img src={bannerImg2} alt="image banner" className="w-[300px]" whileHover={{scale:1.1}} transition={{duration: 0.3}}/>
+            <motion.img src={bannerImg2} alt="image banner" className="w-[200px] h-auto md:w-[300px]" whileHover={{scale:1.1}} transition={{duration: 0.3}}/>
           </div>
           <div className={classes.camSetBox3}>
             <div className="p-3">
@@ -66,7 +66,7 @@ function Banner() {
                 RENT NOW
               </motion.a>
             </div>
-            <motion.img src={bannerImg3} alt="image banner" className="w-[300px]" whileHover={{scale:1.1}} transition={{duration: 0.3}}/>
+            <motion.img src={bannerImg3} alt="image banner" className="w-[200px] h-auto md:w-[300px]" whileHover={{scale:1.1}} transition={{duration: 0.3}}/>
           </div>
         </div>
       </div>
