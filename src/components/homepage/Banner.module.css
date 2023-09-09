@@ -1,0 +1,28 @@
+.camSetBox1 {
+  @apply sm:col-span-12 row-span-4 p-5 w-[100%] h-[580px] flex justify-between rounded;
+  background-color: #f0f0f0;
+}
+.camSetBox2 {
+  @apply col-span-12 row-span-2 p-5 w-[100%] h-[280px] md:justify-between flex lg:items-center;
+  background-color: #f0f0f0;
+}
+.camSetBox3 {
+  @apply col-span-12 row-span-2 p-5 w-[100%] h-[280px] md:justify-between flex lg:items-center;
+  background-color: #f0f0f0;
+}
+
+.img1 {
+  width: 600px;
+  background-position: center;
+  background-size: contain;
+}
+
+.img2 {
+  width: 600px;
+  background-position: center;
+  background-size: contain;
+}
+
+.mainBtn {
+  @apply bg-slate-800 px-6 py-3 text-lg font-medium text-white;
+}
