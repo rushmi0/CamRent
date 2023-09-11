@@ -8,7 +8,10 @@
 ## Implementation Note
 
 ### Development Approach
-This project follows a Hybrid development approach, combining elements of Plan-driven and Agile methodologies. We prioritize both planning and flexibility to achieve the best results for the project.
+โครงการนี้นำแนวทางการพัฒนาแบบผสมผสานโดยรวมกับความสำคัญที่ให้กับการวางแผนและความยืดหยุ่น เพื่อเพิ่มประสิทธิภาพและคุณภาพของผลลัพธ์ของโครงการ 
+โดยผสมผสานองค์ประกอบของวิธีการตามแผนและแบบ Agile เรามุ่งเน้นให้การวางแผนเป็นระเบียบและแม่นยำเพื่อให้เราสามารถระบุวัตถุประสงค์และขอบเขตของโครงการได้อย่างชัดเจน 
+ในขณะเดียวกันเรายังเน้นความยืดหยุ่นเพื่อรับมือกับการเปลี่ยนแปลงและปรับปรุงในขณะดำเนินโครงการ เพื่อให้ได้ผลลัพธ์ที่ดียิ่งขึ้นสำหรับโครงการของเรา
+
 
 ### Development Environment
 - **Text Editor**: Visual Studio Code
