@@ -8,9 +8,9 @@
 ## Implementation Note
 
 ### Development Approach
-โครงการนี้นำแนวทางการพัฒนาแบบผสมผสานโดยรวมกับความสำคัญที่ให้กับการวางแผนและความยืดหยุ่น เพื่อเพิ่มประสิทธิภาพและคุณภาพของผลลัพธ์ของโครงการ 
-โดยผสมผสานองค์ประกอบของวิธีการตามแผนและแบบ Agile เรามุ่งเน้นให้การวางแผนเป็นระเบียบและแม่นยำเพื่อให้เราสามารถระบุวัตถุประสงค์และขอบเขตของโครงการได้อย่างชัดเจน 
-ในขณะเดียวกันเรายังเน้นความยืดหยุ่นเพื่อรับมือกับการเปลี่ยนแปลงและปรับปรุงในขณะดำเนินโครงการ เพื่อให้ได้ผลลัพธ์ที่ดียิ่งขึ้นสำหรับโครงการของเรา
+โครงงานนี้นำแนวทางการพัฒนาแบบผสมผสานโดยรวมกับความสำคัญที่ให้กับการวางแผนและความยืดหยุ่น เพื่อเพิ่มประสิทธิภาพและคุณภาพของผลลัพธ์ของโครงงาน 
+โดยผสมผสานองค์ประกอบของวิธีการตามแผนและแบบ Agile เรามุ่งเน้นให้การวางแผนเป็นระเบียบและแม่นยำเพื่อให้เราสามารถระบุวัตถุประสงค์และขอบเขตของโครงงานได้อย่างชัดเจน 
+ในขณะเดียวกันเรายังเน้นความยืดหยุ่นเพื่อรับมือกับการเปลี่ยนแปลงและปรับปรุงในขณะดำเนินโครงงาน เพื่อให้ได้ผลลัพธ์ที่ดียิ่งขึ้นสำหรับโครงงานของเรา
 
 
 ### Development Environment
@@ -73,25 +73,32 @@
 ## Role and Duty
 
 * **นายวัชรพล พงษ์วิลัย (2013111089)**
-  - ทำหน้าที่ `เขียนโค้ด ในส่วน Backend` และจัดการ Database และ API ส่งให้ทาง Frontend ใช้งาน
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Backend และจัดการฐานข้อมูล
+  - พัฒนา API สำหรับการนำเข้าไปใช้ใน Frontend
 
 * **นายศุภวิชญ์ คมขำ (2113110668)**
-  - ทำหน้าที่ `เขียนโค้ด ในส่วน Frontend` และสร้างหน้า Web Page ตามที่กำหนดในแผนภาพ [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Frontend
+  - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
 * **นายอภิรักษ์ ฉิมหิรัญ (2113110700)**
-  - ทำหน้าที่ `เขียนโค้ด ในส่วน Frontend` และสร้างหน้า Web Page ตามที่กำหนดในแผนภาพ [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Frontend
+  - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
 * **นายมินทดา ลำพุทธา (2113110957)**
-  - ทำหน้าที่ `เขียนโค้ด ในส่วน Frontend` และสร้างหน้า Web Page ตามที่กำหนดในแผนภาพ [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Frontend
+  - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
 * **นายชัยพัฒน์ จรรยาศักดิ์ศรี (2113110056)**
-  - ทำหน้าที่ `เขียนโค้ด ในส่วน Frontend` และสร้างหน้า Web Page ตามที่กำหนดในแผนภาพ [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Frontend
+  - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
 * **นายนพภูมิ บุญจันทร์ (2113110221)**
-  - ทำหน้าที่ `เข้าไปหาข้อมูลรูปภาพ` รวมถึงกล้องถ่ายรูปและอุปกรณ์เสริมตามที่กำหนด
-
-* **นายพงศ์พล แต้มศิริ (2113110817)**
-  - ทำหน้าที่ `หาข้อมูลรูปภาพ` รวมถึงกล้องถ่ายรูปและอุปกรณ์เสริมตามที่กำหนด
+  - ค้นหาข้อมูลรูปภาพกล้องถ่ายรูปและอุปกรณ์เสริมตามที่กำหนด
 
 ## Usage
 
