@@ -1,6 +1,10 @@
-# CamRent
+# Implementation Note
 
-## Implementation Note
+
+<div align="center">
+  <span><img src="https://github.com/rushmi0/CamRent/assets/120770468/7bfc0c12-dbbd-41f4-92cc-3c6c9ce6592a" height=200 width=200 /></span>
+</div>
+
 
 ### Development Approach
 โปรเจคนี้ใช้วิธีการพัฒนาแบบ Hybrid ซึ่งเป็นการผสมผสานระหว่างแนวคิด Plan-driven และ Agile ในกระบวนการพัฒนา 
