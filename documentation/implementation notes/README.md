@@ -98,6 +98,11 @@
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
 * **นายนพภูมิ บุญจันทร์ (2113110221)**
+  - เจ้าของโครงงานบน GitHub
+  - พัฒนาส่วน Frontend
+  - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
+
+* **นายพงศ์พล แต้มศิริ (2113110817)**
   - ค้นหาข้อมูลรูปภาพกล้องถ่ายรูปและอุปกรณ์เสริมตามที่กำหนด
 
 ## Usage
