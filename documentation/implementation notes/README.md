@@ -80,32 +80,32 @@
 
 ## Role and Duty
 
-* **นายวัชรพล พงษ์วิลัย (2013111089)**
+* **นายวัชรพล พงษ์วิลัย (2013111089)** [GitHub](https://github.com/rushmi0)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Backend และจัดการฐานข้อมูล
   - พัฒนา API สำหรับการนำเข้าไปใช้ใน Frontend
 
-* **นายศุภวิชญ์ คมขำ (2113110668)**
+* **นายศุภวิชญ์ คมขำ (2113110668)** [GitHub](https://github.com/SupavithLOL)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Frontend
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWjZtQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
-* **นายอภิรักษ์ ฉิมหิรัญ (2113110700)**
+* **นายอภิรักษ์ ฉิมหิรัญ (2113110700)** [GitHub](https://github.com/Emperor13)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Frontend
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
-* **นายมินทดา ลำพุทธา (2113110957)**
+* **นายมินทดา ลำพุทธา (2113110957)** [GitHub](https://github.com/MasterAvocado1150)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Frontend
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
-* **นายชัยพัฒน์ จรรยาศักดิ์ศรี (2113110056)**
+* **นายชัยพัฒน์ จรรยาศักดิ์ศรี (2113110056)** [GitHub](https://github.com/CJ1426)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Frontend
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
 
-* **นายนพภูมิ บุญจันทร์ (2113110221)**
+* **นายนพภูมิ บุญจันทร์ (2113110221)** [GitHub](https://github.com/VolleyV)
   - เจ้าของโครงงานบน GitHub
   - พัฒนาส่วน Frontend
   - สร้างหน้าเว็บตามแผนภาพใน [Miro](https://miro.com/welcomeonboard/ZmUxV3VKZ25EalVta005bTRJSWJiN0FpNzZDS0R4NTdRWUJWSVdYelFNRUVvamYxWTluWj2tQ2FnQ3c1RzhwY3wzNDU4NzY0NTU4NTY5MjE2MzY2fDI=?share_link_id=195079943401)
