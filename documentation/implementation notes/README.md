@@ -5,6 +5,8 @@
   <img src="https://github.com/rushmi0/CamRent/assets/120770468/7bfc0c12-dbbd-41f4-92cc-3c6c9ce6592a" height=256 width=256 />
 </div>
 
+> โครงงานนี้เป็น
+
 ## Implementation Note
 
 ### Development Approach
@@ -56,9 +58,13 @@
   - Kotlin
   - Java
 
-### AI
+### AI Assistant
 - ChatGPT3.5
 - Bard
+
+### Search Engine
+- Microsoft Edge 
+- FireFox
 
 ### Data Storage
 - SQLite
@@ -116,3 +122,6 @@
 ## License
 
 ...
+
+
+อ้างอิงจาก [andreasonny83](https://gist.github.com/andreasonny83/7670f4b39fe237d52636df3dec49cf3a#project-name)
