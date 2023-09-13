@@ -74,7 +74,6 @@
   - exposed-core: 0.41.1
   - exposed-dao: 0.41.1
   - exposed-jdbc: 0.41.1
-  - exposed-jdbc: 0.41.1
   - exposed-java-time: 0.41.1
   - HikariCP: 5.0.1
   - json: 20230227
