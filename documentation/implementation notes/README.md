@@ -1,7 +1,7 @@
 # CamRent Project
 
 
-<div align="center">
+<div align="center" style="margin-bottom: 35px; margin-top: 50px">
   <img src="https://github.com/rushmi0/CamRent/assets/120770468/7bfc0c12-dbbd-41f4-92cc-3c6c9ce6592a" height=256 width=256 />
 </div>
 
