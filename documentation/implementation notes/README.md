@@ -5,9 +5,29 @@
   <img src="https://github.com/rushmi0/CamRent/assets/120770468/7bfc0c12-dbbd-41f4-92cc-3c6c9ce6592a" height=256 width=256 />
 </div>
 
+
 โครงงานนี้ เป็นชิ้นงานในวิชา Software Engineer ของสาขา IT วัตถุประสงค์ของโครงงานนี้คือเพื่อศึกษากระบวนการพัฒนาระบบซอฟต์แวร์
 
 นอกจากนี้ โครงงานนี้ยังมุ่งเน้นการศึกษาและประยุกต์ใช้หลักการและเครื่องมือที่ใช้ในการพัฒนาซอฟต์แวร์ เราจะได้ศึกษาการใช้เทคโนโลยีที่ทันสมัยเพื่อสร้างซอฟต์แวร์ที่มีคุณภาพและสามารถตอบสนองความต้องการของผู้ใช้ได้อย่างเหมาะสม
+
+
+## Table of contents
+- [Project Name](#camrent-project)
+  - [Implementation Note](#implementation-note)
+    - [Development Approach](#development-approach)
+    - [Development Environment](#development-environment)
+    - [Version Control](#version-control)
+    - [Frontend Tools](#frontend-tools)
+    - [Backend Tools](#backend-tools)
+    - [AI Assistant](#ai-assistant)
+    - [Search Engine](#search-engine)
+    - [Data Storage](#data-storage)
+    - [Communication Tools](#communication-tools)
+    - [Planning Tools](#planning-tools)
+    - [Role and Duty](#role-and-duty)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Refer](#refer-andreasonny83)
 
 ## Implementation Note
 
@@ -29,6 +49,9 @@
 ### Frontend Tools
 - **Development Tool**: ReactJS + Vite
 - **Styling Framework**: Tailwind CSS + DaisyUI
+- **Additional Tool**: 
+  -  Modern React Snippets
+  - 
 - **Additional Libraries**:
   - react-icons
   - axios
@@ -63,6 +86,7 @@
 ### AI Assistant
 - ChatGPT3.5
 - Bard
+- Bing
 
 ### Search Engine
 - Microsoft Edge 
@@ -113,9 +137,6 @@
 * **นายพงศ์พล แต้มศิริ (2113110817)**
   - ค้นหาข้อมูลรูปภาพกล้องถ่ายรูปและอุปกรณ์เสริมตามที่กำหนด
 
-## Usage
-
-...
 
 ## Contributing
 
@@ -126,4 +147,4 @@
 ...
 
 
-อ้างอิงจาก [andreasonny83](https://gist.github.com/andreasonny83/7670f4b39fe237d52636df3dec49cf3a#project-name)
+## Refer [andreasonny83](https://gist.github.com/andreasonny83/7670f4b39fe237d52636df3dec49cf3a#project-name)
