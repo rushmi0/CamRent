@@ -50,8 +50,9 @@
 - **Development Tool**: ReactJS + Vite
 - **Styling Framework**: Tailwind CSS + DaisyUI
 - **Additional Tool**: 
-  -  Modern React Snippets
-  - 
+  - React Buddy 
+  - Modern React Snippets
+  - ES7+ React/Redux/React-Native snippets
 - **Additional Libraries**:
   - react-icons
   - axios
@@ -65,6 +66,7 @@
 ### Backend Tools
 - **Additional Tool**:
   -  Database tools and SQL
+  - SimpleSqliteBrowser
   - JetClient
   - [Maven Repository](https://mvnrepository.com/)
 - **Backend Framework**: Ktor
