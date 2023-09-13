@@ -67,6 +67,7 @@
 - **Additional Tool**:
   -  Database tools and SQL
   - SimpleSqliteBrowser
+  - Postman
   - JetClient
   - [Maven Repository](https://mvnrepository.com/)
 - **Backend Framework**: Ktor
