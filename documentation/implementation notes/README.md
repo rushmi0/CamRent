@@ -43,7 +43,7 @@
   - IntelliJ IDEA Ultimate
   - WebStorm
 
-## Version Control
+### Version Control
 - **GitHub**
 
 ### Frontend Tools
