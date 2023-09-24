@@ -163,6 +163,24 @@ object ShiftTo {
         return result
     }
 
+    fun Int.DectoLittleEndian(bytes: Int): String {
+        require(bytes in 1..8) { "Byte count should be between 1 and 8" }
+
+        val valueInLittleEndian = ByteArray(bytes)
+        for (i in 0 until bytes) {
+            valueInLittleEndian[i] = (this shr (i * 8)).toByte()
+        }
+
+        val hexString = StringBuilder()
+        for (i in valueInLittleEndian.size - 1 downTo 0) {
+            val hex = (valueInLittleEndian[i].toInt() and 0xFF).toString(16).padStart(2, '0')
+            hexString.append(hex)
+        }
+
+        return hexString.toString().toUpperCase()
+    }
+
+
 
 
     fun String.decodeBase58(): String {

@@ -182,6 +182,7 @@ fun main() {
     val tsDecode = key.decodeBase58()
     println(tsDecode)
 
+
     val decoded = Base58.decode(key)
     println(decoded)
     println(Arrays.toString(decoded) + "\n")

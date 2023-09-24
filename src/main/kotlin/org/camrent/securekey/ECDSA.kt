@@ -1,6 +1,9 @@
 package org.camrent.securekey
 
 
+import org.camrent.securekey.EllipticCurve.addPoint
+import org.camrent.securekey.EllipticCurve.modinv
+import org.camrent.securekey.EllipticCurve.multiplyPoint
 import org.camrent.utils.ShiftTo.ByteArrayToHex
 import java.math.BigInteger
 import java.security.SecureRandom
@@ -24,8 +27,8 @@ object ECDSA {
         //val k = BigInteger("42854675228720239947134362876390869888553449708741430898694136287991817016610")
         val k = BigInteger(256, SecureRandom())
 
-        val point: EllipticCurve.Point = EllipticCurve.multiplyPoint(k)
-        val kInv: BigInteger = EllipticCurve.modinv(k, N)
+        val point: EllipticCurve.Point = multiplyPoint(k)
+        val kInv: BigInteger = modinv(k, N)
 
         val r: BigInteger = point.x % N
         var s: BigInteger = ((m + r * privateKey) * kInv) % N
@@ -45,14 +48,14 @@ object ECDSA {
     ): Boolean {
         val (r, s) = signature
 
-        val w = EllipticCurve.modinv(s, N)
+        val w = modinv(s, N)
         val u1 = (message * w) % N
         val u2 = (r * w) % N
 
-        val point1 = EllipticCurve.multiplyPoint(u1)
-        val point2 = EllipticCurve.multiplyPoint(u2, publicKeyPoint)
+        val point1 = multiplyPoint(u1)
+        val point2 = multiplyPoint(u2, publicKeyPoint)
 
-        val point = EllipticCurve.addPoint(point1, point2)
+        val point = addPoint(point1, point2)
 
         val x = point.x % N
 
