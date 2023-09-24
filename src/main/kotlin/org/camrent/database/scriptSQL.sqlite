@@ -1,0 +1,242 @@
+
+-- [ People Table ]
+CREATE TABLE IF NOT EXISTS People
+(
+    PersonID    TEXT PRIMARY KEY,
+    FirstName   TEXT                                                       NOT NULL,
+    LastName    TEXT                                                       NOT NULL,
+    Email       TEXT CHECK (Email LIKE '%_@__%.__%' OR Email LIKE '%@%.%') NOT NULL,
+    PhoneNumber TEXT                                                       NOT NULL,
+    AddressID   TEXT,
+    FOREIGN KEY (AddressID) REFERENCES Address (AddressID)
+);
+SELECT * FROM People;
+
+-- [ Customers Table ]
+CREATE TABLE IF NOT EXISTS Customers
+(
+    CustomerID   TEXT PRIMARY KEY,
+    UserName     TEXT        NOT NULL UNIQUE,
+    ProfileImage TEXT,
+    AuthKey      TEXT        NOT NULL,
+    TimeStamp    DATETIME,
+    CreateAccountDate        DATETIME,
+    PersonID     TEXT UNIQUE NOT NULL,
+    FOREIGN KEY (PersonID) REFERENCES People (PersonID)
+);
+SELECT * FROM Customers;
+
+-- [ Stores Table ]
+CREATE TABLE IF NOT EXISTS Stores
+(
+    StoreID       TEXT PRIMARY KEY,
+    StoreName     TEXT        NOT NULL UNIQUE,
+    ProfileImage  TEXT,
+    PaymentMethod TEXT,
+    AuthKey       TEXT,
+    TimeStamp    DATETIME ,
+     CreateAccountDate        DATETIME ,
+    PersonID      TEXT UNIQUE NOT NULL,
+    FOREIGN KEY (PersonID) REFERENCES People (PersonID)
+);
+SELECT * FROM Stores;
+
+-- [ Address Table ]
+CREATE TABLE IF NOT EXISTS Address
+(
+    AddressID    TEXT PRIMARY KEY,
+    LocationName TEXT NOT NULL,
+    City         TEXT NOT NULL,
+    Province     TEXT NOT NULL,
+    PostalNumber TEXT NOT NULL,
+    StreetName   TEXT NOT NULL
+);
+SELECT * FROM Address;
+
+-- [ CreditScore Table ]
+CREATE TABLE IF NOT EXISTS CreditScore
+(
+    ScoreID    TEXT PRIMARY KEY,
+    Score      INTEGER DEFAULT 0,
+    Report     TEXT,
+    StoreID    TEXT,
+    CustomerID TEXT,
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+);
+SELECT * FROM CreditScore;
+
+-- [ OrderContract Table ]
+CREATE TABLE IF NOT EXISTS OrderContract
+(
+    OrderID    TEXT PRIMARY KEY,
+    Quantity   INTEGER DEFAULT 0,
+    Duration   INTEGER DEFAULT 0,
+    CustomerID TEXT,
+    AddressID  TEXT,
+    ProductID  TEXT,
+    FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+    FOREIGN KEY (AddressID) REFERENCES Address (AddressID)
+);
+SELECT * FROM OrderContract;
+
+-- [ Transactions Table ]
+CREATE TABLE IF NOT EXISTS Transactions
+(
+    TxID       TEXT PRIMARY KEY,
+    TotalPrice INTEGER NOT NULL,
+    Status     TEXT     DEFAULT 'Pending', -- 'Pending'  / 'Confirmed'
+    TimeStamp   DATETIME,
+    Date       DATETIME,
+    OrderID    TEXT,
+    FOREIGN KEY (OrderID) REFERENCES OrderContract (OrderID)
+);
+SELECT * FROM Transactions;
+
+-- [ Products Table ]
+CREATE TABLE IF NOT EXISTS Products
+(
+    ProductID     TEXT PRIMARY KEY,
+    ProductName   TEXT NOT NULL,
+    Image1        TEXT,
+    Image2        TEXT,
+    Image3        TEXT,
+    Image4        TEXT,
+    Type          TEXT    DEFAULT 'N/A',
+    Price         INTEGER DEFAULT 0,
+    SpecDetail    TEXT, -- JSON
+    DESC          TEXT,
+    ProductStatus TEXT    DEFAULT ' Unavailable',
+    StoreID       TEXT,
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID)
+);
+SELECT * FROM Products;
+
+-- [ FineTable ]
+CREATE TABLE IF NOT EXISTS Fine
+(
+    FineID      TEXT PRIMARY KEY,
+    TimeStamp    DATETIME ,
+    Date        DATETIME ,
+    Description TEXT,
+    Image1      TEXT,
+    Image2      TEXT,
+    Image3      TEXT,
+    Image4      TEXT,
+    PenaltyFee  INTEGER,
+    Status      TEXT NOT NULL,
+    StoreID     TEXT,
+    ProductID   TEXT,
+    CustomerID  TEXT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID),
+    FOREIGN KEY (ProductID) REFERENCES Products (ProductID)
+);
+SELECT  * FROM Fine;
+
+
+
+
+
+SELECT name
+FROM sqlite_master
+WHERE type = 'table';
+
+
+-- [ คำสั่งลบตาราง ]
+-- DROP TABLE IF EXISTS People;
+-- DROP TABLE IF EXISTS Customers;
+-- DROP TABLE IF EXISTS Stores;
+-- DROP TABLE IF EXISTS Address;
+-- DROP TABLE IF EXISTS CreditScore;
+-- DROP TABLE IF EXISTS OrderContract;
+-- DROP TABLE IF EXISTS Transactions;
+-- DROP TABLE IF EXISTS Products;
+-- DROP TABLE IF EXISTS Fine;
+
+
+
+
+-- เพิ่มข้อมูลในตาราง People
+INSERT INTO People (PersonID, FirstName, LastName, Email, PhoneNumber, AddressID)
+VALUES
+    ('PS-00001', 'John', 'Doe', 'john.doe@example.com', '123-4567-8901', 'ADDR-00001'),
+    ('PS-00002', 'Jane', 'Smith', 'jane.smith@example.com', '987-6543-2109', 'ADDR-00002'),
+    ('PS-00003', 'Alice', 'Johnson', 'alice.johnson@example.com', '555-1234-5678', 'ADDR-00003'),
+    ('PS-00004', 'Bob', 'Williams', 'bob.williams@example.com', '111-2222-3333', 'ADDR-00004'),
+    ('PS-00005', 'Eva', 'Brown', 'eva.brown@example.com', '999-8888-7777', 'ADDR-00005');
+
+-- เพิ่มข้อมูลในตาราง Customers
+INSERT INTO Customers (CustomerID, UserName, ProfileImage, AuthKey, PersonID)
+VALUES
+    ('CTM-00001', 'johndoe', 'N/A','US123456', 'PS-00001'),
+    ('CTM-00002', 'janesmith', 'N/A','US987654', 'PS-00002'),
+    ('CTM-00003', 'alicejohnson', 'N/A','US555555', 'PS-00003'),
+    ('CTM-00004', 'bobwilliams', 'N/A','US111111', 'PS-00004'),
+    ('CTM-00005', 'evabrown', 'N/A','US999999', 'PS-00005');
+
+-- เพิ่มข้อมูลในตาราง Stores
+INSERT INTO Stores (StoreID, StoreName, ProfileImage, PaymentMethod, AuthKey, PersonID)
+VALUES
+    ('ST-00001', 'Store A', 'N/A','Credit Card', 'ST111111', 'PS-00006'),
+    ('ST-00002', 'Store B', 'N/A','PayPal', 'ST222222', 'PS-00007'),
+    ('ST-00003', 'Store C', 'N/A','Cash on Delivery', 'ST333333', 'PS-00008'),
+    ('ST-00004', 'Store D', 'N/A','Credit Card', 'ST444444', 'PS-00009'),
+    ('ST-00005', 'Store E', 'N/A','PayPal', 'ST555555', 'PS-00010');
+
+-- เพิ่มข้อมูลในตาราง Address
+INSERT INTO Address (AddressID, LocationName, City, Province, PostalNumber, StreetName)
+VALUES
+    ('ADDR-00001', 'Home', 'New York', 'New York', '10001', '123 Main Street'),
+    ('ADDR-00002', 'Home', 'Los Angeles', 'California', '90001', '456 Elm Street'),
+    ('ADDR-00003', 'Work', 'Chicago', 'Illinois', '60601', '789 Oak Avenue'),
+    ('ADDR-00004', 'Home', 'Houston', 'Texas', '77001', '101 Pine Road'),
+    ('ADDR-00005', 'Work', 'Miami', 'Florida', '33101', '202 Maple Lane');
+
+-- เพิ่มข้อมูลในตาราง CreditScore
+INSERT INTO CreditScore (ScoreID, Score, Report, StoreID, CustomerID)
+VALUES
+    ('SC-00001', 750, 'Good credit history', 'ST-00001', 'CTM-00001'),
+    ('SC-00002', 680, 'Fair credit history', 'ST-00002', 'CTM-00002'),
+    ('SC-00003', 800, 'Excellent credit history', 'ST-00003', 'CTM-00003'),
+    ('SC-00004', 700, 'Good credit history', 'ST-00004', 'CTM-00004'),
+    ('SC-00005', 720, 'Good credit history', 'ST-00005', 'CTM-00005');
+
+-- เพิ่มข้อมูลในตาราง OrderContract
+INSERT INTO OrderContract (OrderID, Quantity, Duration, CustomerID, AddressID, ProductID)
+VALUES
+    ('OD-00001', 2, 30, 'CTM-00001', 'ADDR-00001', 'PD-00001'),
+    ('OD-00002', 3, 45, 'CTM-00002', 'ADDR-00002', 'PD-00002'),
+    ('OD-00003', 1, 15, 'CTM-00003', 'ADDR-00003', 'PD-00003'),
+    ('OD-00004', 4, 60, 'CTM-00004', 'ADDR-00004', 'PD-00004'),
+    ('OD-00005', 2, 30, 'CTM-00005', 'ADDR-00005', 'PD-00005');
+
+-- เพิ่มข้อมูลในตาราง Transactions
+INSERT INTO Transactions (TxID, TotalPrice, Status, OrderID)
+VALUES
+    ('TX-00001', 2000, 'Completed', 'OD-00001'),
+    ('TX-00002', 1500, 'Completed', 'OD-00002'),
+    ('TX-00003', 500, 'Completed', 'OD-00003'),
+    ('TX-00004', 4000, 'Processing', 'OD-00004'),
+    ('TX-00005', 1800, 'Completed', 'OD-00005');
+
+-- เพิ่มข้อมูลในตาราง Products
+INSERT INTO Products (ProductID, ProductName, Image1, Image2, Image3, Image4, Type, Price, SpecDetail, DESC, ProductStatus, StoreID)
+VALUES
+    ('PD-00001', 'Product A', 'N/A','N/A','N/A','N/A','Type A', 100, '{"Color": "Red", "Size": "M"}', 'Description A', 'Available', 'ST-00001'),
+    ('PD-00002', 'Product B', 'N/A','N/A','N/A','N/A','Type B', 50, '{"Color": "Blue", "Size": "L"}', 'Description B', 'Available', 'ST-00002'),
+    ('PD-00003', 'Product C', 'N/A','N/A','N/A','N/A','Type A', 30, '{"Color": "Green", "Size": "S"}', 'Description C', 'Available', 'ST-00003'),
+    ('PD-00004', 'Product D', 'N/A','N/A','N/A','N/A','Type C', 200, '{"Color": "Yellow", "Size": "XL"}', 'Description D', 'Out of Stock', 'ST-00004'),
+    ('PD-00005', 'Product E', 'N/A','N/A','N/A','N/A','Type B', 80, '{"Color": "Black", "Size": "M"}', 'Description E', 'Available', 'ST-00005');
+
+-- เพิ่มข้อมูลในตาราง Fine
+INSERT INTO Fine (FineID, Description, Image1, Image2, Image3, Image4, PenaltyFee, Status, CustomerID, StoreID, ProductID)
+VALUES
+    ('FN-00001',  'Late payment', 'N/A','N/A','N/A','N/A',100, 'Paid', 'CTM-00001', 'ST-00001', 'PD-00001'),
+    ('FN-00002', 'Late payment', 'N/A','N/A','N/A','N/A',50, 'Paid', 'CTM-00002', 'ST-00002', 'PD-00002'),
+    ('FN-00003', 'Late payment', 'N/A','N/A','N/A','N/A',30, 'Paid', 'CTM-00003', 'ST-00003', 'PD-00003'),
+    ('FN-00004', 'Late payment', 'N/A','N/A','N/A','N/A',200, 'Unpaid', 'CTM-00004', 'ST-00004', 'PD-00004'),
+    ('FN-00005', 'Late payment', 'N/A','N/A','N/A','N/A',80, 'Paid', 'CTM-00005', 'ST-00005', 'PD-00005');
+
+
