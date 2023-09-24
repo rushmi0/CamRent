@@ -7,6 +7,11 @@ import org.camrent.database.DatabaseFactory
 import org.camrent.database.DatabaseFactory.dbQuery
 import org.camrent.database.forms.CustomersForm
 import org.camrent.database.table.CustomersTable
+import org.camrent.database.table.CustomersTable.authKey
+import org.camrent.database.table.CustomersTable.customerID
+import org.camrent.database.table.CustomersTable.personID
+import org.camrent.database.table.CustomersTable.profileImage
+import org.camrent.database.table.CustomersTable.userName
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -32,11 +37,11 @@ object Customer {
         return dbQuery {
             CustomersTable.selectAll().map {
                 CustomersForm(
-                    it[CustomersTable.customerID],
-                    it[CustomersTable.userName],
-                    it[CustomersTable.profileImage],
-                    it[CustomersTable.authKey],
-                    it[CustomersTable.personID]
+                    it[customerID],
+                    it[userName],
+                    it[profileImage],
+                    it[authKey],
+                    it[personID]
                 )
             }
         }
@@ -77,25 +82,25 @@ suspend fun main() {
 //    val idBytes = maxCustomerId?.stringToSignedIntArray()
 //    println(Arrays.toString(idBytes))
 
-    // ต่อสายการทำงาน (transaction)
+
     transaction {
         // SELECT
         val result: Query = CustomersTable.selectAll()
 
         // SELECT WHERE
-        val filteredResult = CustomersTable.select { CustomersTable.customerID eq "CTM-00013" }.toList()
+        val filteredResult = CustomersTable.select { customerID eq "CTM-00013" }.toList()
 
         // SELECT MAX
-        val maxCustomerID = CustomersTable.slice(CustomersTable.customerID.max()).selectAll()
-            .single()[CustomersTable.customerID.max()].toString()
+        val maxCustomerID = CustomersTable.slice(customerID.max()).selectAll()
+            .single()[customerID.max()].toString()
 
         // SELECT MIN
-        val minCustomerID = CustomersTable.slice(CustomersTable.customerID.min()).selectAll()
-            .single()[CustomersTable.customerID.min()].toString()
+        val minCustomerID = CustomersTable.slice(customerID.min()).selectAll()
+            .single()[customerID.min()].toString()
 
         // SELECT SUM
-        val sumOfCustomerIDs = CustomersTable.slice(CustomersTable.customerID.sum()).selectAll()
-            .single()[CustomersTable.customerID.sum()].toString()
+        val sumOfCustomerIDs = CustomersTable.slice(customerID.sum()).selectAll()
+            .single()[customerID.sum()].toString()
 
         // Print results
         println("SELECT All: $result")
