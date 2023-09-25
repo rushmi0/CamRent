@@ -1,8 +1,7 @@
-package org.camrent.database.forms
+package org.camrent.database.field
 
-data class PeopleForm(
-    val peopleID: String,
-    val sequenceNumber: Int,
+data class PeopleField(
+    val personID: String,
     val firstName: String,
     val lastName: String,
     val email: String,

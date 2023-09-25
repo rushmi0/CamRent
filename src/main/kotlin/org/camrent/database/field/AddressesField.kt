@@ -1,6 +1,7 @@
-package org.camrent.database.forms
+package org.camrent.database.field
 
-data class AddressesForm(
+data class AddressesField(
+    val addressID: String,
     val locationName: String,
     val city: String,
     val province: String,

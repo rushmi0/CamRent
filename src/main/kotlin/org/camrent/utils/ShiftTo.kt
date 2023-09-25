@@ -1,5 +1,6 @@
 package org.camrent.utils
 
+import org.camrent.utils.ShiftTo.DectoLittleEndian
 import java.math.BigInteger
 import java.util.*
 
@@ -200,5 +201,17 @@ object ShiftTo {
     }
 
 
+}
 
+
+fun main() {
+
+    val num = 2
+    val nuw = num.DectoLittleEndian(2)
+    println(nuw)
+
+    val maxID = "TSX-0001"
+    val prefix = maxID.substring(0, 4)
+    val suffix = maxID.substring(4)
+    println("$maxID \n$prefix \n$suffix")
 }

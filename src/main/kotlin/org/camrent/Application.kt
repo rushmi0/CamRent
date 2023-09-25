@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.camrent.database.DatabaseFactory
+import org.camrent.database.service.test.testJSON
 import org.camrent.plugins.*
 
 fun main() {
@@ -13,6 +14,7 @@ fun main() {
 
 fun Application.module() {
     DatabaseFactory.initialize()
+    testJSON()
     configureSecurity()
     configureSerialization()
     configureDatabases()
