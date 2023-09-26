@@ -23,7 +23,7 @@ function classNames(...classes) {
 
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-[#353535] top-0 sticky">
+    <Disclosure as="nav" className="bg-[#5a6680] top-0 sticky z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
@@ -63,7 +63,7 @@ export default function Example() {
                           item.current
                             ? "text-white underline"
                             : "text-gray-300 hover:bg-gray-500 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                          "rounded-md px-3 py-2 text-sm font-bold"
                         )}
                         aria-current={item.current ? "page" : undefined}
                         active={window.location.pathname == item.href ? item.current=true: item.current=false}
@@ -139,13 +139,13 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/login"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Sign out
+                            Sign In
                           </a>
                         )}
                       </Menu.Item>

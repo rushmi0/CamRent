@@ -1,5 +1,5 @@
 .headText {
-    @apply font-medium
+    @apply font-bold
 }
 
 .subText {

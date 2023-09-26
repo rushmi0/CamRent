@@ -9,8 +9,8 @@ function Homepage() {
   return (
     <>
       <motion.section
-      id={classes.bgImage}
-        className="h-[45rem] bg-gradient-to-r from-cyan-500 to-blue-500"
+        id={classes.bgImage}
+        className="h-[45rem]"
         initial={{ y: -300, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 300, opacity: 0 }}
@@ -27,18 +27,18 @@ function Homepage() {
             >
               <div className=" p-[2rem] flex-col md:ml-[4rem] lg:ml-[4rem] xl:ml-[18rem]">
                 <div className="text-7xl sm:text-7xl md:text-9xl font-medium">
-                  <h1 className="text-[#96663f]">CAM</h1>
-                  <h1 className="pl-[6rem]  text-[#96663f] md:text-[#353535]">RENT</h1>
+                  <h1 className="text-[#fff] font-medium">CAM</h1>
+                  <h1 className=" text-[#96663f] md:text-[#353535]">RENT</h1>
                 </div>
                 <div className=" mt-4 flex items-center justify-between">
-                  <p className="font-light text-2xl text-[#96663f] mr-4">
+                  <p className="font-light text-2xl text-[#f0f0f0] mr-4">
                     Save up to 50%
                   </p>
                   <motion.a
                     href="/shop"
-                    className="bg-[#96663f] py-2 px-5 text-white font-medium rounded"
+                    className="bg-[#5a6680] py-2 px-5 text-white font-medium rounded"
                     whileHover={{ 
-                      backgroundColor: "#353535", 
+                      backgroundColor: "#f7bdb2", 
                     }}
                   >
                     RENT NOW

@@ -83,7 +83,7 @@ function Shop() {
         )}
         {!isLoading && (
           <>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center mb-5">
               <h1 className="text-2xl">Loading</h1>
               <span className="loading loading-spinner loading-lg"></span>
             </div>

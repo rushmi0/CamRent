@@ -26,7 +26,7 @@ function ShopList() {
               <input
                 type="text"
                 placeholder="Search..."
-                className="input input-bordered w-full max-w-xs rounded-full bg-slate-200 z-50"
+                className="input input-bordered w-full max-w-xs rounded-full bg-slate-200"
               />
             </div>
             <div className="flex justify-start md:justify-end items-center">

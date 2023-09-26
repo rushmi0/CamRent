@@ -1,12 +1,11 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
-
 
 function ShopStyleOne({ id, cate, img, price }) {
   return (
     <>
-        <Link key={id}>
-          <div className="bg-[#f0f0f0] h-[30rem]">
+      <Link key={id}>
+        <div className="bg-[#f0f0f0] h-[30rem] border-b-4 border-[#96663f]">
             <div className="flex justify-center ">
               <img className="h-[400px] p-5" src={img} alt="" />
             </div>
@@ -15,10 +14,9 @@ function ShopStyleOne({ id, cate, img, price }) {
               <p className="font-medium text-lg">${price}/hr</p>
             </div>
           </div>
-        </Link>
-    
+      </Link>
     </>
-  )
+  );
 }
 
-export default ShopStyleOne
+export default ShopStyleOne;
