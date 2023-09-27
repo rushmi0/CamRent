@@ -87,9 +87,12 @@ fun Application.customerRoute() {
             }
 
 
-            delete("customers") {
+            delete("customers/{id}") {
+                val id = call.parameters["id"]?.toInt()
                 // ลบข้อมูลลูกค้า
-                Customer.delete(1)
+                if (id != null) {
+                    Customer.delete(id)
+                }
                 // ส่งคำตอบกลับ
                 call.respondText("Customer deleted successfully")
             }
