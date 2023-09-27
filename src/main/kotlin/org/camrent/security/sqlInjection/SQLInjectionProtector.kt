@@ -22,7 +22,6 @@ class SQLInjectionProtector {
 
         // ทำการกำจัด SQL Injection จากข้อมูล
         fun sanitizeInput(input: String): String {
-            // นี่เป็นตัวอย่างเท่านั้น ควรใช้วิธีการที่เหมาะสมกับระบบฐานข้อมูลของคุณ
             // ในที่นี้ใช้การลบคำหลัก SQL ที่ไม่ปลอดภัย
             val sqlKeywords = listOf(
                 "SELECT",
