@@ -8,6 +8,7 @@ import io.ktor.server.routing.*
 import org.camrent.Route.api.customerRoute
 import org.camrent.database.test.uploadFile
 import org.camrent.database.test.uploadImage
+import org.camrent.test.basic.basicBasePath
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -23,6 +24,6 @@ fun Application.configureRouting() {
 
         uploadImage()
         uploadFile()
-
+        basicBasePath()
     }
 }
