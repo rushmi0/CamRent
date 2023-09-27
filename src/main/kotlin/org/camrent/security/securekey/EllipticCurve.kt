@@ -1,13 +1,13 @@
-package org.camrent.securekey
+package org.camrent.security.securekey
 
 
-import org.camrent.securekey.ECDSA.SignSignatures
-import org.camrent.securekey.ECDSA.VerifySignature
-import org.camrent.securekey.ECDSA.toDERFormat
+import org.camrent.security.securekey.ECDSA.SignSignatures
+import org.camrent.security.securekey.ECDSA.VerifySignature
+import org.camrent.security.securekey.ECDSA.toDERFormat
 
-import org.camrent.securekey.EllipticCurve.compressed
-import org.camrent.securekey.EllipticCurve.getPublicKey
-import org.camrent.securekey.EllipticCurve.multiplyPoint
+import org.camrent.security.securekey.EllipticCurve.compressed
+import org.camrent.security.securekey.EllipticCurve.getPublicKey
+import org.camrent.security.securekey.EllipticCurve.multiplyPoint
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
 import org.camrent.utils.ShiftTo.HexToByteArray
 
