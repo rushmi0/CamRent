@@ -16,7 +16,7 @@ class CommandInjectionProtector {
 
         fun sanitizeInput(input: String): String {
             // กรองคำสั่งที่ไม่ปลอดภัย
-            return input.replace(Regex("[&|;<>]"), "")
+            return input.replace(Regex("[&|;<>/]"), "")
         }
     }
 
