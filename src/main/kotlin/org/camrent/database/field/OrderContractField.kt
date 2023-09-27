@@ -1,10 +1,10 @@
 package org.camrent.database.field
 
 data class OrderContractField(
-    val oderID: String,
+    val oderID: Int,
     val quantity: Int,
-    val duration: Int,
-    val customerID: String,
-    val addressID: String,
-    val productID: String
+    val duration: String,
+    val customerID: Int,
+    val addressID: Int,
+    val productID: Int
 )

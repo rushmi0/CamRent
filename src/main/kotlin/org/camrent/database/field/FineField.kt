@@ -1,7 +1,7 @@
 package org.camrent.database.field
 
 data class FineField(
-    val fineID: String,
+    val fineID: Int,
     val timeStamp: String,
     val date: String,
     val description: String,
@@ -11,7 +11,7 @@ data class FineField(
     val image4: String,
     val penaltyFee: Int,
     val status: String,
-    val storeID: String,
-    val productID: String,
-    val customerID: String
+    val storeID: Int,
+    val productID: Int,
+    val customerID: Int
 )

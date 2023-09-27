@@ -1,11 +1,11 @@
 package org.camrent.database.field
 
 data class CustomersField(
-    val customerID: String,
+    val customerID: Int,
     val userName: String,
     val profileImage: String,
-    val authKey: String? = null,
+    val authKey: String,
     val timeStamp: String,
     val createAt: String,
-    val personID: String
+    val personID: Int
 )

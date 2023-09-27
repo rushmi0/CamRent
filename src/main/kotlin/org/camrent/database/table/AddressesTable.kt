@@ -4,7 +4,7 @@ import org.jetbrains.exposed.sql.Table
 
 object AddressesTable : Table("Address") {
 
-    val addressID = text("AddressID")
+    val addressID = integer("AddressID")
     val locationName = text("LocationName")
     val city = text("City")
     val province = text("Province")

@@ -22,113 +22,113 @@ SQLite เป็นระบบจัดเก็บข้อมูลแบบ 
 
 ## People Table
 
-| คอลัมน์     | ประเภท | PK หรือ FK | อ้างอิง FK |    รูปแบบ    | คำอธิบาย      |
-|:------------|:-------|:----------:|:----------:|:------------:|---------------|
-| PersonID    | TEXT   |   **PK**   |            |   PS-XXXX    | รหัสบุคคล     |
-| FirstName   | TEXT   |            |            |    Xxxxxx    | ชื่อ          |
-| LastName    | TEXT   |            |            |    Xxxxxx    | นามสกุล       |
-| Email       | TEXT   |            |            |    Xxxxxx    | อีเมล         |
-| PhoneNumber | TEXT   |            |            | 999-9999-999 | เบอร์โทรศัพท์ |
-| AddressID   | TEXT   |   **FK**   |  Address   |  ADDR-XXXX   | รหัสที่อยู่   |
+| คอลัมน์     | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |    รูปแบบ    | คำอธิบาย      |
+|:------------|:-----------|:----------:|:----------:|:------------:|---------------|
+| PersonID    | TEXT       |   **PK**   |            |   PS-XXXX    | รหัสบุคคล     |
+| FirstName   | TEXT       |            |            |    Xxxxxx    | ชื่อ          |
+| LastName    | TEXT       |            |            |    Xxxxxx    | นามสกุล       |
+| Email       | TEXT       |            |            |    Xxxxxx    | อีเมล         |
+| PhoneNumber | TEXT       |            |            | 999-9999-999 | เบอร์โทรศัพท์ |
+| AddressID   | TEXT       |   **FK**   |  Address   |  ADDR-XXXX   | รหัสที่อยู่   |
 
 ## Customers Table
 
-| คอลัมน์      | ประเภท | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย          |
-|:-------------|:-------|:----------:|:----------:|:--------:|:------------------|
-| CustomerID   | TEXT   |   **PK**   |            | CTM-XXXX | รหัสลูกค้า        |
-| UserName     | TEXT   |            |            |  xxxxxx  | ชื่อผู้ใช้        |
-| ProfileImage | BLOB   |            |            |   img    | รูปของบัญชีผู้ใช้ |
-| AuthKey      | TEXT   |            |            | USxxxxxx | รหัสยืนยันตัวตน   |
-| PersonID     | TEXT   |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล         |
+| คอลัมน์      | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย          |
+|:-------------|:-----------|:----------:|:----------:|:--------:|:------------------|
+| CustomerID   | TEXT       |   **PK**   |            | CTM-XXXX | รหัสลูกค้า        |
+| UserName     | TEXT       |            |            |  xxxxxx  | ชื่อผู้ใช้        |
+| ProfileImage | BLOB       |            |            |   img    | รูปของบัญชีผู้ใช้ |
+| AuthKey      | TEXT       |            |            | USxxxxxx | รหัสยืนยันตัวตน   |
+| PersonID     | TEXT       |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล         |
 
 ## Stores Table
 
-| คอลัมน์       | ประเภท | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย                  |
-|:--------------|:-------|:----------:|:----------:|:--------:|:--------------------------|
-| StoreID       | TEXT   |   **PK**   |            | ST-XXXX  | รหัสร้านค้า               |
-| StoreName     | TEXT   |            |            |  xxxxxx  | ชื่อร้านค้า               |
-| ProfileImage  | BLOB   |            |            |   img    | รูปของบัญชีร้าน           |
-| PaymentMethod | TEXT   |            |            |  xxxxxx  | วิธีการชำระเงิน           |
-| AuthKey       | TEXT   |            |            | STxxxxxx | รหัสยืนยันตัวตนของร้านค้า |
-| PersonID      | TEXT   |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล                 |
+| คอลัมน์       | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย                  |
+|:--------------|:-----------|:----------:|:----------:|:--------:|:--------------------------|
+| StoreID       | TEXT       |   **PK**   |            | ST-XXXX  | รหัสร้านค้า               |
+| StoreName     | TEXT       |            |            |  xxxxxx  | ชื่อร้านค้า               |
+| ProfileImage  | BLOB       |            |            |   img    | รูปของบัญชีร้าน           |
+| PaymentMethod | TEXT       |            |            |  xxxxxx  | วิธีการชำระเงิน           |
+| AuthKey       | TEXT       |            |            | STxxxxxx | รหัสยืนยันตัวตนของร้านค้า |
+| PersonID      | TEXT       |   **FK**   |   People   | PS-XXXX  | รหัสบุคคล                 |
 
 ## Address Table
 
-| คอลัมน์      | ประเภท | PK หรือ FK | อ้างอิง FK |  รูปแบบ   | คำอธิบาย     |
-|:-------------|:-------|:----------:|:----------:|:---------:|:-------------|
-| AddressID    | TEXT   |   **PK**   |            | ADDR-XXXX | รหัสที่อยู่  |
-| LocationName | TEXT   |            |            |  Xxxxxxx  | ชื่อสถานที่  |
-| City         | TEXT   |            |            |  Xxxxxxx  | เมือง        |
-| Province     | TEXT   |            |            |  Xxxxxxx  | จังหวัด      |
-| PostalNumber | TEXT   |            |            |   99999   | รหัสไปรษณีย์ |
-| StreetName   | TEXT   |            |            |  Xxxxxxx  | ชื่อถนน      |
+| คอลัมน์      | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |  รูปแบบ   | คำอธิบาย     |
+|:-------------|:-----------|:----------:|:----------:|:---------:|:-------------|
+| AddressID    | TEXT       |   **PK**   |            | ADDR-XXXX | รหัสที่อยู่  |
+| LocationName | TEXT       |            |            |  Xxxxxxx  | ชื่อสถานที่  |
+| City         | TEXT       |            |            |  Xxxxxxx  | เมือง        |
+| Province     | TEXT       |            |            |  Xxxxxxx  | จังหวัด      |
+| PostalNumber | TEXT       |            |            |   99999   | รหัสไปรษณีย์ |
+| StreetName   | TEXT       |            |            |  Xxxxxxx  | ชื่อถนน      |
 
 ## CreditScore Table
 
-| คอลัมน์    | ประเภท  | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย        |
-|:-----------|:--------|:----------:|:----------:|:--------:|:----------------|
-| ScoreID    | TEXT    |   **PK**   |            | SC-XXXX  | รหัสคะแนนเครดิต |
-| Score      | INTEGER |            |            |    9     | คะแนนเครดิต     |
-| Report     | TEXT    |            |            |  xxxxxx  | รายงานเครดิต    |
-| StoreID    | TEXT    |   **FK**   |   Stores   | ST-XXXX  | รหัสร้านค้า     |
-| CustomerID | TEXT    |   **FK**   | Customers  | CTM-XXXX | รหัสลูกค้า      |
+| คอลัมน์    | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |  รูปแบบ  | คำอธิบาย        |
+|:-----------|:-----------|:----------:|:----------:|:--------:|:----------------|
+| ScoreID    | TEXT       |   **PK**   |            | SC-XXXX  | รหัสคะแนนเครดิต |
+| Score      | INTEGER    |            |            |    9     | คะแนนเครดิต     |
+| Report     | TEXT       |            |            |  xxxxxx  | รายงานเครดิต    |
+| StoreID    | TEXT       |   **FK**   |   Stores   | ST-XXXX  | รหัสร้านค้า     |
+| CustomerID | TEXT       |   **FK**   | Customers  | CTM-XXXX | รหัสลูกค้า      |
 
 ## OrderContract Table
 
-| คอลัมน์    | ประเภท  | PK หรือ FK | อ้างอิง FK |  รูปแบบ   | คำอธิบาย             |
-|:-----------|:--------|:----------:|:----------:|:---------:|:---------------------|
-| OrderID    | TEXT    |   **PK**   |            |  OD-XXXX  | รหัสสัญญาการสั่งซื้อ |
-| Quantity   | INTEGER |            |            |     9     | จำนวน                |
-| Duration   | INTEGER |            |            |     9     | ระยะเวลา             |
-| CustomerID | TEXT    |   **FK**   | Customers  | CTM-XXXX  | รหัสลูกค้า           |
-| AddressID  | TEXT    |   **FK**   |  Address   | ADDR-XXXX | รหัสที่อยู่          |
-| ProductID  | TEXT    |   **FK**   |  Products  |  PD-XXXX  | รหัสสินค้า           |
+| คอลัมน์    | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |  รูปแบบ   | คำอธิบาย             |
+|:-----------|:-----------|:----------:|:----------:|:---------:|:---------------------|
+| OrderID    | TEXT       |   **PK**   |            |  OD-XXXX  | รหัสสัญญาการสั่งซื้อ |
+| Quantity   | INTEGER    |            |            |     9     | จำนวน                |
+| Duration   | INTEGER    |            |            |     9     | ระยะเวลา             |
+| CustomerID | TEXT       |   **FK**   | Customers  | CTM-XXXX  | รหัสลูกค้า           |
+| AddressID  | TEXT       |   **FK**   |  Address   | ADDR-XXXX | รหัสที่อยู่          |
+| ProductID  | TEXT       |   **FK**   |  Products  |  PD-XXXX  | รหัสสินค้า           |
 
 ## Transactions Table
 
-| คอลัมน์    | ประเภท   | PK หรือ FK |  อ้างอิง FK   |   รูปแบบ   | คำอธิบาย             |
-|:-----------|:---------|:----------:|:-------------:|:----------:|:---------------------|
-| TxID       | TEXT     |   **PK**   |               |  TX-XXXX   | รหัสธุรกรรม          |
-| TotalPrice | INTEGER  |            |               |    9999    | ราคารวม              |
-| Status     | TEXT     |            |               |   Xxxxxx   | สถานะ                |
-| TimeSpam   | DATETIME |            |               |  99:99:99  | เวลาที่บันทึก        |
-| Date       | DATETIME |            |               | 99-99-9999 | วันที่บันทึก         |
-| OrderID    | TEXT     |   **FK**   | OrderContract |  OD-XXXX   | รหัสสัญญาการสั่งซื้อ |
+| คอลัมน์    | ชนิดข้อมูล | PK หรือ FK |  อ้างอิง FK   |   รูปแบบ   | คำอธิบาย             |
+|:-----------|:-----------|:----------:|:-------------:|:----------:|:---------------------|
+| TxID       | TEXT       |   **PK**   |               |  TX-XXXX   | รหัสธุรกรรม          |
+| TotalPrice | INTEGER    |            |               |    9999    | ราคารวม              |
+| Status     | TEXT       |            |               |   Xxxxxx   | สถานะ                |
+| TimeSpam   | DATETIME   |            |               |  99:99:99  | เวลาที่บันทึก        |
+| Date       | DATETIME   |            |               | 99-99-9999 | วันที่บันทึก         |
+| OrderID    | TEXT       |   **FK**   | OrderContract |  OD-XXXX   | รหัสสัญญาการสั่งซื้อ |
 
 ## Products Table
 
-| คอลัมน์       | ประเภท  | PK หรือ FK | อ้างอิง FK | รูปแบบ  | คำอธิบาย              |
-|:--------------|:--------|:----------:|:----------:|:-------:|:----------------------|
-| ProductID     | TEXT    |   **PK**   |            | PD-XXXX | รหัสสินค้า            |
-| ProductName   | TEXT    |            |            | Xxxxxx  | ชื่อสินค้า            |
-| Image1        | BLOB    |            |            |   img   | รูปภาพ 1              |
-| Image2        | BLOB    |            |            |   img   | รูปภาพ 2              |
-| Image3        | BLOB    |            |            |   img   | รูปภาพ 3              |
-| Image4        | BLOB    |            |            |   img   | รูปภาพ 4              |
-| Type          | TEXT    |            |            | xxxxxx  | ประเภทสินค้า          |
-| Price         | INTEGER |            |            |  99999  | ราคา                  |
-| SpecDetail    | TEXT    |            |            |  JSON   | รายละเอียดสินค้า JSON |
-| DESC          | TEXT    |            |            | xxxxxx  | คำอธิบายสินค้า        |
-| ProductStatus | TEXT    |            |            | Xxxxxx  | สถานะสินค้า           |
-| StoreID       | TEXT    |   **FK**   |   Stores   | ST-XXXX | รหัสร้านค้า           |
+| คอลัมน์       | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK | รูปแบบ  | คำอธิบาย              |
+|:--------------|:-----------|:----------:|:----------:|:-------:|:----------------------|
+| ProductID     | TEXT       |   **PK**   |            | PD-XXXX | รหัสสินค้า            |
+| ProductName   | TEXT       |            |            | Xxxxxx  | ชื่อสินค้า            |
+| Image1        | BLOB       |            |            |   img   | รูปภาพ 1              |
+| Image2        | BLOB       |            |            |   img   | รูปภาพ 2              |
+| Image3        | BLOB       |            |            |   img   | รูปภาพ 3              |
+| Image4        | BLOB       |            |            |   img   | รูปภาพ 4              |
+| Type          | TEXT       |            |            | xxxxxx  | ชนิดข้อมูลสินค้า      |
+| Price         | INTEGER    |            |            |  99999  | ราคา                  |
+| SpecDetail    | TEXT       |            |            |  JSON   | รายละเอียดสินค้า JSON |
+| DESC          | TEXT       |            |            | xxxxxx  | คำอธิบายสินค้า        |
+| ProductStatus | TEXT       |            |            | Xxxxxx  | สถานะสินค้า           |
+| StoreID       | TEXT       |   **FK**   |   Stores   | ST-XXXX | รหัสร้านค้า           |
 
 ## Fine Table
 
-| คอลัมน์     | ประเภท   | PK หรือ FK | อ้างอิง FK |   รูปแบบ   | คำอธิบาย        |
-|:------------|:---------|:----------:|:----------:|:----------:|:----------------|
-| FineID      | TEXT     |   **PK**   |            |  FN-XXXX   | รหัสค่าปรับ     |
-| TimeSpam    | DATETIME |            |            |  99:99:99  | เวลาที่บันทึก   |
-| Date        | DATETIME |            |            | 99-99-9999 | วันที่บันทึก    |
-| Description | TEXT     |            |            |   xxxxxx   | คำอธิบายค่าปรับ |
-| Image1      | BLOB     |            |            |    img     | รูปภาพ 1        |
-| Image2      | BLOB     |            |            |    img     | รูปภาพ 2        |
-| Image3      | BLOB     |            |            |    img     | รูปภาพ 3        |
-| Image4      | BLOB     |            |            |    img     | รูปภาพ 4        |
-| PenaltyFee  | INTEGER  |            |            |   99999    | ค่าปรับ         |
-| Status      | TEXT     |            |            |   Xxxxxx   | สถานะ           |
-| CustomerID  | TEXT     |   **FK**   | Customers  |  CTM-XXXX  | รหัสลูกค้า      |
-| StoreID     | TEXT     |   **FK**   |   Stores   |  ST-XXXX   | รหัสร้านค้า     |
-| ProductID   | TEXT     |   **FK**   |  Products  |  PD-XXXX   | รหัสสินค้า      |
+| คอลัมน์     | ชนิดข้อมูล | PK หรือ FK | อ้างอิง FK |   รูปแบบ   | คำอธิบาย        |
+|:------------|:-----------|:----------:|:----------:|:----------:|:----------------|
+| FineID      | TEXT       |   **PK**   |            |  FN-XXXX   | รหัสค่าปรับ     |
+| TimeSpam    | DATETIME   |            |            |  99:99:99  | เวลาที่บันทึก   |
+| Date        | DATETIME   |            |            | 99-99-9999 | วันที่บันทึก    |
+| Description | TEXT       |            |            |   xxxxxx   | คำอธิบายค่าปรับ |
+| Image1      | BLOB       |            |            |    img     | รูปภาพ 1        |
+| Image2      | BLOB       |            |            |    img     | รูปภาพ 2        |
+| Image3      | BLOB       |            |            |    img     | รูปภาพ 3        |
+| Image4      | BLOB       |            |            |    img     | รูปภาพ 4        |
+| PenaltyFee  | INTEGER    |            |            |   99999    | ค่าปรับ         |
+| Status      | TEXT       |            |            |   Xxxxxx   | สถานะ           |
+| CustomerID  | TEXT       |   **FK**   | Customers  |  CTM-XXXX  | รหัสลูกค้า      |
+| StoreID     | TEXT       |   **FK**   |   Stores   |  ST-XXXX   | รหัสร้านค้า     |
+| ProductID   | TEXT       |   **FK**   |  Products  |  PD-XXXX   | รหัสสินค้า      |
 
 [//]: # (Encode &#40;เข้ารหัส&#41;:)
 

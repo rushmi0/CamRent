@@ -1,12 +1,16 @@
 package org.camrent.utils
 
+import org.camrent.utils.ShiftTo.ByteArrayToHex
 import org.camrent.utils.ShiftTo.DectoLittleEndian
+import org.camrent.utils.ShiftTo.littleEndianToDeci
 import java.math.BigInteger
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.*
 
 object ShiftTo {
 
-    private val HEX_ARRAY: CharArray = "0123456789abcdef".toCharArray()
+    //private val HEX_ARRAY: CharArray = "0123456789abcdef".toCharArray()
     private val hexDigits: String = "0123456789abcdef"
 
 
@@ -164,24 +168,9 @@ object ShiftTo {
         return result
     }
 
-    fun Int.DectoLittleEndian(bytes: Int): String {
-        require(bytes in 1..8) { "Byte count should be between 1 and 8" }
-
-        val valueInLittleEndian = ByteArray(bytes)
-        for (i in 0 until bytes) {
-            valueInLittleEndian[i] = (this shr (i * 8)).toByte()
-        }
-
-        val hexString = StringBuilder()
-        for (i in valueInLittleEndian.size - 1 downTo 0) {
-            val hex = (valueInLittleEndian[i].toInt() and 0xFF).toString(16).padStart(2, '0')
-            hexString.append(hex)
-        }
-
-        return hexString.toString().toUpperCase()
+    fun Int.DectoLittleEndian(): String {
+        return ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(this).array().ByteArrayToHex()
     }
-
-
 
 
     fun String.decodeBase58(): String {
@@ -207,11 +196,18 @@ object ShiftTo {
 fun main() {
 
     val num = 2
-    val nuw = num.DectoLittleEndian(2)
+    val nuw = num.DectoLittleEndian()
     println(nuw)
 
     val maxID = "TSX-0001"
     val prefix = maxID.substring(0, 4)
     val suffix = maxID.substring(4)
     println("$maxID \n$prefix \n$suffix")
+
+
+    val number = "01000000".littleEndianToDeci().toInt() + 1
+    println(number)
+
+    val little = number.DectoLittleEndian()
+    println(little)
 }

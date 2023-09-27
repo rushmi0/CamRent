@@ -1,7 +1,7 @@
 package org.camrent.database.field
 
 data class AddressesField(
-    val addressID: String,
+    val addressID: Int,
     val locationName: String,
     val city: String,
     val province: String,

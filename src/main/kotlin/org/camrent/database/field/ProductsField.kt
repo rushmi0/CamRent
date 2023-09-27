@@ -1,7 +1,7 @@
 package org.camrent.database.field
 
 data class ProductsField(
-    val productID: String,
+    val productID: Int,
     val productName: String,
     val image1: String,
     val image2: String,
@@ -11,6 +11,6 @@ data class ProductsField(
     val price: Int,
     val specDetail: String,
     val description: String,
-    val productStats: String,
-    val storeID: String
+    val status: String,
+    val storeID: Int
 )

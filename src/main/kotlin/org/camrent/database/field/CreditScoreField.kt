@@ -1,9 +1,8 @@
 package org.camrent.database.field
 
 data class CreditScoreField(
-    val scoreID: String,
+    val scoreID: Int,
     val score: Int,
-    val report: String,
-    val storeID: String,
-    val customerID: String
+    val storeID: Int,
+    val customerID: Int
 )
