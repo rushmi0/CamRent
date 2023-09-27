@@ -1,9 +1,9 @@
-package org.camrent.securekey
+package org.camrent.security.securekey
 
 
-import org.camrent.securekey.EllipticCurve.addPoint
-import org.camrent.securekey.EllipticCurve.modinv
-import org.camrent.securekey.EllipticCurve.multiplyPoint
+import org.camrent.security.securekey.EllipticCurve.addPoint
+import org.camrent.security.securekey.EllipticCurve.modinv
+import org.camrent.security.securekey.EllipticCurve.multiplyPoint
 import org.camrent.utils.ShiftTo.ByteArrayToHex
 import java.math.BigInteger
 import java.security.SecureRandom
