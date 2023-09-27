@@ -1,4 +1,4 @@
-package org.camrent.securekey
+package org.camrent.security.securekey
 
 import java.math.BigInteger
 
