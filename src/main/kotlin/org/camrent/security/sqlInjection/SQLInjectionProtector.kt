@@ -4,16 +4,11 @@ class SQLInjectionProtector {
 
     companion object {
 
+        private val sqlKeywords = SQL.keyWords
+
+
         // ตรวจสอบ SQL Injection
         fun checkForSQLInjection(input: String): Boolean {
-            val sqlKeywords = listOf(
-                "SELECT",
-                "INSERT",
-                "UPDATE",
-                "DELETE",
-                "DROP",
-                "TRUNCATE"
-            )
             val sanitizedInput = input.toUpperCase()
 
             // ตรวจสอบว่ามีคำหลัก SQL ที่ไม่ปลอดภัยหรือไม่
@@ -22,15 +17,6 @@ class SQLInjectionProtector {
 
         // ทำการกำจัด SQL Injection จากข้อมูล
         fun sanitizeInput(input: String): String {
-            // ในที่นี้ใช้การลบคำหลัก SQL ที่ไม่ปลอดภัย
-            val sqlKeywords = listOf(
-                "SELECT",
-                "INSERT",
-                "UPDATE",
-                "DELETE",
-                "DROP",
-                "TRUNCATE"
-            )
 
             var sanitizedInput = input
             for (keyword in sqlKeywords) {
