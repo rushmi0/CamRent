@@ -3,13 +3,15 @@ package org.camrent.database.service
 
 import com.CamRent.utils.Time.getCurrentDate
 import com.CamRent.utils.Time.getCurrentTime
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.camrent.database.DatabaseFactory
 import org.camrent.database.DatabaseFactory.dbQuery
-import org.camrent.database.field.customer.CustomersField
-import org.camrent.database.field.customer.Data
+import org.camrent.database.field.CustomersField
 import org.camrent.database.forms.CustomersForm
 import org.camrent.database.service.Customer.selectMaxID
 import org.camrent.database.service.Customer.selectMinID
+import org.camrent.database.table.AddressesTable
 import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.CustomersTable.authKey
 import org.camrent.database.table.CustomersTable.createAt
@@ -18,6 +20,7 @@ import org.camrent.database.table.CustomersTable.personID
 import org.camrent.database.table.CustomersTable.profileImage
 import org.camrent.database.table.CustomersTable.timeStamp
 import org.camrent.database.table.CustomersTable.userName
+import org.camrent.database.table.PeopleTable
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.*
 
@@ -25,15 +28,6 @@ import org.jetbrains.exposed.sql.*
 // สร้างอ็อบเจกต์ Customer สำหรับจัดการข้อมูลลูกค้า
 object Customer {
 
-    // เมธอดสำหรับสร้าง Primary Key ใหม่
-    private suspend fun genKey(): Int {
-        val num = Customer.selectMaxID() ?: 0 // ถ้าเป็น null ให้คืนค่าเป็น 0
-        return if (num == 0) {
-            1
-        } else {
-            num + 1
-        }
-    }
 
     // เมธอดสำหรับดึงค่า ID ที่มากที่สุด
     suspend fun selectMaxID(): Int {
@@ -55,20 +49,80 @@ object Customer {
         }
     }
 
+    data class CustomerName(val userName: String, val customerID: Int)
+
+    suspend fun getCustomerNameById(customerId: Int): CustomerName? {
+        return dbQuery {
+            CustomersTable.select { CustomersTable.customerID eq customerId }
+                .mapNotNull {
+                    CustomerName(
+                        it[CustomersTable.userName],
+                        it[CustomersTable.customerID]
+                    )
+                }
+                .singleOrNull()
+        }
+    }
+
+
+    // * เมธอดสำหรับดึงข้อมูลลูกค้าทั้งหมด
+    suspend fun selectAll(): List<CustomersField> {
+        return dbQuery {
+            // ดึงข้อมูลทั้งหมดจาก CustomersTable แล้วแปลงให้อยู่ในรูปของ CustomersField
+            CustomersTable.selectAll().map {
+                CustomersField(
+                    it[customerID],
+                    it[userName],
+                    it[profileImage],
+                    it[authKey],
+                    it[timeStamp],
+                    it[createAt],
+                    it[personID]
+                )
+            }
+        }
+    }
+
+
+    // สร้าง Mutex สำหรับการล็อคการเข้าถึงตัวแปร id
+    private val idLock = Mutex()
+
+    // เมธอดสำหรับสร้าง Primary Key ใหม่
+    suspend fun genKey(): Int {
+        // ล็อคการเข้าถึงตัวแปร id
+        return idLock.withLock {
+            val num = Customer.selectMaxID()
+            if (num == 0) {
+                1
+            } else {
+                num + 1
+            }
+        }
+    }
+
 
     // เมธอดสำหรับเพิ่มข้อมูลลูกค้าใหม่
-    suspend fun insert(form: CustomersForm) {
-        val id = this.genKey()
+    suspend fun insert(customerData: CustomersForm) {
+        // สร้าง customerID ใหม่
+        val id = genKey()
         dbQuery {
+            // เพิ่มข้อมูลลูกค้าใน CustomersTable
             CustomersTable.insert {
                 // กำหนดข้อมูลในคอลัมน์ต่างๆ
                 it[customerID] = id
-                it[userName] = form.userName
-                //it[profileImage] = form.ProfileImage
-                it[authKey] = form.authKey
+                it[userName] = customerData.userName
+                it[authKey] = customerData.authKey
                 it[timeStamp] = getCurrentTime()
                 it[createAt] = getCurrentDate()
                 it[personID] = id // ค่า personID ต้องตรงกับ customerID
+            }
+
+            PeopleTable.insert {
+                it[personID] = id
+            }
+
+            AddressesTable.insert {
+                it[addressID] = id
             }
         }
     }
@@ -106,30 +160,13 @@ object Customer {
 
 
     // เมธอดสำหรับลบข้อมูลลูกค้า
-    suspend fun delete(customerID: Int): Unit {
+    suspend fun delete(id: Int): Unit {
         dbQuery {
-            // ลบข้อมูลลูกค้าที่มี customerID ตรงกับที่ระบุ
-            CustomersTable.deleteWhere { CustomersTable.customerID eq customerID }
-        }
-    }
-
-
-    // * เมธอดสำหรับดึงข้อมูลลูกค้าทั้งหมด
-    suspend fun selectAll(): List<CustomersField> {
-        return dbQuery {
-            // ดึงข้อมูลทั้งหมดจาก CustomersTable แล้วแปลงให้อยู่ในรูปของ CustomersField
-            CustomersTable.selectAll().map {
-                CustomersField(
-                    it[customerID],
-                    Data(
-                        it[authKey],
-                        it[createAt],
-                        it[personID],
-                        it[profileImage],
-                        it[timeStamp],
-                        it[userName]
-                    )
-                )
+            // ลบข้อมูลลูกค้าที่มี customerID และ personID ตรงกับที่ระบุ
+            CustomersTable.deleteWhere {
+                (CustomersTable.customerID eq id) and
+                        (PeopleTable.personID eq id) and
+                        (AddressesTable.addressID eq id)
             }
         }
     }
@@ -148,27 +185,26 @@ suspend fun main() {
     println("Min CustomerID: ${selectMinID()}")
     println("Max CustomerID: ${selectMaxID()}")
 
+    val id = Customer.genKey()
+    println(id)
+
 
     // แสดงข้อมูลทั้งหมดของลูกค้า
     // สร้าง Coroutine Scope สำหรับรันการทำงานที่ต้องใช้ runBlocking
-//    runBlocking {
-//
-//        // เลือกข้อมูลทั้งหมดของลูกค้า
-//        val customersList: List<CustomersField> = Customer.selectAll()
-//
-//        // วนลูปผ่านลิสต์ของลูกค้าและแสดงข้อมูล
-//        customersList.forEach { E ->
-//            println("\n=====================\n")
-//            println("Customer ID: ${E.customerID}")
-//            println("User Name: ${E.userName}")
-//            println("Profile Image: ${E.profileImage}")
-//            println("Auth Key: ${E.authKey}")
-//            println("Time Stamp: ${E.timeStamp}")
-//            println("Create Account Date: ${E.createAt}")
-//            println("Person ID: ${E.personID}")
-//        }
-//    }
+    // เลือกข้อมูลทั้งหมดของลูกค้า
+    val customersList: List<CustomersField> = Customer.selectAll()
 
+    // วนลูปผ่านลิสต์ของลูกค้าและแสดงข้อมูล
+    customersList.forEach { E ->
+        println("\n=====================\n")
+        println("Customer ID: ${E.customerID}")
+        println("User Name: ${E.userName}")
+        println("Profile Image: ${E.profileImage}")
+        println("Auth Key: ${E.authKey}")
+        println("Time Stamp: ${E.timeStamp}")
+        println("Create Account Date: ${E.createAt}")
+        println("Person ID: ${E.personID}")
+    }
 
 //    // อัปเดตข้อมูล
 //    val updateData = update(1, "ProfileImage", "lala.png")

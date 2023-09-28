@@ -6,5 +6,5 @@ data class PeopleField(
     val lastName: String,
     val email: String,
     val phoneNumber: String,
-    val addressID: Int
+    val addressID: Int?
 )

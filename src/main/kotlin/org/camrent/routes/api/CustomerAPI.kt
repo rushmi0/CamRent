@@ -1,4 +1,4 @@
-package org.camrent.Route.api
+package org.camrent.routes.api
 
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -27,6 +27,7 @@ fun Application.customerRoute() {
 
             post("customers") {
                 try {
+                    // รับข้อมูลจาก body ของคำขอ POST
                     val payload = call.receive<CustomersForm>()
 
                     // ตรวจสอบว่า UserName และ AuthKey ไม่เป็นค่าว่าง
@@ -36,33 +37,35 @@ fun Application.customerRoute() {
                         if (XssDetector.containsHtmlTags(payload.userName) || XssDetector.containsJavascript(payload.userName) ||
                             XssDetector.containsHtmlTags(payload.authKey) || XssDetector.containsJavascript(payload.authKey)
                         ) {
+                            // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                             call.respond(HttpStatusCode.BadRequest, "Cross-site scripting detected.")
                         } else {
-                            // หากไม่พบ XSS และ SQL Injection, ทำการเพิ่มข้อมูล
                             // ทำการกำจัด SQL Injection จากข้อมูล
                             val sanitizedUserName = SQLInjectionProtector.sanitizeInput(payload.userName)
+                            println(sanitizedUserName)
                             val sanitizedAuthKey = SQLInjectionProtector.sanitizeInput(payload.authKey)
+                            println(sanitizedAuthKey)
 
                             // เพิ่มข้อมูลลูกค้า
                             insert(CustomersForm(sanitizedUserName, sanitizedAuthKey))
+
+                            // ตอบกลับด้วยสถานะผลลัพธ์ 201 Created
                             call.respond(HttpStatusCode.Created, "Customer table inserted data successfully")
                         }
                     } else {
+                        // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                         call.respond(HttpStatusCode.BadRequest, "UserName and AuthKey must not be empty")
                     }
 
                 } catch (e: ContentTransformationException) {
-                    call.respond(
-                        HttpStatusCode.BadRequest,
-                        "Invalid data format. Please provide data in the correct format."
-                    )
+                    // ถ้าข้อมูลไม่ตรงตามรูปแบบ, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
+                    call.respond(HttpStatusCode.BadRequest, "Invalid data format. Please provide data in the correct format.")
                 } catch (e: Exception) {
-                    call.respond(
-                        HttpStatusCode.InternalServerError,
-                        "An error occurred while processing your request."
-                    )
+                    // ถ้าเกิดข้อผิดพลาดอื่น ๆ, ตอบกลับด้วยสถานะผลลัพธ์ 500 Internal Server Error
+                    call.respond(HttpStatusCode.InternalServerError, "An error occurred while processing your request.")
                 }
             }
+
 
 
 

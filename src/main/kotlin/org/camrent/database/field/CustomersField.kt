@@ -7,5 +7,5 @@ data class CustomersField(
     val authKey: String,
     val timeStamp: String,
     val createAt: String,
-    val personID: Int
+    val personID: Int?
 )
