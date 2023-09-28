@@ -1,18 +1,15 @@
 package org.camrent.database.service
 
 
-import kotlinx.coroutines.runBlocking
 import com.CamRent.utils.Time.getCurrentDate
 import com.CamRent.utils.Time.getCurrentTime
-import io.ktor.server.routing.*
 import org.camrent.database.DatabaseFactory
 import org.camrent.database.DatabaseFactory.dbQuery
-import org.camrent.database.field.CustomersField
+import org.camrent.database.field.customer.CustomersField
+import org.camrent.database.field.customer.Data
 import org.camrent.database.forms.CustomersForm
-import org.camrent.database.service.Customer.delete
 import org.camrent.database.service.Customer.selectMaxID
 import org.camrent.database.service.Customer.selectMinID
-import org.camrent.database.service.Customer.update
 import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.CustomersTable.authKey
 import org.camrent.database.table.CustomersTable.createAt
@@ -59,7 +56,6 @@ object Customer {
     }
 
 
-
     // เมธอดสำหรับเพิ่มข้อมูลลูกค้าใหม่
     suspend fun insert(form: CustomersForm) {
         val id = this.genKey()
@@ -67,9 +63,9 @@ object Customer {
             CustomersTable.insert {
                 // กำหนดข้อมูลในคอลัมน์ต่างๆ
                 it[customerID] = id
-                it[userName] = form.UserName
+                it[userName] = form.userName
                 //it[profileImage] = form.ProfileImage
-                it[authKey] = form.AuthKey
+                it[authKey] = form.authKey
                 it[timeStamp] = getCurrentTime()
                 it[createAt] = getCurrentDate()
                 it[personID] = id // ค่า personID ต้องตรงกับ customerID
@@ -125,12 +121,14 @@ object Customer {
             CustomersTable.selectAll().map {
                 CustomersField(
                     it[customerID],
-                    it[userName],
-                    it[profileImage],
-                    it[authKey],
-                    it[timeStamp],
-                    it[createAt],
-                    it[personID]
+                    Data(
+                        it[authKey],
+                        it[createAt],
+                        it[personID],
+                        it[profileImage],
+                        it[timeStamp],
+                        it[userName]
+                    )
                 )
             }
         }
@@ -138,9 +136,6 @@ object Customer {
 
 
 }
-
-
-
 
 
 // ฟังก์ชัน main สำหรับทดสอบการใช้งาน

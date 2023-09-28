@@ -8,6 +8,7 @@ import io.ktor.server.routing.*
 import org.camrent.database.forms.CustomersForm
 import org.camrent.database.service.Customer
 import org.camrent.database.service.Customer.insert
+import org.camrent.security.sqlInjection.SQLInjectionProtector
 import org.camrent.security.xss.XssDetector
 
 
@@ -29,25 +30,37 @@ fun Application.customerRoute() {
                     val payload = call.receive<CustomersForm>()
 
                     // ตรวจสอบว่า UserName และ AuthKey ไม่เป็นค่าว่าง
-                    if (payload.UserName.isNotBlank() && payload.AuthKey.isNotBlank()) {
+                    if (payload.userName.isNotBlank() && payload.authKey.isNotBlank()) {
 
                         // ตรวจสอบ XSS
-                        if (XssDetector.containsHtmlTags(payload.UserName) || XssDetector.containsJavascript(payload.UserName) ||
-                            XssDetector.containsHtmlTags(payload.AuthKey) || XssDetector.containsJavascript(payload.AuthKey)
+                        if (XssDetector.containsHtmlTags(payload.userName) || XssDetector.containsJavascript(payload.userName) ||
+                            XssDetector.containsHtmlTags(payload.authKey) || XssDetector.containsJavascript(payload.authKey)
                         ) {
                             call.respond(HttpStatusCode.BadRequest, "Cross-site scripting detected.")
                         } else {
-                            // หากไม่พบ XSS ทำการเพิ่มข้อมูล
-                            insert(payload)
+                            // หากไม่พบ XSS และ SQL Injection, ทำการเพิ่มข้อมูล
+                            // ทำการกำจัด SQL Injection จากข้อมูล
+                            val sanitizedUserName = SQLInjectionProtector.sanitizeInput(payload.userName)
+                            val sanitizedAuthKey = SQLInjectionProtector.sanitizeInput(payload.authKey)
+
+                            // เพิ่มข้อมูลลูกค้า
+                            insert(CustomersForm(sanitizedUserName, sanitizedAuthKey))
                             call.respond(HttpStatusCode.Created, "Customer table inserted data successfully")
                         }
                     } else {
                         call.respond(HttpStatusCode.BadRequest, "UserName and AuthKey must not be empty")
                     }
+
                 } catch (e: ContentTransformationException) {
-                    call.respond(HttpStatusCode.BadRequest, "Invalid data format. Please provide data in the correct format.")
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "Invalid data format. Please provide data in the correct format."
+                    )
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.InternalServerError, "An error occurred while processing your request.")
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        "An error occurred while processing your request."
+                    )
                 }
             }
 
@@ -63,14 +76,18 @@ fun Application.customerRoute() {
                         // ตรวจสอบ XSS สำหรับทุก field ที่รับมา
                         for ((fieldName, newValue) in payload) {
                             if (XssDetector.containsHtmlTags(newValue) || XssDetector.containsJavascript(newValue)) {
-                                call.respond(HttpStatusCode.BadRequest, "Cross-site scripting detected in the field: $fieldName")
+                                call.respond(
+                                    HttpStatusCode.BadRequest,
+                                    "Cross-site scripting detected in the field: $fieldName"
+                                )
                                 return@patch
                             }
-                        }
 
-                        // ถ้าไม่พบ XSS, ทำการอัปเดตข้อมูล
-                        for ((fieldName, newValue) in payload) {
-                            Customer.update(id, fieldName, newValue)
+                            // ทำการกำจัด SQL Injection จากข้อมูล
+                            val sanitizedValue = SQLInjectionProtector.sanitizeInput(newValue)
+
+                            // ถ้าไม่พบ XSS, ทำการอัปเดตข้อมูล
+                            Customer.update(id, fieldName, sanitizedValue)
                         }
                         call.respondText("Customer updated successfully")
                     } else {
@@ -78,8 +95,11 @@ fun Application.customerRoute() {
                     }
 
                 } catch (e: ContentTransformationException) {
-                    // กรณีเกิด ContentTransformationException (รูปแบบข้อมูลไม่ตรงตาม)
-                    call.respond(HttpStatusCode.BadRequest, "Invalid data format. Please provide data in the correct format.")
+                    // กรณีเกิด รูปแบบข้อมูลไม่ตรงตามโครงร้างที่กำหนด
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "Invalid data format. Please provide data in the correct format."
+                    )
                 } catch (e: Exception) {
                     // กรณีเกิด Exception อื่น ๆ
                     call.respond(HttpStatusCode.InternalServerError, "An error occurred while processing your request.")
