@@ -87,6 +87,27 @@ object Customer {
     }
 
 
+    suspend fun findCustomerByUserName(accountName: String): CustomersField? {
+        return dbQuery {
+            // เลือกข้อมูลลูกค้าที่มีชื่อผู้ใช้ตรงกับ `accountName`
+            CustomersTable.select { CustomersTable.userName eq accountName }
+                .mapNotNull {
+                    // แปลงข้อมูลที่ดึงมาในแต่ละแถวเป็น CustomersField object
+                    CustomersField(
+                        it[CustomersTable.customerID],  // ดึงค่า customerID จากฐานข้อมูล
+                        it[CustomersTable.userName],    // ดึงค่า userName จากฐานข้อมูล
+                        it[CustomersTable.profileImage], // ดึงค่า profileImage จากฐานข้อมูล
+                        it[CustomersTable.authKey],      // ดึงค่า authKey จากฐานข้อมูล
+                        it[CustomersTable.timeStamp],    // ดึงค่า timeStamp จากฐานข้อมูล
+                        it[CustomersTable.createAt],     // ดึงค่า createAt จากฐานข้อมูล
+                        it[CustomersTable.personID]      // ดึงค่า personID จากฐานข้อมูล
+                    )
+                }
+                .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
+        }
+    }
+
+
 
     // เมธอดสำหรับเพิ่มข้อมูลลูกค้าใหม่
     suspend fun insert(customerData: CustomersForm): Boolean {
@@ -95,10 +116,10 @@ object Customer {
                 // เพิ่มข้อมูลลูกค้าใน CustomersTable
                 CustomersTable.insert {
                     // กำหนดข้อมูลในคอลัมน์ต่างๆ
-                    it[userName] = customerData.userName
-                    it[authKey] = customerData.authKey
-                    it[timeStamp] = getCurrentTime()
-                    it[createAt] = getCurrentDate()
+                    it[userName] = customerData.userName // กำหนดชื่อผู้ใช้ เพิ่มลงฐานข้อมูล
+                    it[authKey] = customerData.authKey // กำหนด `Public Key` เพิ่มลงฐานข้อมูล
+                    it[timeStamp] = getCurrentTime()  // กำหนดเวลาที่เพิ่มลงฐานข้อมูล
+                    it[createAt] = getCurrentDate()   // กำหนดวันที่เพิ่มลงฐานข้อมูล
                 }
             }
             true // สำเร็จ
@@ -108,24 +129,6 @@ object Customer {
         }
     }
 
-
-    suspend fun findCustomerByUserName(accountName: String): CustomersField? {
-        return dbQuery {
-            CustomersTable.select { CustomersTable.userName eq accountName }
-                .mapNotNull {
-                    CustomersField(
-                        it[CustomersTable.customerID],
-                        it[CustomersTable.userName],
-                        it[CustomersTable.profileImage],
-                        it[CustomersTable.authKey],
-                        it[CustomersTable.timeStamp],
-                        it[CustomersTable.createAt],
-                        it[CustomersTable.personID]
-                    )
-                }
-                .singleOrNull()
-        }
-    }
 
 
     // เมธอดสำหรับอัปเดตข้อมูลลูกค้า
