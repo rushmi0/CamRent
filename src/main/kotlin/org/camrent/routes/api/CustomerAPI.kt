@@ -7,7 +7,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.camrent.database.forms.CustomersForm
 import org.camrent.database.service.Customer
-import org.camrent.database.service.Customer.insert
 import org.camrent.security.sqlInjection.SQLInjectionProtector
 import org.camrent.security.xss.XssDetector
 
@@ -19,7 +18,7 @@ fun Application.customerRoute() {
 
             get("customers") {
                 // เรียกใช้งานเมธอดเพื่อดึงข้อมูลลูกค้าทั้งหมด
-                val customers = Customer.selectAll()
+                val customers = Customer.selectAllFromCustomers()
                 println("> Host: ${call.request.headers["Host"]}")
                 call.respond(HttpStatusCode.OK, customers)
             }
@@ -38,31 +37,50 @@ fun Application.customerRoute() {
                             XssDetector.containsHtmlTags(payload.authKey) || XssDetector.containsJavascript(payload.authKey)
                         ) {
                             // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                            call.respond(HttpStatusCode.BadRequest, "Cross-site scripting detected.")
+                            call.respond(
+                                HttpStatusCode.BadRequest,
+                                "Cross-site scripting detected."
+                            )
                         } else {
                             // ทำการกำจัด SQL Injection จากข้อมูล
                             val sanitizedUserName = SQLInjectionProtector.sanitizeInput(payload.userName)
-                            println(sanitizedUserName)
+                            println("\nUser Name $sanitizedUserName")
                             val sanitizedAuthKey = SQLInjectionProtector.sanitizeInput(payload.authKey)
-                            println(sanitizedAuthKey)
+                            println("Publick Key $sanitizedAuthKey \n")
 
-                            // เพิ่มข้อมูลลูกค้า
-                            insert(CustomersForm(sanitizedUserName, sanitizedAuthKey))
+                            // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
+                            val status = Customer.insert(CustomersForm(sanitizedUserName, sanitizedAuthKey))
 
-                            // ตอบกลับด้วยสถานะผลลัพธ์ 201 Created
-                            call.respond(HttpStatusCode.Created, "Customer table inserted data successfully")
+                            if (status) {
+                                // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย userName สำเร็จหรือไม่
+                                val result = Customer.findCustomerByUserName(sanitizedUserName)
+                                if (result != null) {
+                                    call.respond(result) // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
+                                } else {
+                                    call.respond(HttpStatusCode.NotFound) // ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
+                                }
+                            }
+
                         }
                     } else {
                         // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                        call.respond(HttpStatusCode.BadRequest, "UserName and AuthKey must not be empty")
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "UserName and AuthKey must not be empty")
                     }
 
                 } catch (e: ContentTransformationException) {
                     // ถ้าข้อมูลไม่ตรงตามรูปแบบ, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                    call.respond(HttpStatusCode.BadRequest, "Invalid data format. Please provide data in the correct format.")
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "Invalid data format. Please provide data in the correct format."
+                    )
                 } catch (e: Exception) {
                     // ถ้าเกิดข้อผิดพลาดอื่น ๆ, ตอบกลับด้วยสถานะผลลัพธ์ 500 Internal Server Error
-                    call.respond(HttpStatusCode.InternalServerError, "An error occurred while processing your request.")
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        "An error occurred while processing your request."
+                    )
                 }
             }
 
@@ -86,15 +104,15 @@ fun Application.customerRoute() {
                                 return@patch
                             }
 
-                            // ทำการกำจัด SQL Injection จากข้อมูล
-                            val sanitizedValue = SQLInjectionProtector.sanitizeInput(newValue)
-
                             // ถ้าไม่พบ XSS, ทำการอัปเดตข้อมูล
-                            Customer.update(id, fieldName, sanitizedValue)
+                            Customer.update(id, fieldName, newValue)
                         }
                         call.respondText("Customer updated successfully")
                     } else {
-                        call.respond(HttpStatusCode.BadRequest, "Invalid customer ID")
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "Invalid customer ID"
+                        )
                     }
 
                 } catch (e: ContentTransformationException) {
@@ -105,7 +123,10 @@ fun Application.customerRoute() {
                     )
                 } catch (e: Exception) {
                     // กรณีเกิด Exception อื่น ๆ
-                    call.respond(HttpStatusCode.InternalServerError, "An error occurred while processing your request.")
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        "An error occurred while processing your request."
+                    )
                 }
             }
 
@@ -114,11 +135,26 @@ fun Application.customerRoute() {
                 val id = call.parameters["id"]?.toInt()
                 // ลบข้อมูลลูกค้า
                 if (id != null) {
-                    Customer.delete(id)
+                    val deletionStatus = Customer.delete(id)
+                    if (deletionStatus) {
+                        // ถ้าการลบข้อมูลสำเร็จ
+                        call.respondText("Customer deleted successfully")
+                    } else {
+                        // ถ้าไม่สามารถลบข้อมูลได้ (เช่น ID ไม่ถูกต้อง)
+                        call.respond(
+                            HttpStatusCode.NotFound,
+                            "Customer not found or unable to delete"
+                        )
+                    }
+                } else {
+                    // ถ้าไม่พบ ID ในคำขอ
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "Invalid ID format or missing ID in request"
+                    )
                 }
-                // ส่งคำตอบกลับ
-                call.respondText("Customer deleted successfully")
             }
+
 
         }
     }

@@ -1,7 +1,7 @@
-package com.CamRent.utils
+package org.camrent.utils
 
-import com.CamRent.utils.Time.getCurrentDate
-import com.CamRent.utils.Time.getCurrentTime
+import org.camrent.utils.Time.getCurrentDate
+import org.camrent.utils.Time.getCurrentTime
 import java.text.SimpleDateFormat
 import java.util.*
 
