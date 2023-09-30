@@ -3,10 +3,13 @@ package org.camrent.security.securekey
 
 import org.camrent.security.securekey.ECDSA.SignSignatures
 import org.camrent.security.securekey.ECDSA.VerifySignature
+import org.camrent.security.securekey.ECDSA.derRecovered
 import org.camrent.security.securekey.ECDSA.toDERFormat
 
 import org.camrent.security.securekey.EllipticCurve.compressed
+import org.camrent.security.securekey.EllipticCurve.getDecompress
 import org.camrent.security.securekey.EllipticCurve.getPublicKey
+import org.camrent.security.securekey.EllipticCurve.isPointOnCurve
 import org.camrent.security.securekey.EllipticCurve.multiplyPoint
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
 import org.camrent.utils.ShiftTo.HexToByteArray
@@ -45,8 +48,8 @@ object EllipticCurve {
     * ตรวจสอบจุดบนโค้งวงรี Secp256k1
     * */
 
-    fun isPointOnCurve(point: Pair<BigInteger, BigInteger>): Boolean {
-        val (x, y) = point
+    fun isPointOnCurve(point: Point?): Boolean {
+        val (x, y) = point!!
 
         // * ตรวจสอบว่าจุดนั้นเป็นไปตามสมการเส้นโค้งวงรี หรือไม่: y^2 = x^3 + Ax + B (mod P)
         val leftSide = (y * y).mod(P)
@@ -175,22 +178,49 @@ object EllipticCurve {
         return groupkeys
     }
 
-    private fun decompressPublicKey(compressedPublicKey: String): Point {
-        val byteArray = compressedPublicKey.HexToByteArray()
-        val xCoord = byteArray.copyOfRange(1, byteArray.size).ByteArrayToBigInteger()
-        val isYEven = byteArray[0] == 2.toByte()
+    private fun decompressPublicKey(compressedPublicKey: String): Point? {
+        try {
+            // แปลง compressed public key ในรูปแบบ Hex เป็น ByteArray
+            val byteArray = compressedPublicKey.HexToByteArray()
 
-        val xSquare = (xCoord.modPow(BigInteger.valueOf(3), N) + B) % N
-        val y = xSquare.modPow((N + BigInteger("1")) / BigInteger("4"), N)
-        val isYSquareEven = y.mod(BigInteger.TWO) == BigInteger.ZERO
+            // ดึงค่า x coordinate จาก ByteArray
+            val xCoord = byteArray.copyOfRange(1, byteArray.size).ByteArrayToBigInteger()
 
-        val computedY = if (isYSquareEven != isYEven) N - y else y
+            // ตรวจสอบว่า y เป็นเลขคู่หรือไม่
+            val isYEven = byteArray[0] == 2.toByte()
 
-        return Point(xCoord, computedY)
+            // คำนวณค่า x^3 (mod P)
+            val xCubed = xCoord.modPow(BigInteger.valueOf(3), P)
+
+            // คำนวณ Ax (mod P)
+            val Ax = xCoord.multiply(A).mod(P)
+
+            // คำนวณ y^2 = x^3 + Ax + B (mod P)
+            val ySquared = xCubed.add(Ax).add(B).mod(P)
+
+            // คำนวณค่า y จาก y^2 โดยใช้ square root
+            val y = ySquared.modPow(P.add(BigInteger.ONE).divide(BigInteger.valueOf(4)), P)
+
+            // ตรวจสอบว่า y^2 เป็นเลขคู่หรือไม่
+            val isYSquareEven = y.mod(BigInteger.TWO) == BigInteger.ZERO
+
+            // คำนวณค่า y โดยแก้ไขเครื่องหมายตามผลลัพธ์ที่ได้จากการตรวจสอบ
+            val computedY = if (isYSquareEven != isYEven) P.subtract(y) else y
+
+            // สร้าง Point จาก x และ y ที่ได้
+            return Point(xCoord, computedY)
+        } catch (e: Exception) {
+            println("Failed to decompress the public key: ${e.message}")
+            return null
+        }
     }
 
 
-    fun String.getDecompress(): Point {
+
+
+
+
+    fun String.getDecompress(): Point? {
         return decompressPublicKey(this)
     }
 
@@ -211,11 +241,11 @@ object EllipticCurve {
 fun main() {
 
     //val privateKey = BigInteger(256, SecureRandom())
-    val privateKey = BigInteger("165F1C58AFB81B9D767FCEF47CBCDFFD3298E0480575AC8A0CA9FEC04F600C26", 16)
+    val privateKey = BigInteger("97ddae0f3a25b92268175400149d65d6887b9cefaf28ea2c078e05cdc15a3c0a", 16)
     println("[H] Private key: ${privateKey.toString(16)}")
     println("Private key: $privateKey")
 
-    val message = BigInteger("0e2bd2792e5b75cbb05561ce5836d12abbdc201b328a2626c27484458a1a9ee", 16)
+    val message = BigInteger("ce7df6b1b2852c5c156b683a9f8d4a8daeda2f35f025cb0cf34943dcac70d6a3", 16)
     println("Message: $message")
 
     val curvePoint = multiplyPoint(privateKey)
@@ -239,5 +269,24 @@ fun main() {
     } else {
         println("ECDSA Signature is Invalid")
     }
+
+    println()
+
+    val signatureRecovered = derRecovered(der)
+    println("Signature Recovered: \n\tr = ${signatureRecovered?.first} \n\ts = ${signatureRecovered?.second}")
+
+    val authKey = compress
+    println("AuthKey = $authKey")
+
+    val pubKeyRecovered = compress.getDecompress()
+    println("Pub Key Recovered: \n\t$pubKeyRecovered")
+
+    val test = isPointOnCurve(pubKeyRecovered)
+    println(test)
+
+    val server: Boolean = VerifySignature(pubKeyRecovered!!, message, signatureRecovered!!)
+    println(server!!)
+
+
 
 }
