@@ -14,6 +14,7 @@ import org.camrent.security.xss.XssDetector
 fun Application.customerRoute() {
 
     routing {
+
         route("api/v1") {
 
             get("customers") {
@@ -24,17 +25,55 @@ fun Application.customerRoute() {
             }
 
 
+            get("customers/{id}") {
+                // อ่านค่า IP address และ port ของ client จาก request
+                val clientIp = call.request.local.remoteHost
+                val clientPort = call.request.local.port
+                // อ่านค่า cookie ชื่อ "user" จาก request
+                val userCookie = call.request.cookies["user"]
+                println("Client IP: $clientIp, Port: $clientPort Cookie: $userCookie")
+
+                // ดึงค่า ID จากพารามิเตอร์ที่ระบุใน URL และแปลงเป็น Int หรือ null ถ้าไม่สามารถแปลงได้
+                val id = call.parameters["id"]?.toIntOrNull()
+
+                if (id != null) {
+                    // ค้นหาข้อมูลลูกค้าด้วย ID
+                    val customer = Customer.findCustomerByUserID(id)
+
+                    if (customer != null) {
+                        // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
+                        call.respond(HttpStatusCode.OK, customer)
+                    } else {
+                        // ถ้าไม่พบข้อมูลลูกค้าให้ตอบกลับด้วยสถานะ 404 Not Found
+                        call.respond(
+                            HttpStatusCode.NotFound,
+                            "Customer not found for ID: $id"
+                        )
+                    }
+                } else {
+                    // ถ้า ID ไม่ถูกต้องหรือไม่ได้ระบุ ให้ตอบกลับด้วยสถานะ 400 Bad Request
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "Invalid ID format"
+                    )
+                }
+            }
+
+
             post("customers") {
                 try {
                     // รับข้อมูลจาก body ของคำขอ POST
                     val payload = call.receive<CustomersForm>()
 
-                    // ตรวจสอบว่า UserName และ AuthKey ไม่เป็นค่าว่าง
-                    if (payload.userName.isNotBlank() && payload.authKey.isNotBlank()) {
+                    val userName = payload.userName
+                    val publicKey = payload.authKey
+
+                    // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
+                    if (userName.isNotBlank() && publicKey.isNotBlank()) {
 
                         // ตรวจสอบ XSS
-                        if (XssDetector.containsHtmlTags(payload.userName) || XssDetector.containsJavascript(payload.userName) ||
-                            XssDetector.containsHtmlTags(payload.authKey) || XssDetector.containsJavascript(payload.authKey)
+                        if (XssDetector.containsHtmlTags(userName) || XssDetector.containsJavascript(userName) ||
+                            XssDetector.containsHtmlTags(publicKey) || XssDetector.containsJavascript(publicKey)
                         ) {
                             // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                             call.respond(
@@ -42,18 +81,12 @@ fun Application.customerRoute() {
                                 "Cross-site scripting detected."
                             )
                         } else {
-                            // ทำการกำจัด SQL Injection จากข้อมูล
-                            val sanitizedUserName = SQLInjectionProtector.sanitizeInput(payload.userName)
-                            println("\nUser Name $sanitizedUserName")
-                            val sanitizedAuthKey = SQLInjectionProtector.sanitizeInput(payload.authKey)
-                            println("Publick Key $sanitizedAuthKey \n")
-
                             // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
-                            val status = Customer.insert(CustomersForm(sanitizedUserName, sanitizedAuthKey))
+                            val status = Customer.insert(CustomersForm(userName, publicKey))
 
                             if (status) {
-                                // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย userName สำเร็จหรือไม่
-                                val result = Customer.findCustomerByUserName(sanitizedUserName)
+                                // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
+                                val result = Customer.findCustomerByUserName(userName)
                                 if (result != null) {
                                     call.respond(result) // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
                                 } else {
@@ -66,7 +99,8 @@ fun Application.customerRoute() {
                         // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                         call.respond(
                             HttpStatusCode.BadRequest,
-                            "UserName and AuthKey must not be empty")
+                            "UserName and AuthKey must not be empty"
+                        )
                     }
 
                 } catch (e: ContentTransformationException) {
@@ -89,7 +123,7 @@ fun Application.customerRoute() {
 
 
             patch("customers/{id}") {
-                val id = call.parameters["id"]?.toInt()
+                val id = call.parameters["id"]?.toIntOrNull()
                 val payload = call.receive<Map<String, String>>() // รับข้อมูลในรูปแบบ Map<String, String>
 
                 try {

@@ -30,23 +30,6 @@ import org.camrent.database.table.CustomersTable.userName
 object Customer {
 
 
-    // สร้าง Mutex สำหรับการล็อคการเข้าถึงตัวแปร id
-    private val idLock = Mutex()
-
-    // เมธอดสำหรับสร้าง Primary Key ใหม่
-    suspend fun genKey(): Int {
-        // ล็อคการเข้าถึงตัวแปร id
-        return idLock.withLock {
-            val num = Customer.selectMaxID()
-            if (num == 0) {
-                1
-            } else {
-                num + 1
-            }
-        }
-    }
-
-
     // เมธอดสำหรับดึงค่า ID ที่มากที่สุด
     suspend fun selectMaxID(): Int {
         return dbQuery {
@@ -71,21 +54,39 @@ object Customer {
     // * เมธอดสำหรับดึงข้อมูลลูกค้าทั้งหมด
     suspend fun selectAllFromCustomers(): List<CustomersField> {
         return dbQuery {
-            // ดึงข้อมูลทั้งหมดจาก CustomersTable แล้วแปลงให้อยู่ในรูปของ CustomersField
+            // ดึงข้อมูลทั้งหมดจากตาราง `CustomersTable` แล้วแปลงให้อยู่ในรูปของ `CustomersField`
             CustomersTable.selectAll().map {
                 CustomersField(
-                    it[customerID],
-                    it[userName],
-                    it[profileImage],
-                    it[authKey],
-                    it[timeStamp],
-                    it[createAt],
-                    it[personID]
+                    it[customerID],     // ดึงค่า customerID จากฐานข้อมูล
+                    it[userName],       // ดึงค่า userName จากฐานข้อมูล
+                    it[profileImage],   // ดึงค่า profileImage จากฐานข้อมูล
+                    it[authKey],        // ดึงค่า authKey จากฐานข้อมูล
+                    it[timeStamp],      // ดึงค่า timeStamp จากฐานข้อมูล
+                    it[createAt],       // ดึงค่า createAt จากฐานข้อมูล
+                    it[personID]        // ดึงค่า personID จากฐานข้อมูล
                 )
             }
         }
     }
 
+    suspend fun findCustomerByUserID(userID: Int): CustomersField?{
+        return dbQuery {
+            CustomersTable.select { CustomersTable.customerID eq userID }
+                .mapNotNull {
+                    // แปลงข้อมูลที่ดึงมาในแต่ละแถวเป็น CustomersField object
+                    CustomersField(
+                        it[CustomersTable.customerID],  // ดึงค่า customerID จากฐานข้อมูล
+                        it[CustomersTable.userName],    // ดึงค่า userName จากฐานข้อมูล
+                        it[CustomersTable.profileImage], // ดึงค่า profileImage จากฐานข้อมูล
+                        it[CustomersTable.authKey],      // ดึงค่า authKey จากฐานข้อมูล
+                        it[CustomersTable.timeStamp],    // ดึงค่า timeStamp จากฐานข้อมูล
+                        it[CustomersTable.createAt],     // ดึงค่า createAt จากฐานข้อมูล
+                        it[CustomersTable.personID]      // ดึงค่า personID จากฐานข้อมูล
+                    )
+                }
+                .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
+        }
+    }
 
     suspend fun findCustomerByUserName(accountName: String): CustomersField? {
         return dbQuery {
@@ -106,7 +107,6 @@ object Customer {
                 .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
         }
     }
-
 
 
     // เมธอดสำหรับเพิ่มข้อมูลลูกค้าใหม่
@@ -130,7 +130,6 @@ object Customer {
     }
 
 
-
     // เมธอดสำหรับอัปเดตข้อมูลลูกค้า
     suspend fun update(customerID: Int, fieldName: String, newValue: String): Unit {
         return dbQuery {
@@ -152,6 +151,13 @@ object Customer {
                     authKey.name -> {
                         // อัปเดต authKey ให้กับลูกค้าที่มี Customer ID: $customerID
                         it[authKey] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $customerID")
+                    }
+
+                    personID.name -> {
+                        // อัปเดต personID ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // แปลง newValue เป็น Int ก่อน
+                        it[personID] = newValue.toInt()
                         println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $customerID")
                     }
 
@@ -188,7 +194,6 @@ object Customer {
     }
 
 
-
 }
 
 
@@ -201,7 +206,6 @@ suspend fun main() {
     // ดึงค่า ID ที่มากที่สุดและค่า ID ที่น้อยที่สุด
     println("Min CustomerID: ${selectMinID()}")
     println("Max CustomerID: ${selectMaxID()}")
-
 
 
     // แสดงข้อมูลทั้งหมดของลูกค้า
