@@ -4,11 +4,8 @@ package org.camrent.security.securekey
 import org.camrent.security.securekey.EllipticCurve.addPoint
 import org.camrent.security.securekey.EllipticCurve.modinv
 import org.camrent.security.securekey.EllipticCurve.multiplyPoint
-import org.camrent.utils.ShiftTo.ByteArrayToHex
-import org.camrent.utils.ShiftTo.HexToByteArray
 import java.math.BigInteger
 import java.security.SecureRandom
-import java.util.*
 
 /*
 * สร้างลายเซ็นและตรวจสอบ ECDSA
@@ -121,10 +118,5 @@ object ECDSA {
             return null
         }
     }
-
-
-
-
-
 
 }
