@@ -18,7 +18,7 @@ fun Route.PeoplePatchByID() {
         try {
             if (id != null) {
                 for ((fieldName, newValue) in payload) {
-                    if (XssDetector.containsHtmlTags(fieldName) || XssDetector.containsJavascript(fieldName)) {
+                    if (XssDetector.containsXss(fieldName) || XssDetector.containsXss(fieldName)) {
                         call.respond(
                             HttpStatusCode.BadRequest,
                             "Cross-site scripting detected in the field: $fieldName"

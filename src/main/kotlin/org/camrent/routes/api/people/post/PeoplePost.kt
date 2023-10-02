@@ -64,6 +64,7 @@ fun Route.PeoplePost() {
                     )
 
                     if (statement) {
+
                         /**
                          * เมื่อบันทึกสำเร็จ ข้อมูลชุดนั้นจะได้รับหมายเลข ID
                          * จากนั้นนำหมายเลข People ID ไปใส่ใน `Customers Table` คนที่ต้องการ
@@ -85,6 +86,7 @@ fun Route.PeoplePost() {
 
                         // ตรวจสอบว่ารหัสผู้ใช้ตรงกับที่รับมาหรือไม่
                         if (checkID == receiveID) {
+
                             val updateStatement = CustomerService.update(
                                 receiveID,
                                 "PersonID", // ค่านี้ต้องตรงกับชื่อ Field ในฐานข้อมูลจริง (ตัวอย่าง: ชื่อ Field ในฐานข้อมูลเป็น "PersonID")
@@ -101,10 +103,9 @@ fun Route.PeoplePost() {
                                 call.respond(customerRecord ?: HttpStatusCode.NotFound)
 
                             }
+
                         }
-
                     }
-
                 }
 
             } else {

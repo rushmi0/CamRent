@@ -19,7 +19,7 @@ fun Route.CustomerPatchByID() {
             if (id != null) {
                 // ตรวจสอบ XSS สำหรับทุก field ที่รับมา
                 for ((fieldName, newValue) in payload) {
-                    if (XssDetector.containsHtmlTags(newValue) || XssDetector.containsJavascript(newValue)) {
+                    if (XssDetector.containsXss(newValue) || XssDetector.containsXss(newValue)) {
                         call.respond(
                             HttpStatusCode.BadRequest,
                             "Cross-site scripting detected in the field: $fieldName"
