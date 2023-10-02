@@ -1,6 +1,6 @@
 package org.camrent.utils
 
-import org.camrent.utils.ShiftTo.ByteArrayToHex
+import org.camrent.security.securekey.Base58
 import org.camrent.utils.ShiftTo.DectoLittleEndian
 import org.camrent.utils.ShiftTo.littleEndianToDeci
 import java.math.BigInteger

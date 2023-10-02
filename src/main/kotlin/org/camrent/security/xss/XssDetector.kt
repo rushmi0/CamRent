@@ -7,11 +7,15 @@ class XssDetector {
         private val htmlTagsPattern = "<[^>]*>".toRegex()
         private val jsPattern = ".*<script>.*</script>.*".toRegex()
 
-        fun containsHtmlTags(text: String): Boolean {
+        fun containsXss(text: String): Boolean {
+            return containsHtmlTags(text) || containsJavascript(text)
+        }
+
+        private fun containsHtmlTags(text: String): Boolean {
             return htmlTagsPattern.containsMatchIn(text)
         }
 
-        fun containsJavascript(text: String): Boolean {
+        private fun containsJavascript(text: String): Boolean {
             return jsPattern.containsMatchIn(text)
         }
     }

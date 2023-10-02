@@ -215,10 +215,7 @@ object EllipticCurve {
         }
     }
 
-
-
-
-
+    // ──────────────────────────────────────────────────────────────────────────────────────── \\
 
     fun String.getDecompress(): Point? {
         return decompressPublicKey(this)
@@ -231,62 +228,5 @@ object EllipticCurve {
     fun String.compressed(): String {
         return groupSelection(this)
     }
-
-
-    // ──────────────────────────────────────────────────────────────────────────────────────── \\
-
-}
-
-// * ตัวอย่าง
-fun main() {
-
-    //val privateKey = BigInteger(256, SecureRandom())
-    val privateKey = BigInteger("97ddae0f3a25b92268175400149d65d6887b9cefaf28ea2c078e05cdc15a3c0a", 16)
-    println("[H] Private key: ${privateKey.toString(16)}")
-    println("Private key: $privateKey")
-
-    val message = BigInteger("ce7df6b1b2852c5c156b683a9f8d4a8daeda2f35f025cb0cf34943dcac70d6a3", 16)
-    println("Message: $message")
-
-    val curvePoint = multiplyPoint(privateKey)
-    println("\nKey Point: $curvePoint")
-
-    val publicKeyPoint = privateKey.getPublicKey()
-    println("[U] Public Key: $publicKeyPoint")
-
-    val compress = publicKeyPoint.compressed()
-    println("[C] Public Key: $compress")
-
-    val sign = SignSignatures(privateKey, message)
-    println("\nSignature: \n r = ${sign.first} \n s = ${sign.second}")
-
-    val der = toDERFormat(sign)
-    println("Der format: $der")
-
-    val validate = VerifySignature(curvePoint, message, sign)
-    if (validate) {
-        println("ECDSA Signature is Valid")
-    } else {
-        println("ECDSA Signature is Invalid")
-    }
-
-    println()
-
-    val signatureRecovered = derRecovered(der)
-    println("Signature Recovered: \n\tr = ${signatureRecovered?.first} \n\ts = ${signatureRecovered?.second}")
-
-    val authKey = compress
-    println("AuthKey = $authKey")
-
-    val pubKeyRecovered = compress.getDecompress()
-    println("Pub Key Recovered: \n\t$pubKeyRecovered")
-
-    val test = isPointOnCurve(pubKeyRecovered)
-    println(test)
-
-    val server: Boolean = VerifySignature(pubKeyRecovered!!, message, signatureRecovered!!)
-    println(server!!)
-
-
 
 }

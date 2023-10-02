@@ -2,11 +2,11 @@
 CREATE TABLE IF NOT EXISTS People
 (
     PersonID    INTEGER PRIMARY KEY AUTOINCREMENT,
-    FirstName   TEXT UNIQUE                                                       NOT NULL,
-    LastName    TEXT UNIQUE                                                       NOT NULL,
-    Email       TEXT UNIQUE CHECK (Email LIKE '%_@__%.__%' OR Email LIKE '%@%.%') NOT NULL,
-    PhoneNumber TEXT UNIQUE                                                       NOT NULL DEFAULT 'N/A',
-    AddressID   INTEGER                                                           NOT NULL,
+    FirstName   TEXT UNIQUE DEFAULT 'N/A',
+    LastName    TEXT UNIQUE DEFAULT 'N/A',
+    Email       TEXT UNIQUE DEFAULT 'N/A',
+    PhoneNumber TEXT UNIQUE DEFAULT 'N/A',
+    AddressID   INTEGER,
 
     FOREIGN KEY (AddressID) REFERENCES Address (AddressID)
 );
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Customers
     AuthKey           TEXT     DEFAULT 'N/A',
     TimeStamp         DATETIME DEFAULT 'N/A',
     CreateAccountDate DATETIME DEFAULT 'N/A',
-    PersonID          INTEGER NOT NULL,
+    PersonID          INTEGER,
 
     FOREIGN KEY (PersonID) REFERENCES People (PersonID)
 );
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Stores
     AuthKey           TEXT     DEFAULT 'N/A',
     TimeStamp         DATETIME DEFAULT 'N/A',
     CreateAccountDate DATETIME DEFAULT 'N/A',
-    PersonID          INTEGER NOT NULL,
+    PersonID          INTEGER ,
 
     FOREIGN KEY (PersonID) REFERENCES People (PersonID)
 );
@@ -72,10 +72,10 @@ CREATE TABLE IF NOT EXISTS OrderContract
 (
     OrderID    INTEGER PRIMARY KEY AUTOINCREMENT,
     Quantity   INTEGER DEFAULT 0,
-    Duration   TEXT,
-    CustomerID INTEGER NOT NULL,
-    AddressID  INTEGER NOT NULL,
-    ProductID  INTEGER NOT NULL,
+    Duration   TEXT    DEFAULT 'N/A',
+    CustomerID INTEGER,
+    AddressID  INTEGER,
+    ProductID  INTEGER,
 
     FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
     FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
@@ -86,11 +86,11 @@ CREATE TABLE IF NOT EXISTS OrderContract
 CREATE TABLE IF NOT EXISTS Transactions
 (
     TxID       INTEGER PRIMARY KEY AUTOINCREMENT,
-    TotalPrice INTEGER NOT NULL,
-    Status     TEXT     DEFAULT 'Pending', -- 'Pending'  / 'Confirmed'
-    TimeStamp  DATETIME DEFAULT 'N/A',
-    Date       DATETIME DEFAULT 'N/A',
-    OrderID    INTEGER NOT NULL,
+    TotalPrice INTEGER NOT NULL DEFAULT 0,
+    Status     TEXT             DEFAULT 'Pending', -- 'Pending'  / 'Confirmed'
+    TimeStamp  DATETIME         DEFAULT 'N/A',
+    Date       DATETIME         DEFAULT 'N/A',
+    OrderID    INTEGER,
 
     FOREIGN KEY (OrderID) REFERENCES OrderContract (OrderID)
 );
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS Products
     SpecDetail  TEXT             DEFAULT 'N/A',
     Description TEXT             DEFAULT 'N/A',
     Status      TEXT    NOT NULL DEFAULT ' Unavailable',
-    StoreID     INTEGER NOT NULL,
+    StoreID     INTEGER,
 
     FOREIGN KEY (StoreID) REFERENCES Stores (StoreID)
 );
@@ -127,9 +127,9 @@ CREATE TABLE IF NOT EXISTS Fine
     Image4      TEXT             DEFAULT 'N/A',
     PenaltyFee  INTEGER          DEFAULT 0,
     Status      TEXT    NOT NULL DEFAULT 'Pending',
-    StoreID     INTEGER NOT NULL,
-    ProductID   INTEGER NOT NULL,
-    CustomerID  INTEGER NOT NULL,
+    StoreID     INTEGER,
+    ProductID   INTEGER,
+    CustomerID  INTEGER,
 
     FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
     FOREIGN KEY (StoreID) REFERENCES Stores (StoreID),
@@ -144,6 +144,10 @@ WHERE type = 'table';
 
 SELECT *
 FROM Customers;
+SELECT *
+FROM People;
+SELECT *
+FROM Address;
 
 
 -- [ คำสั่งลบตาราง ]

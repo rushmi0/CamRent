@@ -5,10 +5,10 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.camrent.routes.api.customerRoute
 import org.camrent.database.test.uploadFile
 import org.camrent.database.test.uploadImage
 import org.camrent.test.basic.basicBasePath
+import java.io.File
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -17,11 +17,17 @@ fun Application.configureRouting() {
         }
     }
     routing {
-        get("/") {
-            call.respondText("Hello World!")
+        get ("") {
+            val file = File("src/main/resources/images/preview/start/Start_Server.jpg")
+
+            // ตรวจสอบว่าไฟล์มีอยู่จริงหรือไม่
+            if (file.exists()) {
+                call.respondFile(file)
+            } else {
+                // หากไม่พบไฟล์ ให้ส่ง HTTP 404 Not Found
+                call.respond(HttpStatusCode.NotFound)
+            }
         }
-
-
         uploadImage()
         uploadFile()
         basicBasePath()
