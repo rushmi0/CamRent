@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS People
 CREATE TABLE IF NOT EXISTS Customers
 (
     CustomerID        INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserName          TEXT    NOT NULL UNIQUE,
+    UserName          TEXT NOT NULL UNIQUE,
     ProfileImage      TEXT     DEFAULT 'N/A',
     AuthKey           TEXT     DEFAULT 'N/A',
     TimeStamp         DATETIME DEFAULT 'N/A',
@@ -25,21 +25,17 @@ CREATE TABLE IF NOT EXISTS Customers
     FOREIGN KEY (PersonID) REFERENCES People (PersonID)
 );
 
--- SELECT UserName
--- FROM Customers
--- WHERE CustomerID = 1;
-
 -- [ Stores Table ]
 CREATE TABLE IF NOT EXISTS Stores
 (
     StoreID           INTEGER PRIMARY KEY AUTOINCREMENT,
-    StoreName         TEXT    NOT NULL UNIQUE,
+    StoreName         TEXT NOT NULL UNIQUE,
     ProfileImage      TEXT     DEFAULT 'N/A',
-    PaymentMethod     TEXT     DEFAULT 'N/A',
+    PaymentMethod     TEXT     DEFAULT 'Lightining Network',
     AuthKey           TEXT     DEFAULT 'N/A',
     TimeStamp         DATETIME DEFAULT 'N/A',
     CreateAccountDate DATETIME DEFAULT 'N/A',
-    PersonID          INTEGER ,
+    PersonID          INTEGER,
 
     FOREIGN KEY (PersonID) REFERENCES People (PersonID)
 );
@@ -99,16 +95,16 @@ CREATE TABLE IF NOT EXISTS Transactions
 CREATE TABLE IF NOT EXISTS Products
 (
     ProductID   INTEGER PRIMARY KEY AUTOINCREMENT,
-    ProductName TEXT    NOT NULL,
-    Image1      TEXT             DEFAULT 'N/A',
-    Image2      TEXT             DEFAULT 'N/A',
-    Image3      TEXT             DEFAULT 'N/A',
-    Image4      TEXT             DEFAULT 'N/A',
-    Type        TEXT             DEFAULT 'N/A',
-    Price       INTEGER          DEFAULT 0,
-    SpecDetail  TEXT             DEFAULT 'N/A',
-    Description TEXT             DEFAULT 'N/A',
-    Status      TEXT    NOT NULL DEFAULT ' Unavailable',
+    ProductName TEXT NOT NULL,
+    Image1      TEXT          DEFAULT 'N/A',
+    Image2      TEXT          DEFAULT 'N/A',
+    Image3      TEXT          DEFAULT 'N/A',
+    Image4      TEXT          DEFAULT 'N/A',
+    Type        TEXT          DEFAULT 'N/A',
+    Price       INTEGER       DEFAULT 0,
+    SpecDetail  TEXT          DEFAULT 'N/A',
+    Description TEXT          DEFAULT 'N/A',
+    Status      TEXT NOT NULL DEFAULT ' Unavailable',
     StoreID     INTEGER,
 
     FOREIGN KEY (StoreID) REFERENCES Stores (StoreID)
@@ -118,15 +114,15 @@ CREATE TABLE IF NOT EXISTS Products
 CREATE TABLE IF NOT EXISTS Fine
 (
     FineID      INTEGER PRIMARY KEY AUTOINCREMENT,
-    TimeStamp   DATETIME         DEFAULT 'N/A',
-    Date        DATETIME         DEFAULT 'N/A',
-    Description TEXT             DEFAULT 'N/A',
-    Image1      TEXT             DEFAULT 'N/A',
-    Image2      TEXT             DEFAULT 'N/A',
-    Image3      TEXT             DEFAULT 'N/A',
-    Image4      TEXT             DEFAULT 'N/A',
-    PenaltyFee  INTEGER          DEFAULT 0,
-    Status      TEXT    NOT NULL DEFAULT 'Pending',
+    Description TEXT          DEFAULT 'N/A',
+    Image1      TEXT          DEFAULT 'N/A',
+    Image2      TEXT          DEFAULT 'N/A',
+    Image3      TEXT          DEFAULT 'N/A',
+    Image4      TEXT          DEFAULT 'N/A',
+    PenaltyFee  INTEGER       DEFAULT 0,
+    TimeStamp   DATETIME      DEFAULT 'N/A',
+    Date        DATETIME      DEFAULT 'N/A',
+    Status      TEXT NOT NULL DEFAULT 'Pending',
     StoreID     INTEGER,
     ProductID   INTEGER,
     CustomerID  INTEGER,
@@ -149,6 +145,15 @@ FROM People;
 SELECT *
 FROM Address;
 
+-- DELETE FROM Customers
+-- WHERE CustomerID = 1;
+--
+-- DELETE FROM People
+-- WHERE PersonID = 1;
+--
+-- DELETE FROM Address
+-- WHERE AddressID = 1;
+
 
 -- [ คำสั่งลบตาราง ]
 -- DROP TABLE IF EXISTS People;
@@ -170,5 +175,3 @@ ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
 UPDATE Customers
 SET ProfileImage = 'image.jpg'
 WHERE CustomerID = 1;
-
-
