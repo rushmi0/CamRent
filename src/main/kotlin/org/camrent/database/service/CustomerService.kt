@@ -1,17 +1,15 @@
 package org.camrent.database.service
 
+import org.camrent.database.DatabaseFactory
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 import org.camrent.utils.Time.getCurrentDate
 import org.camrent.utils.Time.getCurrentTime
-import org.camrent.database.DatabaseFactory
 import org.camrent.database.DatabaseFactory.dbQuery
 import org.camrent.database.field.CustomersField
 import org.camrent.database.forms.CustomersForm
-import org.camrent.database.service.CustomerService.findCustomerByUserName
-import org.camrent.database.service.CustomerService.selectMaxID
-import org.camrent.database.service.CustomerService.selectMinID
+import org.camrent.database.table.AddressesTable
 import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.CustomersTable.authKey
 import org.camrent.database.table.CustomersTable.createAt
@@ -170,27 +168,15 @@ object CustomerService {
     suspend fun delete(id: Int): Boolean {
         return try {
             dbQuery {
-                val rowsAffected: Int = CustomersTable.deleteWhere {
-                    (CustomersTable.customerID eq id) and
-                            (PeopleTable.personID eq id) //and
-//                            (AddressesTable.addressID eq id)
-                }
-
-                /**
-                 * เมื่อใช้ฟังก์ชัน `deleteWhere` ใน Exposed Framework หรือคำสั่ง SQL
-                 *
-                 * @sample rowsAffected > 0: การลบสำเร็จและมีแถวถูกลบ, ข้อมูลถูกลบจากฐานข้อมูล.
-                 * @sample rowsAffected == 0: ไม่มีข้อมูลที่ต้องการลบในฐานข้อมูล.
-                 * @sample rowsAffected < 0: เกิดข้อผิดพลาดในกระบวนการลบ.
-                 * */
-                rowsAffected > 0 // ตรวจสอบว่ามีการลบข้อมูล (rowsAffected > 0) หรือไม่
+                val customerDeleted = CustomersTable.deleteWhere { customerID eq id } > 0
+                val personDeleted = PeopleTable.deleteWhere { personID eq id } > 0
+                //val addressDeleted = AddressesTable.deleteWhere { addressID eq id } > 0
+                return@dbQuery customerDeleted && personDeleted //&& addressDeleted
             }
         } catch (e: Exception) {
-            // หากเกิดข้อผิดพลาดในการลบข้อมูล
+            println("จับข้อผิดพลาดและคืนค่า false: $e")
             false
         }
     }
 
-
 }
-

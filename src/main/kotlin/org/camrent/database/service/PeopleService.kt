@@ -85,16 +85,16 @@ object PeopleService {
     }
 
 
-    suspend fun insert(field: PeopleForm): Boolean {
+    suspend fun insert(record: PeopleForm): Boolean {
         return try {
             dbQuery {
                 // เพิ่มข้อมูลบุคคลใน PeopleTable
                 PeopleTable.insert {
                     // กำหนดข้อมูลในคอลัมน์ต่างๆ
-                    it[firstName] = field.firstName
-                    it[lastName] = field.lastName
-                    it[email] = field.email
-                    it[phoneNumber] = field.phoneNumber
+                    it[firstName] = record.firstName
+                    it[lastName] = record.lastName
+                    it[email] = record.email
+                    it[phoneNumber] = record.phoneNumber
                 }
             }
             true
