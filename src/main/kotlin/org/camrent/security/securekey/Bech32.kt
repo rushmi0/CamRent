@@ -304,6 +304,8 @@ object Bech32 {
         return publicKey
     }
 
+
+
     fun decode(publicKey: String): Triple<String, Int, String>? {
         try {
             val result = this.bech32ToSegwit(publicKey)
@@ -317,6 +319,8 @@ object Bech32 {
             return null
         }
     }
+
+
 }
 
 

@@ -1,6 +1,7 @@
 package org.camrent.utils
 
 import org.camrent.security.securekey.Base58
+import org.camrent.security.securekey.Bech32
 import org.camrent.utils.ShiftTo.DectoLittleEndian
 import org.camrent.utils.ShiftTo.littleEndianToDeci
 import java.math.BigInteger
@@ -171,6 +172,16 @@ object ShiftTo {
     fun Int.DectoLittleEndian(): String {
         return ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(this).array().ByteArrayToHex()
     }
+
+
+    fun String.B32encode(): String {
+        return Bech32.encode(this)
+    }
+
+    fun String.B32decode() : Triple<String, Int, String>? {
+        return Bech32.decode(this)
+    }
+
 
 
     fun String.decodeBase58(): String {
