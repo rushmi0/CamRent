@@ -1,8 +1,10 @@
 package org.camrent.database.service
 
 import org.camrent.database.DatabaseFactory.dbQuery
+import org.camrent.database.field.CustomersField
 import org.camrent.database.field.PeopleField
 import org.camrent.database.forms.PeopleForm
+import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.PeopleTable
 import org.camrent.database.table.PeopleTable.addressID
 import org.camrent.database.table.PeopleTable.email
@@ -81,6 +83,27 @@ object PeopleService {
                     )
                 }
                 .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
+        }
+    }
+
+    
+    // เมธอดสำหรับหา CustomerID จาก PersonID
+    suspend fun findCustomerByPersonID(personID: Int): CustomersField? {
+        return dbQuery {
+            // ดึงข้อมูลจากตาราง CustomersTable โดยใช้ PersonID
+            CustomersTable.select { CustomersTable.personID eq personID }
+                .singleOrNull()?.let {
+                    // สร้าง CustomersField จากข้อมูลที่ได้
+                    CustomersField(
+                        it[CustomersTable.customerID],
+                        it[CustomersTable.userName],
+                        it[CustomersTable.profileImage],
+                        it[CustomersTable.authKey],
+                        it[CustomersTable.timeStamp],
+                        it[CustomersTable.createAt],
+                        it[CustomersTable.personID]
+                    )
+                }
         }
     }
 
