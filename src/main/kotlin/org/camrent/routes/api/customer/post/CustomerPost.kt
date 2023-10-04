@@ -45,9 +45,13 @@ fun Route.CustomerPost() {
                         // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
                         val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
                         val id: Int? = customerRecord?.customerID
-                        AccountDirectory.createDirectory("customers", id!!)
+                        val mkdir = AccountDirectory.createDirectory("customers", id!!)
 
-                        call.respond(customerRecord ?: HttpStatusCode.NotFound) // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client หรือ ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
+                        if (mkdir) {
+                            // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client หรือ ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
+                            call.respond(customerRecord ?: HttpStatusCode.NotFound)
+                        }
+
                     }
                 }
             } else {
