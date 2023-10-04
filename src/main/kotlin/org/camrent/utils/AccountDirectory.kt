@@ -7,14 +7,13 @@ object AccountDirectory {
     fun getDirectoryPath(path: String): String = path
 
     fun createDirectory(typeUser: String, directoryID: Int): Boolean {
-        // แทนที่ช่องว่างด้วย underscores ในชื่อผู้ใช้
-        val sanitizedPath = typeUser.replace(" ", "_")
+
         // กำหนดเส้นทางของไดเร็กทอรีหลัก
-        val baseDirectory = "src/main/resources/images/account/$sanitizedPath/usr_$directoryID"
+        val baseDirectory = "src/main/resources/images/account/$typeUser/usr_$directoryID"
 
         // กำหนดเส้นทางของไดเร็กทอรีที่ต้องการสร้างโดยใช้ when expression
         val directoryPath = when (typeUser) {
-            "customers" -> "$baseDirectory/profileImage/customers"
+            "customers" -> "$baseDirectory/profileImage"
             "stores" -> "$baseDirectory/profileImage/stores/products/camera; $baseDirectory/profileImage/stores/products/accessories"
             else -> throw IllegalArgumentException("ไม่รู้จัก Directory: $typeUser")
         }
