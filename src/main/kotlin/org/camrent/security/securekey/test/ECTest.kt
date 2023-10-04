@@ -14,7 +14,7 @@ fun main() {
     println("ECDS Signature: \n\t$der")
 
     val signatureRecovered = ECDSA.derRecovered(der)
-    println("Signature Recovered: \n\tr = ${signatureRecovered?.first} \n\ts = ${signatureRecovered?.second}")
+    println("Signature Recovered: \n\tr = ${signatureRecovered?.R} \n\ts = ${signatureRecovered?.S}")
 
     val authKey = "027b83ad6afb1209f3c82ebeb08c0c5fa9bf6724548506f2fb4f991e2287a77090"
     println("Public Key = $authKey")

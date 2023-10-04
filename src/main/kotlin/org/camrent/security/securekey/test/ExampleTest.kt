@@ -5,11 +5,16 @@ import org.camrent.security.securekey.EllipticCurve
 import org.camrent.security.securekey.EllipticCurve.compressed
 import org.camrent.security.securekey.EllipticCurve.getDecompress
 import org.camrent.security.securekey.EllipticCurve.getPublicKey
+import org.camrent.security.securekey.Sha256
 import java.math.BigInteger
 
 
 // * ตัวอย่าง
 fun main() {
+
+    val me = "Hello, world!".toByteArray()
+    val hash = Sha256.hash(me)
+    println("Hash: ${hash.joinToString("") { "%02x".format(it) }}")
 
     //val privateKey = BigInteger(256, SecureRandom())
     val privateKey = BigInteger("97ddae0f3a25b92268175400149d65d6887b9cefaf28ea2c078e05cdc15a3c0a", 16)
@@ -29,7 +34,7 @@ fun main() {
     println("[C] Public Key: $compress")
 
     val sign = ECDSA.SignSignatures(privateKey, message)
-    println("\nSignature: \n\t r = ${sign.first} \n\t s = ${sign.second}")
+    println("\nSignature: \n\t r = ${sign.R} \n\t s = ${sign.S}")
 
     val der = ECDSA.toDERFormat(sign)
     println("Der format: $der")
@@ -44,7 +49,7 @@ fun main() {
     println()
 
     val signatureRecovered = ECDSA.derRecovered(der)
-    println("Signature Recovered: \n\tr = ${signatureRecovered?.first} \n\ts = ${signatureRecovered?.second}")
+    println("Signature Recovered: \n\tr = ${signatureRecovered?.R} \n\ts = ${signatureRecovered?.S}")
 
     val authKey = compress
     println("AuthKey = $authKey")

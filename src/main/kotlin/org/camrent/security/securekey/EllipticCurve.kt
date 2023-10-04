@@ -1,16 +1,6 @@
 package org.camrent.security.securekey
 
 
-import org.camrent.security.securekey.ECDSA.SignSignatures
-import org.camrent.security.securekey.ECDSA.VerifySignature
-import org.camrent.security.securekey.ECDSA.derRecovered
-import org.camrent.security.securekey.ECDSA.toDERFormat
-
-import org.camrent.security.securekey.EllipticCurve.compressed
-import org.camrent.security.securekey.EllipticCurve.getDecompress
-import org.camrent.security.securekey.EllipticCurve.getPublicKey
-import org.camrent.security.securekey.EllipticCurve.isPointOnCurve
-import org.camrent.security.securekey.EllipticCurve.multiplyPoint
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
 import org.camrent.utils.ShiftTo.HexToByteArray
 
@@ -40,7 +30,10 @@ object EllipticCurve {
 
 
     // * จุดบนเส้นโค้งวงรี มีพิกัด x และ y
-    data class Point(val x: BigInteger, val y: BigInteger)
+    data class Point(
+        val X: BigInteger,
+        val Y: BigInteger
+    )
 
     // ──────────────────────────────────────────────────────────────────────────────────────── \\
 
@@ -152,7 +145,7 @@ object EllipticCurve {
 
     private fun fullPublicKeyPoint(k: BigInteger): String {
         val point: Point = multiplyPoint(k)
-        val publicKeyPoint = "04${point.x.toString(16)}${point.y.toString(16)}"
+        val publicKeyPoint = "04${point.X.toString(16)}${point.Y.toString(16)}"
 
         // * ถ้าขนาด public key Hex น้องกว่า 130 จะต้องแทรก "0" เข้าไปอยู่ระหว่าง "04" และพิกัด X
         if (publicKeyPoint.length < 130) {
