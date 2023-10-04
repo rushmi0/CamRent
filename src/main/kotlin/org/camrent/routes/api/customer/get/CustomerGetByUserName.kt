@@ -13,7 +13,6 @@ import org.camrent.security.securekey.Sha256
 import org.camrent.utils.ShiftTo
 import org.camrent.utils.ShiftTo.B32decode
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
-import org.slf4j.event.Level
 
 
 fun Route.CustomerByUserName() {
