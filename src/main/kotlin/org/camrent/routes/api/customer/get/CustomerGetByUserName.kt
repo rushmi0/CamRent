@@ -13,6 +13,8 @@ import org.camrent.security.securekey.Sha256
 import org.camrent.utils.ShiftTo
 import org.camrent.utils.ShiftTo.B32decode
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
+import org.slf4j.event.Level
+
 
 fun Route.CustomerByUserName() {
 
@@ -70,6 +72,8 @@ fun Route.CustomerByUserName() {
                     "รูปแบบข้อมูลไม่ถูกต้อง"
                 )
             }
+
+
         }  catch (e: IllegalArgumentException) {
             // ตอบกลับด้วยสถานะ `400 Bad Request` ในกรณีที่มีข้อผิดพลาดเกี่ยวกับข้อมูลขาเข้าไม่ถูกต้อง
             call.respond(
