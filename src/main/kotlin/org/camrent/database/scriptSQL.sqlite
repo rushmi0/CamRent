@@ -145,14 +145,17 @@ FROM People;
 SELECT *
 FROM Address;
 
--- DELETE FROM Customers
+-- DELETE  FROM Customers
 -- WHERE CustomerID = 1;
---
--- DELETE FROM People
--- WHERE PersonID = 1;
---
--- DELETE FROM Address
--- WHERE AddressID = 1;
+
+UPDATE Customers
+SET ProfileImage = 'N/A'
+WHERE CustomerID = 1;
+
+
+SELECT CustomerID
+FROM Customers
+WHERE PersonID = 1;
 
 
 -- [ คำสั่งลบตาราง ]
