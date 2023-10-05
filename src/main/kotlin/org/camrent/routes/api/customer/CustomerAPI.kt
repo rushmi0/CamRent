@@ -24,7 +24,11 @@ fun Application.customerRoute() {
             AuthTest()
             UploadFileTest()
 
-            // `GET` "/customers"
+
+            /**
+             * `GET` "/customers"
+             * @sample CustomerGet: ใช้เพื่อเรียกดูข้อมูลจาก ตาราง Customers ทั้งหมด
+             * */
             CustomerGet()
 
             // `GET` "/customers/id/{id}"
