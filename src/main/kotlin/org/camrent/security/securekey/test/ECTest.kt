@@ -26,6 +26,6 @@ fun main() {
     println("It is point on curve: \n\t$test ")
 
     val server: Boolean = ECDSA.VerifySignature(pubKeyRecovered!!, message, signatureRecovered!!)
-    println("Verify Signature: \n\t$server")
+    println("Verify Signature: ❌ \n\t$server")
 
 }
