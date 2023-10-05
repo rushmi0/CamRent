@@ -33,26 +33,37 @@ fun Route.CustomerPost() {
                         "ตรวจพบการเขียน Cross-site scripting"
                     )
                 } else {
-                    // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
-                    val statement = CustomerService.insert(
-                        CustomersForm(
-                            userName,
-                            publicKey
+
+                    val checkUserName = CustomerService.findCustomerByUserName(userName)?.userName
+
+                    if (checkUserName == userName) {
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "User Name ใช้งานไม่ได้"
                         )
-                    )
+                    } else {
+                        // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
+                        val statement = CustomerService.insert(
+                            CustomersForm(
+                                userName,
+                                publicKey
+                            )
+                        )
 
-                    if (statement) {
-                        // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
-                        val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
-                        val id: Int? = customerRecord?.customerID
-                        val mkdir = AccountDirectory.createDirectory("customers", id!!)
+                        if (statement) {
+                            // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
+                            val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
+                            val id: Int? = customerRecord?.customerID
+                            val mkdir = AccountDirectory.createDirectory("customers", id!!)
 
-                        if (mkdir) {
-                            // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client หรือ ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
-                            call.respond(customerRecord ?: HttpStatusCode.NotFound)
+                            if (mkdir) {
+                                // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client หรือ ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
+                                call.respond(customerRecord ?: HttpStatusCode.NotFound)
+                            }
+
                         }
-
                     }
+
                 }
             } else {
                 // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
