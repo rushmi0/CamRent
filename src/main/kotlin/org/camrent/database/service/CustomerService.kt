@@ -9,6 +9,7 @@ import org.camrent.utils.Time.getCurrentTime
 import org.camrent.database.DatabaseFactory.dbQuery
 import org.camrent.database.field.CustomersField
 import org.camrent.database.forms.CustomersForm
+import org.camrent.database.service.CustomerService.findCustomerByPublicKey
 import org.camrent.database.table.AddressesTable
 import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.CustomersTable.authKey
@@ -104,6 +105,27 @@ object CustomerService {
     }
 
 
+    suspend fun findCustomerByPublicKey(publicKey: String): CustomersField? {
+        return dbQuery {
+            // เลือกข้อมูลลูกค้าที่มีชื่อผู้ใช้ตรงกับ `accountName`
+            CustomersTable.select { authKey eq publicKey }
+                .mapNotNull {
+                    // แปลงข้อมูลที่ดึงมาในแต่ละแถวเป็น CustomersField object
+                    CustomersField(
+                        it[customerID],  // ดึงค่า customerID จากฐานข้อมูล
+                        it[userName],    // ดึงค่า userName จากฐานข้อมูล
+                        it[profileImage], // ดึงค่า profileImage จากฐานข้อมูล
+                        it[authKey],      // ดึงค่า authKey จากฐานข้อมูล
+                        it[timeStamp],    // ดึงค่า timeStamp จากฐานข้อมูล
+                        it[createAt],     // ดึงค่า createAt จากฐานข้อมูล
+                        it[personID]      // ดึงค่า personID จากฐานข้อมูล
+                    )
+                }
+                .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
+        }
+    }
+
+
     // เมธอดสำหรับเพิ่มข้อมูลลูกค้าใหม่
     suspend fun insert(field: CustomersForm): Boolean {
         return try {
@@ -180,3 +202,12 @@ object CustomerService {
     }
 
 }
+
+
+//suspend fun main() {
+//
+//    DatabaseFactory.initialize()
+//    val ts = findCustomerByPublicKey("npub1qqtl9z9ypazwu2uy52fx6j8m3zadadanjs4sctdxdul70anyrampcc2urs2j")?.userName
+//    println(ts)
+//
+//}
