@@ -10,6 +10,7 @@ import org.camrent.database.DatabaseFactory.dbQuery
 import org.camrent.database.field.CustomersField
 import org.camrent.database.forms.CustomersForm
 import org.camrent.database.service.CustomerService.findCustomerByPublicKey
+import org.camrent.database.service.CustomerService.findCustomerByUserName
 import org.camrent.database.table.AddressesTable
 import org.camrent.database.table.CustomersTable
 import org.camrent.database.table.CustomersTable.authKey
@@ -207,7 +208,7 @@ object CustomerService {
 //suspend fun main() {
 //
 //    DatabaseFactory.initialize()
-//    val ts = findCustomerByPublicKey("npub1qqtl9z9ypazwu2uy52fx6j8m3zadadanjs4sctdxdul70anyrampcc2urs2j")?.userName
+//    val ts = findCustomerByUserName("npub1qqtl9z9ypazwu2uy52fx6j8m3zadadanjs4sctdxdul70anyrampcc2urs2j")?.userName
 //    println(ts)
 //
 //}
