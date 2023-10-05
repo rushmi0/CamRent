@@ -20,19 +20,20 @@ fun Application.peopleRoute() {
 
         route("api/v1") {
 
-            // `GET` "/people"
+            // `GET` "/people" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง `People` ทั้งหมด
             PeopleGet()
 
-            // `GET` "/people/{id}"
+            // `GET` "people/id/{id}" ใช้สำหรับ ดึงขอมูล ของ `People` โดยใช้หมายเลข `ID` ในการขอ
             PeopleGetByID()
 
-            // `PATCH` "/people/{id}"
+            // `PATCH` "/people/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ
             PeoplePatchByID()
 
-            // `POST` "/people"
+            // `POST` "/people" : ใช้สำหรับ เพิ่มข้อมูลส่วนบุคคล โดยการรับข้อมูลหลัก และหมายเลข `ID` ของ `User` นั้น
             PeoplePost()
 
         }
+
     }
 
 

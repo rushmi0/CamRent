@@ -14,7 +14,7 @@ import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
 
 fun Route.PeopleGetByID() {
 
-    get("people/{id}") {
+    get("people/id/{id}") {
 
         try {
             // ดึงค่า ID จากพารามิเตอร์ที่ระบุใน URL และแปลงเป็น Int หรือ null ถ้าไม่สามารถแปลงได้

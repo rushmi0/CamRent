@@ -8,5 +8,5 @@ data class StoresField(
     val authKey: String,
     val timeStamp: String,
     val createAt: String,
-    val personID: Int
+    val personID: Int?
 )

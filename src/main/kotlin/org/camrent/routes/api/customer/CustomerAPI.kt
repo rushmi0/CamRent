@@ -17,22 +17,22 @@ fun Application.customerRoute() {
 
         route("api/v1") {
 
-            // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง Customers ทั้งหมด
+            // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง `Customers` ทั้งหมด
             CustomerGet()
 
-            // `GET` "/customers/auth/{publicKey}" : ใช้สำหรับ Sign-in และจะได้รับข้อมูลที่สำคัญ
+            // `GET` "/customers/auth/{publicKey}" : ใช้สำหรับ `Sign-in` และจะได้รับข้อมูลที่สำคัญ
             CustomerAuthentication()
 
-            // `GET` "/customers/id/{id}"  ใช้สำหรับ ดึงขอมูล ของ Customer โดยใช้หมายเลข ID ในการขอ
+            // `GET` "/customers/id/{id}"  ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `ID` ในการขอ
             CustomerGetByID()
 
-            // `GET` "/customers/img/id/{id}" : ใช้สำหรับ ดึงรูป Profile ของ Customer
+            // `GET` "/customers/img/id/{id}" : ใช้สำหรับ ดึงรูป `Profile` ของ `Customer`
             CustomerOpenImage()
 
-            // `GET` "/customers/name/{name}" ใช้สำหรับ ดึงขอมูล ของ Customer โดยใช้หมายเลข User Name ในการขอ
+            // `GET` "/customers/name/{name}" ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `User Name` ในการขอ
             CustomerByUserName()
 
-            // `POST` "/customers" : ใช้สำหรับ Sign-up และบันทึกลงฐานข้อมูล
+            // `POST` "/customers" : ใช้สำหรับ `Sign-up` และบันทึกลงฐานข้อมูล
             CustomerPost()
 
             // `PATCH` "/customers/id/{id}" : ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูป

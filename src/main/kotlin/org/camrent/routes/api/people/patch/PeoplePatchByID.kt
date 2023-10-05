@@ -11,7 +11,7 @@ import org.camrent.security.xss.XssDetector
 
 fun Route.PeoplePatchByID() {
 
-    patch("people/{id}") {
+    patch("people/id/{id}") {
         val id = call.parameters["id"]?.toIntOrNull()
         val payload = call.receive<Map<String, String>>()
 
