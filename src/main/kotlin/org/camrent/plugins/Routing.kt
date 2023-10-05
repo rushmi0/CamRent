@@ -28,8 +28,5 @@ fun Application.configureRouting() {
                 call.respond(HttpStatusCode.NotFound)
             }
         }
-        uploadImage()
-        uploadFile()
-        basicBasePath()
     }
 }
