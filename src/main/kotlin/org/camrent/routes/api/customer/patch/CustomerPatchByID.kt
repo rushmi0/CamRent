@@ -22,7 +22,7 @@ fun Route.CustomerPatchByID() {
                     if (XssDetector.containsXss(newValue) || XssDetector.containsXss(newValue)) {
                         call.respond(
                             HttpStatusCode.BadRequest,
-                            "Cross-site scripting detected in the field: $fieldName"
+                            "ตรวจพบ Cross-site scripting ใน field: $fieldName"
                         )
                         return@patch
                     }
@@ -30,25 +30,26 @@ fun Route.CustomerPatchByID() {
                     // ถ้าไม่พบ XSS, ทำการอัปเดตข้อมูล
                     CustomerService.update(id, fieldName, newValue)
                 }
-                call.respondText("Customer updated successfully")
+                call.respondText("อัปเดตลูกค้าเรียบร้อยแล้ว")
             } else {
                 call.respond(
                     HttpStatusCode.BadRequest,
-                    "Invalid customer ID"
+                    "ID ลูกค้าไม่ถูกต้อง\n"
                 )
             }
+
 
         } catch (e: ContentTransformationException) {
             // กรณีเกิด รูปแบบข้อมูลไม่ตรงตามโครงร้างที่กำหนด
             call.respond(
                 HttpStatusCode.BadRequest,
-                "Invalid data format. Please provide data in the correct format."
+                "รูปแบบข้อมูลไม่ตรงตามโครงร้างที่กำหนด"
             )
         } catch (e: Exception) {
             // กรณีเกิด Exception อื่น ๆ
             call.respond(
                 HttpStatusCode.InternalServerError,
-                "An error occurred while processing your request."
+                "เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ"
             )
         }
     }
