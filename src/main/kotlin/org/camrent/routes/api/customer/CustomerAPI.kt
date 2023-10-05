@@ -9,6 +9,7 @@ import org.camrent.routes.api.customer.get.CustomerByUserName
 import org.camrent.routes.api.customer.get.CustomerGet
 import org.camrent.routes.api.customer.get.CustomerGetByID
 import org.camrent.routes.api.customer.patch.CustomerPatchByID
+import org.camrent.routes.api.customer.patch.CustomerUploadImage
 import org.camrent.routes.api.customer.post.CustomerPost
 import org.camrent.routes.api.customer.post.CustomerPostImage
 import org.camrent.routes.api.customer.test.AuthTest
@@ -39,6 +40,9 @@ fun Application.customerRoute() {
 
             // `PATCH` "/customers/id/{id}"
             CustomerPatchByID()
+
+            // `PATCH` "/customers/img/id/{id}"
+            CustomerUploadImage()
 
             // `DELETE` "/customers/id/{id}"
             CustomerDeleteByID()
