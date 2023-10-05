@@ -5,15 +5,11 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
 import org.camrent.routes.api.customer.delete.CustomerDeleteByID
-import org.camrent.routes.api.customer.get.CustomerByUserName
-import org.camrent.routes.api.customer.get.CustomerGet
-import org.camrent.routes.api.customer.get.CustomerGetByID
-import org.camrent.routes.api.customer.get.CustomerOpenImage
+import org.camrent.routes.api.customer.get.*
 import org.camrent.routes.api.customer.patch.CustomerPatchByID
 import org.camrent.routes.api.customer.patch.CustomerUploadImage
 import org.camrent.routes.api.customer.post.CustomerPost
-import org.camrent.routes.api.customer.test.AuthTest
-import org.camrent.routes.api.customer.test.UploadFileTest
+
 
 fun Application.customerRoute() {
 
@@ -21,32 +17,29 @@ fun Application.customerRoute() {
 
         route("api/v1") {
 
-            AuthTest()
-            UploadFileTest()
 
-
-            /**
-             * `GET` "/customers"
-             * @sample CustomerGet: ใช้เพื่อเรียกดูข้อมูลจาก ตาราง Customers ทั้งหมด
-             * */
+            // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง Customers ทั้งหมด
             CustomerGet()
 
-            // `GET` "/customers/id/{id}"
+            // `GET` "/customers/auth/{publicKey}" : ใช้สำหรับ Sign-in และจะได้รับข้อมูลที่สำคัญ
+            CustomerAuthentication()
+
+            // `GET` "/customers/id/{id}"  ใช้สำหรับ ดึงขอมูล ของ Customer โดยใช้หมายเลข ID ในการขอ
             CustomerGetByID()
 
-            // `GET` "/customers/img/id/{id}"
+            // `GET` "/customers/img/id/{id}" : ใช้สำหรับ ดึงรูป Profile ของ Customer
             CustomerOpenImage()
 
-            // `GET` "/customers/name/{name}"
+            // `GET` "/customers/name/{name}" ใช้สำหรับ ดึงขอมูล ของ Customer โดยใช้หมายเลข User Name ในการขอ
             CustomerByUserName()
 
-            // `POST` "/customers"
+            // `POST` "/customers" : ใช้สำหรับ Sign-up และบันทึกลงฐานข้อมูล
             CustomerPost()
 
-            // `PATCH` "/customers/id/{id}"
+            // `PATCH` "/customers/id/{id}" : ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูป
             CustomerPatchByID()
 
-            // `PATCH` "/customers/img/id/{id}"
+            // `PATCH` "/customers/img/id/{id}"  ใช้สำหรับ เพิ่มรูป ลงฐานข้อมูล
             CustomerUploadImage()
 
             // `DELETE` "/customers/id/{id}"

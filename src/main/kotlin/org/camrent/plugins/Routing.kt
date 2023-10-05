@@ -5,9 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.camrent.database.test.uploadFile
-import org.camrent.database.test.uploadImage
-import org.camrent.test.basic.basicBasePath
+
 import java.io.File
 
 fun Application.configureRouting() {
