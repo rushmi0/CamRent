@@ -42,6 +42,7 @@ fun Route.CustomerPost() {
                             "User Name ใช้งานไม่ได้"
                         )
                     } else {
+
                         // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
                         val statement = CustomerService.insert(
                             CustomersForm(
@@ -58,7 +59,7 @@ fun Route.CustomerPost() {
 
                             if (mkdir) {
                                 // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client หรือ ถ้าไม่พบข้อมูลลูกค้า, ตอบกลับด้วยสถานะผลลัพธ์ 404 Not Found
-                                call.respond(customerRecord ?: HttpStatusCode.NotFound)
+                                call.respond(customerRecord)
                             }
 
                         }

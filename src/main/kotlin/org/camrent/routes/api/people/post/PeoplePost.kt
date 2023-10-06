@@ -26,9 +26,13 @@ fun Route.PeoplePost() {
             val phoneNumber = payload.phoneNumber
 
             // หมายเลข `ID` ที่จะใช้ในการ update ข้อมูล จาก `People Table`
-            val receiveID = call.request.headers["AccountID"]?.toInt()!!
-            println("AccountID: $receiveID")
+            val targetID = call.request.headers["AccountID"]?.toInt()!!
+            println("AccountID: $targetID")
 
+            /**
+             * @sample Customer :
+             * @sample Stores :
+             * */
             val receiveType = call.request.headers["AccountType"]
             println("AccountType: $receiveType")
 
@@ -87,13 +91,13 @@ fun Route.PeoplePost() {
                             val idPeople: Int? = peopleRecord?.personID
 
                             // ค้นหาข้อมูลลูกค้าด้วยรหัสผู้ใช้
-                            val checkID = CustomerService.findCustomerByUserID(receiveID)?.customerID
+                            val checkID = CustomerService.findCustomerByUserID(targetID)?.customerID
 
                             // ตรวจสอบว่ารหัสผู้ใช้ตรงกับที่รับมาหรือไม่
-                            if (checkID == receiveID) {
+                            if (checkID == targetID) {
 
                                 val updateStatement = CustomerService.update(
-                                    receiveID,
+                                    targetID,
                                     "PersonID", // ค่านี้ต้องตรงกับชื่อ Field ในฐานข้อมูลจริง (ตัวอย่าง: ชื่อ Field ในฐานข้อมูลเป็น "PersonID")
                                     idPeople.toString() // แปลง ID ของบุคคลเป็น String เพื่ออัปเดต
                                 )
@@ -102,18 +106,24 @@ fun Route.PeoplePost() {
                                 if (updateStatement) {
 
                                     // ค้นหาข้อมูลลูกค้าอีกครั้ง
-                                    val customerRecord = CustomerService.findCustomerByUserID(receiveID)
+                                    val customerRecord = CustomerService.findCustomerByUserID(targetID)
+                                    println(customerRecord)
 
-                                    // ส่งข้อมูลลูกค้ากลับไปหา client หรือ 404 Not Found ถ้าไม่พบข้อมูล
-                                    call.respond(customerRecord ?: HttpStatusCode.NotFound)
-
+                                    // ส่งข้อมูลลูกค้ากลับไปหา client
+                                    call.respond(
+                                        HttpStatusCode.OK,
+                                        "บันทึกข้อมูล `Customer` สำเร็จ"
+                                    )
                                 }
 
                             }
+                        } else {
+                            call.respond(
+                                HttpStatusCode.BadRequest,
+                                "ข้อมูลบุคคล ห้ามซ้ำกัน"
+                            )
                         }
                     }
-
-
 
 
 
@@ -147,14 +157,14 @@ fun Route.PeoplePost() {
                             // ดึงเอา ID ของบุคคล (personID) ถ้าพบ
                             val idPeople: Int? = peopleRecord?.personID
 
-                            // ค้นหาข้อมูลลูกค้าด้วยรหัสผู้ใช้
-                            val checkID = CustomerService.findCustomerByUserID(receiveID)?.customerID
+                            // ค้นหาข้อมูลร้านด้วยรหัสผู้ใช้
+                            val checkID = StoresService.findStoresByUserID(targetID)?.storeID
 
                             // ตรวจสอบว่ารหัสผู้ใช้ตรงกับที่รับมาหรือไม่
-                            if (checkID == receiveID) {
+                            if (checkID == targetID) {
 
                                 val updateStatement = StoresService.update(
-                                    receiveID,
+                                    targetID,
                                     "PersonID", // ค่านี้ต้องตรงกับชื่อ Field ในฐานข้อมูลจริง (ตัวอย่าง: ชื่อ Field ในฐานข้อมูลเป็น "PersonID")
                                     idPeople.toString() // แปลง ID ของบุคคลเป็น String เพื่ออัปเดต
                                 )
@@ -163,14 +173,23 @@ fun Route.PeoplePost() {
                                 if (updateStatement) {
 
                                     // ค้นหาข้อมูลลูกค้าอีกครั้ง
-                                    val customerRecord = CustomerService.findCustomerByUserID(receiveID)
+                                    val customerRecord = StoresService.findStoresByUserID(targetID)!!
+                                    println(customerRecord)
 
-                                    // ส่งข้อมูลลูกค้ากลับไปหา client หรือ 404 Not Found ถ้าไม่พบข้อมูล
-                                    call.respond(customerRecord ?: HttpStatusCode.NotFound)
+                                    // ส่งข้อมูลลูกค้ากลับไปหา client
+                                    call.respond(
+                                        HttpStatusCode.OK,
+                                        "บันทึกข้อมูล `Stores` สำเร็จ"
+                                    )
 
                                 }
 
                             }
+                        } else {
+                            call.respond(
+                                HttpStatusCode.BadRequest,
+                                "ข้อมูลบุคคล ห้ามซ้ำกัน"
+                            )
                         }
                     }
 

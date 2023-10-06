@@ -23,10 +23,10 @@ object StoresService {
 
 
 
-    suspend fun findStoresByUserID(userID: String): StoresField? {
+    suspend fun findStoresByUserID(userID: Int): StoresField? {
         return dbQuery {
             // เลือกข้อมูลลูกค้าที่มีชื่อผู้ใช้ตรงกับ `accountName`
-            StoresTable.select { storeName eq userID }
+            StoresTable.select { storeID eq userID }
                 .mapNotNull {
                     // แปลงข้อมูลที่ดึงมาในแต่ละแถวเป็น StoresField object
                     StoresField(
@@ -119,35 +119,35 @@ object StoresService {
             val updatedRowCount = StoresTable.update( { StoresTable.storeID eq storesID } ) {
 
                 when (fieldName) {
-                    "UserName" -> {
+                    "StoreName" -> {
                         // อัปเดต storeName ให้กับลูกค้าที่มี Stores ID: $storesID
                         it[storeName] = newValue
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $storesID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Stores ID: $storesID")
                     }
 
                     "ProfileImage" -> {
                         // อัปเดต profileImage ให้กับลูกค้าที่มี Stores ID: $storesID
                         it[profileImage] = newValue
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $storesID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Stores ID: $storesID")
                     }
 
                     "PaymentMethod" -> {
                         // อัปเดต paymentMethod ให้กับลูกค้าที่มี Stores ID: $storesID
                         it[paymentMethod] = newValue
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $storesID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Stores ID: $storesID")
                     }
 
                     "AuthKey" -> {
                         // อัปเดต authKey ให้กับลูกค้าที่มี Stores ID: $storesID
                         it[authKey] = newValue
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $storesID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Stores ID: $storesID")
                     }
 
                     "PersonID" -> {
                         // อัปเดต personID ให้กับลูกค้าที่มี Stores ID: $storesID
                         // แปลง newValue เป็น Int ก่อน
                         it[personID] = newValue.toInt()
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $storesID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Stores ID: $storesID")
                     }
 
                     else -> throw IllegalArgumentException("ไม่พบชื่อฟิลด์ $fieldName")
