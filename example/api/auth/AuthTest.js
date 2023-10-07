@@ -19,7 +19,7 @@ const witness = encodeURIComponent(url)
 const signature = ec.signMessage(witness, privateKey);
 const derEncodedSignature = ec.derEncode(signature);
 
-const accountType = ["Stores", "Customer"]
+const accountType =  ["Customer", "Stores"]
 
 const config = {
     headers: {
@@ -29,9 +29,6 @@ const config = {
         'Witness': witness
     }
 };
-
-
-console.log(config)
 
 axios.get(
     url,

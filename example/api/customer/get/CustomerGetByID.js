@@ -23,7 +23,7 @@ const config = {
 };
 
 const resultData = await axios.get(url, config)
-console.log(resultData.data)
+console.log("Customer Data from: ", resultData.data)
 
 const id = resultData.data["customerID"]
 console.log(`Customer ID : ${id}`)
