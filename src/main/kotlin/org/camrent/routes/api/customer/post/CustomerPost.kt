@@ -27,11 +27,13 @@ fun Route.CustomerPost() {
                 if (XssDetector.containsXss(userName) ||
                     XssDetector.containsXss(publicKey)
                 ) {
+
                     // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                     call.respond(
                         HttpStatusCode.BadRequest,
                         "ตรวจพบการเขียน Cross-site scripting"
                     )
+
                 } else {
 
                     val checkUserName = CustomerService.findCustomerByUserName(userName)?.userName

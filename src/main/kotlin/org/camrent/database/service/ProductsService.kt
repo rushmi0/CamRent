@@ -84,8 +84,6 @@ object ProductsService {
                     // กำหนดข้อมูลในคอลัมน์ต่างๆ
                     it[productName] = field.productName
 
-
-
                 }
             }
             true // สำเร็จ
@@ -104,6 +102,66 @@ object ProductsService {
                     "ProductName" -> {
                         // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
                         it[productName] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Image1" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[image1] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Image2" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[image2] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Image3" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[image3] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Image4" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[image4] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Type" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[type] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Price" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[price] = newValue.toInt()
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "SpecDetail" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[specDetail] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Description" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[description] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "Status" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[status] = newValue
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
+                    }
+
+                    "StoreID" -> {
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        it[storeID] = newValue.toInt()
                         println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
                     }
 

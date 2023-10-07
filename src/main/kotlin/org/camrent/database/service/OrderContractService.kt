@@ -77,41 +77,41 @@ object OrderContractService {
 
     suspend fun update(itemID: Int, fieldName: String, newValue: String): Boolean {
         return dbQuery {
-            val updatedRowCount = OrderContractTable.update({ OrderContractTable.orderID eq itemID }) {
+            val updatedRowCount = OrderContractTable.update({ orderID eq itemID }) {
                 // กำหนดค่าใหม่ตามเมื่อเงื่อนไข ลงในคอลัมน์ที่ต้องการอัปเดต
                 when (fieldName) {
 
                     "Quantity" -> {
-                        // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // อัปเดต profileImage ให้กับลูกค้าที่มี OrderContract ID: $itemID
                         it[quantity] = newValue.toInt()
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $itemID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี OrderContract ID: $itemID")
                     }
 
                     "Duration" -> {
-                        // อัปเดต authKey ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // อัปเดต authKey ให้กับลูกค้าที่มี OrderContract ID: $itemID
                         it[duration] = newValue
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $itemID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี OrderContract ID: $itemID")
                     }
 
                     "CustomerID" -> {
-                        // อัปเดต personID ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // อัปเดต personID ให้กับลูกค้าที่มี OrderContract ID: $itemID
                         // แปลง newValue เป็น Int ก่อน
                         it[customerID] = newValue.toInt()
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $itemID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี OrderContract ID: $itemID")
                     }
 
                     "AddressID" -> {
-                        // อัปเดต personID ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // อัปเดต personID ให้กับลูกค้าที่มี OrderContract ID: $itemID
                         // แปลง newValue เป็น Int ก่อน
                         it[addressID] = newValue.toInt()
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $itemID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี OrderContract ID: $itemID")
                     }
 
                     "ProductID" -> {
-                        // อัปเดต personID ให้กับลูกค้าที่มี Customer ID: $customerID
+                        // อัปเดต personID ให้กับลูกค้าที่มี OrderContract ID: $itemID
                         // แปลง newValue เป็น Int ก่อน
                         it[productID] = newValue.toInt()
-                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี Customer ID: $itemID")
+                        println("อัปเดต $fieldName ให้กับลูกค้าที่มี OrderContract ID: $itemID")
                     }
 
                     else -> throw IllegalArgumentException("ไม่พบชื่อฟิลด์ $fieldName")

@@ -17,6 +17,7 @@ fun Application.customerRoute() {
 
         route("api/v1") {
 
+
             // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง `Customers` ทั้งหมด
             CustomerGet()
 

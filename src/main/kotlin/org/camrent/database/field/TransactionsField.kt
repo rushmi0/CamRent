@@ -4,7 +4,7 @@ data class TransactionsField(
     val txID: Int,
     val totalPrice: Int,
     val status: String,
-    val timeSpam: String,
+    val timeStamp: String,
     val date: String,
-    val orderID: Int
+    val orderID: Int?
 )
