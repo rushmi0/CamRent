@@ -4,26 +4,27 @@ import {b32encode} from "../../ecc/Bech32.js";
 
 
 const ec = EllipticCurve();
-const pass = "TestPass123<T>"
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
+// `Account 1`
+const pass = "lnw1150"
 const privateKey = ec.genPrivateKey(pass)
 
 const publicKey = ec.generateKeyPair(privateKey)
 const authKey = b32encode(publicKey)
-console.log(authKey)
-// npub1qqvk42zem553azjt6w2s982tulgxnvwxhhk6yu2gvsf5thk94l6ge77zgnxe
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
 
-const url = 'http://localhost:8080/api/v1/user/auth/' + authKey;
+const url = 'http://127.0.0.1:8080/api/v1/user/auth/' + authKey;
 const witness = encodeURIComponent(url)
 
 const signature = ec.signMessage(witness, privateKey);
 const derEncodedSignature = ec.derEncode(signature);
 
-const type = ["Stores", "Customer"]
+const accountType = ["Stores", "Customer"]
 
 const config = {
     headers: {
         'Content-Type': 'application/json',
-        'AccountType': type[0], // `Stores` , `Customer`
+        'AccountType': accountType[0],
         'Signature': derEncodedSignature,
         'Witness': witness
     }
