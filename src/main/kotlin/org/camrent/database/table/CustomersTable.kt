@@ -7,12 +7,12 @@ import org.jetbrains.exposed.sql.insert
 object CustomersTable : Table("Customers") {
 
     // กำหนดคอลัมน์ของตาราง
-    val customerID = integer("CustomerID").uniqueIndex()  // รหัสลูกค้า
-    val userName = text("UserName").uniqueIndex()  // ชื่อผู้ใช้
-    val profileImage = text("ProfileImage")  // รูปโปรไฟล์
-    val authKey = text("AuthKey")  // คีย์การยืนยันตัวตน
-    val timeStamp = text("TimeStamp")
-    val createAt = text("CreateAccountDate")
+    val customerID = integer("CustomerID").uniqueIndex()
+    val userName = text("UserName").uniqueIndex()
+    val profileImage = text("ProfileImage").default("N/A")
+    val authKey = text("AuthKey").default("N/A")
+    val timeStamp = text("TimeStamp").default("N/A")
+    val createAt = text("CreateAccountDate").default("N/A")
 
     val personID = integer("PersonID").references(PeopleTable.personID).uniqueIndex()
 
