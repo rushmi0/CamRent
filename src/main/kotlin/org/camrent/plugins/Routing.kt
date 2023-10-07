@@ -5,6 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.camrent.routes.api.auth.get.UserAuthentication
 
 import java.io.File
 
@@ -15,6 +16,11 @@ fun Application.configureRouting() {
         }
     }
     routing {
+
+        route("api/v1") {
+            UserAuthentication()
+        }
+
         get ("") {
             val file = File("src/main/resources/images/preview/start/Start_Server.jpg")
 
