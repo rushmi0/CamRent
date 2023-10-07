@@ -1,14 +1,11 @@
 package org.camrent.database
 
 
-import org.camrent.database.table.AddressesTable
-import org.camrent.database.table.CustomersTable
-import org.camrent.database.table.PeopleTable
-
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.camrent.database.table.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -20,14 +17,14 @@ object DatabaseFactory {
         Database.connect(hikariConfig())
         transaction {
             SchemaUtils.create(AddressesTable)
-            //SchemaUtils.create(CreditScoreTable)
+            SchemaUtils.create(CreditScoreTable)
             SchemaUtils.create(CustomersTable)
-            //SchemaUtils.create(FineTable)
-            //SchemaUtils.create(OrderContractTable)
+            SchemaUtils.create(FineTable)
+            SchemaUtils.create(OrderContractTable)
             SchemaUtils.create(PeopleTable)
-            //SchemaUtils.create(ProductsTable)
-            //SchemaUtils.create(StoresTable)
-            //SchemaUtils.create(TransactionsTable)
+            SchemaUtils.create(ProductsTable)
+            SchemaUtils.create(StoresTable)
+            SchemaUtils.create(TransactionsTable)
         }
 
     }
