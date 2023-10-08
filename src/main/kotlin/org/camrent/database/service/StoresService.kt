@@ -99,8 +99,6 @@ object StoresService {
                 StoresTable.insert {
                     // กำหนดข้อมูลในคอลัมน์ต่างๆ
                     it[storeName] = field.storeName
-                    it[profileImage] = field.profileImage
-                    it[paymentMethod] = field.paymentMethod
                     it[authKey] = field.authKey
                     it[timeStamp] = Time.getCurrentTime()  // กำหนดเวลาที่เพิ่มลงฐานข้อมูล
                     it[createAt] = Time.getCurrentDate()   // กำหนดวันที่เพิ่มลงฐานข้อมูล

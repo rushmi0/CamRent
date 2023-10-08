@@ -51,12 +51,12 @@ object ProductsService {
     }
 
 
-    suspend fun findProductsByProductsID(productsID: Int): ProductsField?{
+    // ใหม่ 1
+    suspend fun findStoreByProductStoreID(targetID: Int): List<ProductsField> {
         return dbQuery {
-            ProductsTable.select { productID eq productsID }
+            ProductsTable.select { ProductsTable.storeID eq targetID }
                 .mapNotNull {
                     ProductsField(
-
                         it[productID],
                         it[productName],
                         it[image1],
@@ -69,12 +69,36 @@ object ProductsService {
                         it[description],
                         it[status],
                         it[storeID]!!
+                    )
+                }
+        }
+    }
 
+
+    suspend fun findProductsByProductsID(productsID: Int): ProductsField? {
+        return dbQuery {
+            ProductsTable.select { productID eq productsID }
+                .mapNotNull {
+                    ProductsField(
+                        it[productID],
+                        it[productName],
+                        it[image1],
+                        it[image2],
+                        it[image3],
+                        it[image4],
+                        it[type],
+                        it[price],
+                        it[specDetail],
+                        it[description],
+                        it[status],
+                        it[storeID]!!
                     )
                 }
                 .singleOrNull() // คืนค่าผลลัพธ์เดียวหรือ null ถ้าไม่พบข้อมูล
         }
     }
+
+
 
     suspend fun insert(field: ProductsForm): Boolean {
         return try {

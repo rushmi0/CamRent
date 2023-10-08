@@ -23,12 +23,12 @@ fun Route.CustomerUploadImage() {
 
         try {
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
-            val id = call.parameters["id"]?.toIntOrNull() ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
-
+            val id = call.parameters["id"]?.toIntOrNull()
+                ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
 
             // ค้นหาข้อมูลลูกค้าด้วย ID
-            val customerData = CustomerService.findCustomerByUserID(id) ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
-
+            val customerData = CustomerService.findCustomerByUserID(id)
+                ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
 
             // รับข้อมูลจาก multipart request
             val multipart = call.receiveMultipart()
@@ -63,8 +63,8 @@ fun Route.CustomerUploadImage() {
                         "${imageFile?.absolutePath}" // ครอบ double code symbol เพื่อแปลงข้อมูลเป็น String
                     )
                     // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
-                    call.respond(HttpStatusCode.OK)
-                    println("ได้รับภาพ: $profileUpdate")
+                    call.respond(HttpStatusCode.Created)
+                    println("ได้รับภาพ: $profileUpdate สถานะ: ${HttpStatusCode.Created}")
                 } else {
 
                     val success = deleteFilesInPathAndCheckExistence(profile)
@@ -75,8 +75,8 @@ fun Route.CustomerUploadImage() {
                             "${imageFile?.absolutePath}"
                         )
                         // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
-                        call.respond(HttpStatusCode.OK)
-                        println("ได้รับภาพ: $profileUpdate")
+                        call.respond(HttpStatusCode.Created)
+                        println("ได้รับภาพ: $profileUpdate สถานะ: ${HttpStatusCode.Created}")
                     }
 
                 }

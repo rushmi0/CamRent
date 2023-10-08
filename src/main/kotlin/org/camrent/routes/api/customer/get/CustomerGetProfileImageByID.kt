@@ -11,7 +11,9 @@ import org.camrent.database.service.CustomerService
 fun Route.CustomerOpenImage() {
 
     get("customers/img/id/{id}") {
+
         try {
+
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
             val id = call.parameters["id"]?.toIntOrNull()
                 ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
@@ -27,8 +29,13 @@ fun Route.CustomerOpenImage() {
                 call.respondFile(java.io.File(file))
             } else {
                 // หากไม่พบไฟล์ ให้ส่ง HTTP 404 Not Found
-                call.respond(HttpStatusCode.NotFound)
+                call.respond(
+                    HttpStatusCode.NotFound,
+                    "ยังไม่รูป"
+                )
             }
+
+
 
         } catch (e: IllegalArgumentException) {
             call.respond(
