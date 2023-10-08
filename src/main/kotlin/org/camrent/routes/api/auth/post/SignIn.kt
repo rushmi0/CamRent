@@ -90,11 +90,11 @@ fun Route.SignInNewAccount() {
                     )
                 }
 
-
-
-
-
-
+            } else {
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    "ประเภท บัญชี่ ที่ต้องการสร้าง ไมู่กต้อง"
+                )
             }
 
             if (accountType == "Stores") {
@@ -157,6 +157,11 @@ fun Route.SignInNewAccount() {
                     )
                 }
 
+            } else {
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    "ประเภท บัญชี่ ที่ต้องการสร้าง ไมู่กต้อง"
+                )
             }
 
 
