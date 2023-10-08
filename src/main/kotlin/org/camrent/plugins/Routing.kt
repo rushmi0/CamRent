@@ -6,6 +6,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.camrent.routes.api.auth.get.UserAuthentication
+import org.camrent.routes.api.auth.post.SignInNewAccount
 
 import java.io.File
 
@@ -18,7 +19,11 @@ fun Application.configureRouting() {
     routing {
 
         route("api/v1") {
+            // `GET` "/user/auth/{publicKey}" : ใช้สำหรับ `Sign-in` ยืนยังตัวตน และจะได้รับข้อมูลที่สำคัญ
             UserAuthentication()
+
+            // `POST` "/user/sign-up" : ใช้สำหรับ `Sign-up` สร้างบัญชี และจะได้รับข้อมูลที่สำคัญ
+            SignInNewAccount()
         }
 
         get ("") {
