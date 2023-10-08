@@ -21,7 +21,7 @@ fun Route.SignInNewAccount() {
 
         try {
 
-            val accountType = call.parameters["AccountType"]
+            val accountType = call.request.headers["AccountType"]
 
             val payload = call.receive<NewAccount>()
 
@@ -64,6 +64,8 @@ fun Route.SignInNewAccount() {
                                 )
                             )
 
+                            println(statement)
+
                             if (statement) {
                                 // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
                                 val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
@@ -93,7 +95,9 @@ fun Route.SignInNewAccount() {
 
 
 
-            } else if (accountType == "Stores") {
+            }
+
+            if (accountType == "Stores") {
 
 
                 // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
@@ -127,6 +131,7 @@ fun Route.SignInNewAccount() {
                                     publicKey
                                 )
                             )
+                            println(statement)
 
                             if (statement) {
                                 // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
@@ -152,11 +157,6 @@ fun Route.SignInNewAccount() {
                     )
                 }
 
-            } else {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "ประเภท บัญชี่ ที่ต้องการสร้าง ไมู่กต้อง"
-                )
             }
 
 
