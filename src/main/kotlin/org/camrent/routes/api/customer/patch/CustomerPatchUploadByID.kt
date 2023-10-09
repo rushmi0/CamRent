@@ -15,6 +15,7 @@ import org.camrent.utils.AccountDirectory.deleteFilesInPathAndCheckExistence
 import org.camrent.utils.AccountDirectory.saveImage
 import org.camrent.utils.ShiftTo.B32decode
 import org.camrent.utils.ShiftTo.ByteArrayToBigInteger
+import org.camrent.utils.ShiftTo.ByteArrayToList
 import java.io.File
 
 fun Route.CustomerUploadImage() {
@@ -22,6 +23,7 @@ fun Route.CustomerUploadImage() {
     post("customers/img/id/{id}") {
 
         try {
+
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
             val id = call.parameters["id"]?.toIntOrNull()
                 ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
@@ -33,7 +35,9 @@ fun Route.CustomerUploadImage() {
             // รับข้อมูลจาก multipart request
             val multipart = call.receiveMultipart()
 
+
             var imageFile: File? = null
+            var uploadedValue: String? = null  // สร้างตัวแปรเพื่อเก็บค่า formItemValue
 
             multipart.forEachPart { part ->
                 when (part) {
@@ -42,13 +46,18 @@ fun Route.CustomerUploadImage() {
                         imageFile = saveImage(id, "customers", "profileImage", part)
                     }
 
+                    is PartData.FormItem -> {
+                        val formItemValue = part.value
+                        println("Name: ${part.name} Value: $formItemValue")
+                        uploadedValue = formItemValue  // บันทึกค่า formItemValue
+                    }
+
                     is PartData.BinaryChannelItem, is PartData.BinaryItem -> {
                         // ไม่รองรับข้อมูล Binary
                         call.respond(HttpStatusCode.UnsupportedMediaType, "ไม่รองรับข้อมูล Binary")
                         return@forEachPart
                     }
 
-                    is PartData.FormItem -> TODO()
                 }
             }
 
@@ -57,29 +66,35 @@ fun Route.CustomerUploadImage() {
                 val profile = customerData.profileImage!!
 
                 if (profile == "N/A") {
-                    val profileUpdate = CustomerService.update(
+
+                    CustomerService.update(
                         customerData.customerID!!,
                         "ProfileImage",
-                        "${imageFile?.absolutePath}" // ครอบ double code symbol เพื่อแปลงข้อมูลเป็น String
+                        "${imageFile?.absolutePath}"
                     )
+
                     // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                     call.respond(HttpStatusCode.Created)
-                    println("ได้รับภาพ: $profileUpdate สถานะ: ${HttpStatusCode.Created}")
+                    println("ได้รับภาพ: $uploadedValue สถานะ: ${HttpStatusCode.Created}")
                 } else {
 
                     val success = deleteFilesInPathAndCheckExistence(profile)
                     if (success) {
-                        val profileUpdate = CustomerService.update(
+
+                        CustomerService.update(
                             customerData.customerID!!,
                             "ProfileImage",
                             "${imageFile?.absolutePath}"
                         )
+
                         // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                         call.respond(HttpStatusCode.Created)
-                        println("ได้รับภาพ: $profileUpdate สถานะ: ${HttpStatusCode.Created}")
+                        println("ได้รับภาพ: $uploadedValue สถานะ: ${HttpStatusCode.Created}")
                     }
 
                 }
+
+
 
             } else {
                 // ตอบกลับว่าไม่มีการอัปโหลดไฟล์

@@ -1,11 +1,15 @@
 package org.camrent.routes.api.customer.get
 
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.netty.handler.codec.http.multipart.DiskAttribute.baseDirectory
 import org.camrent.database.service.CustomerService
+import java.io.File
 
 
 fun Route.CustomerOpenImage() {
@@ -13,6 +17,7 @@ fun Route.CustomerOpenImage() {
     get("customers/img/id/{id}") {
 
         try {
+
 
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
             val id = call.parameters["id"]?.toIntOrNull()
@@ -25,7 +30,7 @@ fun Route.CustomerOpenImage() {
             val file = customerData.profileImage
 
             // ตรวจสอบว่าไฟล์มีอยู่จริงหรือไม่
-            if (file != null && file.isNotBlank()) {
+            if (file != "N/A" && file != null && file.isNotBlank()) {
                 call.respondFile(java.io.File(file))
             } else {
                 // หากไม่พบไฟล์ ให้ส่ง HTTP 404 Not Found
@@ -54,4 +59,7 @@ fun Route.CustomerOpenImage() {
             )
         }
     }
+
+
+
 }

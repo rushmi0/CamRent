@@ -23,45 +23,8 @@ fun Route.CustomerGetByID() {
             // ค้นหาข้อมูลลูกค้าด้วย ID
             val customer = CustomerService.findCustomerByUserID(id) ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
 
-            // ดึงค่า Witness และ Signature จาก Headers
-            val signature = call.request.headers["Signature"]
-            val witness = call.request.headers["Witness"]
-
-            // ตรวจสอบว่า `Signature` และ `Witness` ไม่เป็น `null`
-            if (signature == null || witness == null) {
-                throw IllegalArgumentException("`Signature` หรือ `Witness` เป็น `null`")
-            }
-
-            val rawPermit = Sha256.hash(witness.toByteArray()).ByteArrayToBigInteger()
-
-            // ถอดรหัส (decode) เพื่อดึงเอาพิกัด R และ S ออกมาใช้ในการคำนวณ
-            val signatureRecovered = ECDSA.derRecovered(signature)!!
-
-            // ดึง `AuthKey` ของ `User` จากฐานข้อมูล และถอดรหัสด้วย Bech32
-            // เพื่อให้ได้ Public Key (ECC) แบบฐาน 16
-            val publicKey = customer.authKey?.B32decode()?.third!!
-
-            // นำ Public Key ที่ถูกบีบอัดให้เป็นตัวเลขฐาน 10 มาคำนวณหา Public Key
-            // ที่เป็นพิกัดบนเส้นโค้ง X และ Y
-            val pubKeyRecovered = publicKey.getDecompress()!!
-
-            // ตรวจสอบลายเซ็นด้วย `ECDSA`
-            val verify = ECDSA.VerifySignature(
-                pubKeyRecovered,
-                rawPermit,
-                signatureRecovered
-            )
-
-            if (verify) {
-                // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
-                call.respond(HttpStatusCode.OK, customer)
-            } else {
-                // ถ้า `verify` เป็นเท็จ ให้ตอบกลับด้วยสถานะ `400 Bad Request`
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "ปฏิเสธการให้ข้อมูล เนื่องจากลายเซ็นไม่ถูกต้อง"
-                )
-            }
+            // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
+            call.respond(HttpStatusCode.OK, customer)
 
 
         } catch (e: IllegalArgumentException) {

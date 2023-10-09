@@ -7,6 +7,7 @@ import io.ktor.server.netty.*
 import org.camrent.database.DatabaseFactory
 import org.camrent.routes.routingLayerAPI
 import org.camrent.plugins.*
+import org.camrent.routes.api.test.testRoutingAPI
 
 
 fun main() {
@@ -21,4 +22,6 @@ fun Application.module() {
     configureSockets()
     routingLayerAPI()
     configureRouting()
+
+    testRoutingAPI()
 }

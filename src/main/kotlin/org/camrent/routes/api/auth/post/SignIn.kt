@@ -29,140 +29,140 @@ fun Route.SignInNewAccount() {
             val publicKey = payload.authKey
 
 
-            // Sign-up บช. `Customer`
-            if (accountType == "Customer") {
+            when {
 
-                // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
-                if (userName.isNotBlank() && publicKey.isNotBlank()) {
-                    // ตรวจสอบ XSS
-                    if (XssDetector.containsXss(userName) ||
-                        XssDetector.containsXss(publicKey)
-                    ) {
+                // Sign-up บช. `Customers`
+                accountType == "Customers" -> {
+                    // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
+                    if (userName.isNotBlank() && publicKey.isNotBlank()) {
+                        // ตรวจสอบ XSS
+                        if (XssDetector.containsXss(userName) ||
+                            XssDetector.containsXss(publicKey)
+                        ) {
 
-                        // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                        call.respond(
-                            HttpStatusCode.BadRequest,
-                            "ตรวจพบการเขียน Cross-site scripting"
-                        )
-
-                    } else {
-
-                        val checkUserName = CustomerService.findCustomerByUserName(userName)?.userName
-
-                        if (checkUserName == userName) {
+                            // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
                             call.respond(
                                 HttpStatusCode.BadRequest,
-                                "User Name ใช้งานไม่ได้"
+                                "ตรวจพบการเขียน Cross-site scripting"
                             )
+
                         } else {
 
-                            // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
-                            val statement = CustomerService.insert(
-                                CustomersForm(
-                                    userName,
-                                    publicKey
+                            val checkUserName = CustomerService.findCustomerByUserName(userName)?.userName
+
+                            if (checkUserName == userName) {
+                                call.respond(
+                                    HttpStatusCode.BadRequest,
+                                    "User Name ใช้งานไม่ได้"
                                 )
+                            } else {
+
+                                // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
+                                val statement = CustomerService.insert(
+                                    CustomersForm(
+                                        userName,
+                                        publicKey
+                                    )
+                                )
+
+                                println(statement)
+
+                                if (statement) {
+                                    // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
+                                    val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
+                                    val id: Int? = customerRecord?.customerID
+                                    val mkdir = AccountDirectory.createDirectory("customers", id!!)
+
+                                    if (mkdir) {
+                                        // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
+                                        call.respond(HttpStatusCode.OK, customerRecord)
+                                        println("สร้างบัญชี Customers สำเร็จ \n" + customerRecord)
+                                    }
+
+                                }
+                            }
+
+                        }
+                    } else {
+                        // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "UserName และ AuthKey จำเป็นต้องระบุข้อมูล"
+                        )
+                    }
+                }
+
+                // Sign-up บช. `Stores`
+                accountType == "Stores" -> {
+                    // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
+                    if (userName.isNotBlank() && publicKey.isNotBlank()) {
+                        // ตรวจสอบ XSS
+                        if (XssDetector.containsXss(userName) ||
+                            XssDetector.containsXss(publicKey)
+                        ) {
+
+                            // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
+                            call.respond(
+                                HttpStatusCode.BadRequest,
+                                "ตรวจพบการเขียน Cross-site scripting"
                             )
 
-                            println(statement)
+                        } else {
 
-                            if (statement) {
-                                // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
-                                val customerRecord: CustomersField? = CustomerService.findCustomerByUserName(userName)
-                                val id: Int? = customerRecord?.customerID
-                                val mkdir = AccountDirectory.createDirectory("customers", id!!)
+                            val checkUserName = StoresService.findStoresByUserName(userName)?.storeName
 
-                                if (mkdir) {
-                                    // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
-                                    call.respond("สร้างบัญชี Customers สำเร็จ")
-                                    println(customerRecord)
+                            if (checkUserName == userName) {
+                                call.respond(
+                                    HttpStatusCode.BadRequest,
+                                    "User Name ใช้งานไม่ได้"
+                                )
+                            } else {
+
+                                // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
+                                val statement = StoresService.insert(
+                                    StoresForm(
+                                        userName,
+                                        publicKey
+                                    )
+                                )
+                                println(statement)
+
+                                if (statement) {
+
+                                    // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
+                                    val storesRecord = StoresService.findStoresByUserName(userName)
+                                    val id: Int? = storesRecord?.storeID
+                                    val mkdir = AccountDirectory.createDirectory("stores", id!!)
+
+                                    if (mkdir) {
+                                        // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
+                                        call.respond(HttpStatusCode.OK, storesRecord)
+                                        println("สร้างบัญชี Stores สำเร็จ \n" + storesRecord)
+                                    }
+
                                 }
-
                             }
-                        }
 
+                        }
+                    } else {
+                        // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "UserName และ AuthKey จำเป็นต้องระบุข้อมูล"
+                        )
                     }
-                } else {
-                    // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
+                }
+
+                accountType != "Customers" || accountType != "Stores" -> {
                     call.respond(
                         HttpStatusCode.BadRequest,
-                        "UserName และ AuthKey จำเป็นต้องระบุข้อมูล"
+                        "ประเภทบัญชี่ $accountType ที่ส่งมาเราไม่รองรับ"
                     )
                 }
 
-            } else {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "ประเภท บัญชี่ ที่ต้องการสร้าง ไมู่กต้อง"
-                )
             }
 
-            if (accountType == "Stores") {
 
-
-                // ตรวจสอบว่า `UserName` และ `AuthKey` ไม่เป็นค่าว่าง
-                if (userName.isNotBlank() && publicKey.isNotBlank()) {
-                    // ตรวจสอบ XSS
-                    if (XssDetector.containsXss(userName) ||
-                        XssDetector.containsXss(publicKey)
-                    ) {
-
-                        // ถ้าพบ Cross-site Scripting (XSS), ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                        call.respond(
-                            HttpStatusCode.BadRequest,
-                            "ตรวจพบการเขียน Cross-site scripting"
-                        )
-
-                    } else {
-
-                        val checkUserName = StoresService.findStoresByUserName(userName)?.storeName
-
-                        if (checkUserName == userName) {
-                            call.respond(
-                                HttpStatusCode.BadRequest,
-                                "User Name ใช้งานไม่ได้"
-                            )
-                        } else {
-
-                            // เพิ่มข้อมูลลูกค้า ถ้าทำสำเร็จจะคือค่าเป็น true
-                            val statement = StoresService.insert(
-                                StoresForm(
-                                    userName,
-                                    publicKey
-                                )
-                            )
-                            println(statement)
-
-                            if (statement) {
-                                // เพื่อตอบกลับให้กับ client, ตรวจสอบว่าการค้นหาผู้ใช้ด้วย `userName` สำเร็จหรือไม่
-                                val storesRecord = StoresService.findStoresByUserName(userName)
-                                val id: Int? = storesRecord?.storeID
-                                val mkdir = AccountDirectory.createDirectory("stores", id!!)
-
-                                if (mkdir) {
-                                    // ส่งข้อมูลลูกค้าที่ค้นหาได้กลับไปยัง client
-                                    call.respond("สร้างบัญชี Stores สำเร็จ")
-                                    println(storesRecord)
-                                }
-
-                            }
-                        }
-
-                    }
-                } else {
-                    // ถ้า UserName หรือ AuthKey ว่าง, ตอบกลับด้วยสถานะผลลัพธ์ 400 Bad Request
-                    call.respond(
-                        HttpStatusCode.BadRequest,
-                        "UserName และ AuthKey จำเป็นต้องระบุข้อมูล"
-                    )
-                }
-
-            } else {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "ประเภท บัญชี่ ที่ต้องการสร้าง ไมู่กต้อง"
-                )
-            }
 
 
 

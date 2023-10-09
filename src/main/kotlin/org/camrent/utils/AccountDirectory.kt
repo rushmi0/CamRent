@@ -1,46 +1,45 @@
 package org.camrent.utils
 
 import io.ktor.http.content.*
+import org.camrent.utils.AccountDirectory.createDirectory
 import java.io.File
 
 object AccountDirectory {
 
     fun getDirectoryPath(path: String): String = path
 
-    fun createDirectory(typeUser: String, directoryID: Int): Boolean {
-
+    fun createDirectory(typeAccount: String, directoryID: Int): Boolean {
         // กำหนดเส้นทางของไดเร็กทอรีหลัก
-        val baseDirectory = "src/main/resources/images/account/$typeUser/usr_$directoryID"
-
-        // กำหนดเส้นทางของไดเร็กทอรีที่ต้องการสร้างโดยใช้ when expression
-        val directoryPath = when (typeUser) {
-            "customers" -> "$baseDirectory/profileImage"
-            "stores" -> "$baseDirectory/profileImage/stores/products/camera; $baseDirectory/profileImage/stores/products/accessories"
-            else -> throw IllegalArgumentException("ไม่รู้จัก Directory: $typeUser")
-        }
+        val baseDirectory = "src/main/resources/images/account/$typeAccount/usr_$directoryID"
 
         return try {
-            // สร้างไดเร็กทอรีหากยังไม่มีอยู่
-            val file = File(directoryPath)
-            if (!file.exists()) {
-                val created = file.mkdirs()
-                if (created) {
-                    println("ไดเร็กทอรี ไอดี '$directoryID' ถูกสร้างเรียบร้อยที่ '$typeUser'.")
-                    this.getDirectoryPath(directoryPath)
-                    true
-                } else {
-                    println("ไม่สามารถสร้างไดเร็กทอรี '$directoryID' ที่ '$typeUser' ได้.")
-                    false
+            when {
+                typeAccount == "customers" -> {
+                    // สร้างไดเร็กทอรี `profileImage` สำหรับลูกค้า
+                    File("$baseDirectory/profileImage").apply { mkdirs() }
+                    true // สร้างไดเร็กทอรีสำเร็จ
                 }
-            } else {
-                println("ไดเร็กทอรี '$directoryID' มีอยู่แล้วที่ '$typeUser'.")
-                false
+
+                typeAccount == "stores" -> {
+                    // สร้างไดเร็กทอรี `profileImage` สำหรับร้านค้า
+                    File("$baseDirectory/profileImage").apply { mkdirs() }
+
+                    // สร้างไดเร็กทอรี `products`, `camera`, และ `accessories` สำหรับร้านค้า
+                    File("$baseDirectory/products/camera").apply { mkdirs() }
+                    File("$baseDirectory/products/accessories").apply { mkdirs() }
+                    true // สร้างไดเร็กทอรีสำเร็จ
+                }
+
+                else -> false // ไม่สามารถสร้างไดเร็กทอรี เนื่องจากไม่รู้จักประเภทบัญชี
             }
+
         } catch (e: Exception) {
-            println("เกิดข้อผิดพลาด: ${e.message}")
+            // แสดงข้อผิดพลาดที่เกิดขึ้น
+            println("เกิดข้อผิดพลาดในการสร้างไดเร็กทอรี: ${e.message}")
             false
         }
     }
+
 
 
     fun deleteDirectory(typeUser: String, directoryID: Int): Boolean {
@@ -69,7 +68,6 @@ object AccountDirectory {
 
         val filePath = when {
             typeAccount == "customers" && typeImage == "profileImage" -> {
-                // src/main/resources/images/account/customers/usr_1/profileImage
                 File("src/main/resources/images/account/$typeAccount/usr_$id/$typeImage/$fileName")
             }
 
@@ -135,3 +133,9 @@ object AccountDirectory {
 }
 
 
+fun main() {
+
+    val dir = createDirectory("customers", 1)
+    println(dir)
+
+}
