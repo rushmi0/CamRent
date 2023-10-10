@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 const ImageUpload = () => {
@@ -48,11 +48,11 @@ const ImageUpload = () => {
                 boxSizing: 'border-box',
             }}
         >
-            <h1 style={{ marginBottom: '20px' }}>Upload Image</h1>
-            <input type="file" onChange={handleFileChange} accept="image/*" style={{ marginBottom: '20px' }} />
+            <h1 style={{marginBottom: '20px'}}>Upload Image</h1>
+            <input type="file" onChange={handleFileChange} accept="image/*" style={{marginBottom: '20px'}}/>
             {previewImage && (
                 <div>
-                    <h2 style={{ marginBottom: '10px' }}>Preview:</h2>
+                    <h2 style={{marginBottom: '10px'}}>Preview:</h2>
                     <img
                         src={previewImage}
                         alt="Preview"
