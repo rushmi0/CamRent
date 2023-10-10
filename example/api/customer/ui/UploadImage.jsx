@@ -19,7 +19,6 @@ const ImageUpload = () => {
                 formData.append('file', file);
                 formData.append("Profile", "Customer")
 
-                // Replace with your API endpoint
                 const apiUrl = 'http://127.0.0.1:8080/api/v1/customers/img/id/1';
 
                 await axios.post(apiUrl, formData, {
