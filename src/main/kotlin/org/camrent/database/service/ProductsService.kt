@@ -11,13 +11,13 @@ import org.camrent.database.table.ProductsTable.image1
 import org.camrent.database.table.ProductsTable.image2
 import org.camrent.database.table.ProductsTable.image3
 import org.camrent.database.table.ProductsTable.image4
-import org.camrent.database.table.ProductsTable.price
+import org.camrent.database.table.ProductsTable.productPrice
 import org.camrent.database.table.ProductsTable.productID
 import org.camrent.database.table.ProductsTable.productName
 import org.camrent.database.table.ProductsTable.specDetail
 import org.camrent.database.table.ProductsTable.status
 import org.camrent.database.table.ProductsTable.storeID
-import org.camrent.database.table.ProductsTable.type
+import org.camrent.database.table.ProductsTable.productType
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 
@@ -39,8 +39,8 @@ object ProductsService {
                     it[image2],
                     it[image3],
                     it[image4],
-                    it[type],
-                    it[price],
+                    it[productType],
+                    it[productPrice],
                     it[specDetail],
                     it[description],
                     it[status],
@@ -63,8 +63,8 @@ object ProductsService {
                         it[image2],
                         it[image3],
                         it[image4],
-                        it[type],
-                        it[price],
+                        it[productType],
+                        it[productPrice],
                         it[specDetail],
                         it[description],
                         it[status],
@@ -86,8 +86,8 @@ object ProductsService {
                         it[image2],
                         it[image3],
                         it[image4],
-                        it[type],
-                        it[price],
+                        it[productType],
+                        it[productPrice],
                         it[specDetail],
                         it[description],
                         it[status],
@@ -107,7 +107,9 @@ object ProductsService {
                 ProductsTable.insert {
                     // กำหนดข้อมูลในคอลัมน์ต่างๆ
                     it[productName] = field.productName
-
+                    it[productType] = field.productType
+                    it[productPrice] = field.productPrice
+                    it[specDetail] = field.specDetail.toString()
                 }
             }
             true // สำเร็จ
@@ -155,13 +157,13 @@ object ProductsService {
 
                     "Type" -> {
                         // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
-                        it[type] = newValue
+                        it[productType] = newValue
                         println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
                     }
 
                     "Price" -> {
                         // อัปเดต profileImage ให้กับลูกค้าที่มี Customer ID: $customerID
-                        it[price] = newValue.toInt()
+                        it[productPrice] = newValue.toInt()
                         println("อัปเดต $fieldName ให้กับลูกค้าที่มี Product ID: $productsID")
                     }
 

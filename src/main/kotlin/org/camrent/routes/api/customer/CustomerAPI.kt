@@ -6,6 +6,7 @@ import io.ktor.server.routing.*
 
 import org.camrent.routes.api.customer.delete.CustomerDeleteByID
 import org.camrent.routes.api.customer.get.*
+import org.camrent.routes.api.customer.get.test.TestProfileURL
 import org.camrent.routes.api.customer.patch.CustomerPatchByID
 import org.camrent.routes.api.customer.patch.CustomerUploadImage
 
@@ -15,6 +16,8 @@ fun Application.customerRoute() {
     routing {
 
         route("api/v1") {
+
+            TestProfileURL()
 
 
             // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง `Customers` ทั้งหมด

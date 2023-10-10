@@ -15,7 +15,8 @@ import org.camrent.security.xss.XssDetector
 import org.camrent.utils.AccountDirectory
 
 
-fun Route.SignInNewAccount() {
+fun Route.SignUpNewAccount() {
+
 
     post("user/sign-up") {
 
@@ -153,7 +154,8 @@ fun Route.SignInNewAccount() {
                     }
                 }
 
-                accountType != "Customers" || accountType != "Stores" -> {
+
+                else -> {
                     call.respond(
                         HttpStatusCode.BadRequest,
                         "ประเภทบัญชี่ $accountType ที่ส่งมาเราไม่รองรับ"
@@ -181,5 +183,6 @@ fun Route.SignInNewAccount() {
         }
 
     }
+
 
 }

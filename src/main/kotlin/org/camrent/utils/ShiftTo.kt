@@ -201,6 +201,11 @@ object ShiftTo {
     }
 
 
+    fun String.buildUrl(): String {
+        return java.net.URLEncoder.encode(this, "UTF-8")
+    }
+
+
 }
 
 

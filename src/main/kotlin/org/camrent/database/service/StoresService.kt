@@ -17,10 +17,29 @@ import org.camrent.utils.Time
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 
 object StoresService {
 
+
+
+    suspend fun selectAllFromStores(): List<StoresField> {
+        return dbQuery {
+            StoresTable.selectAll().map {
+                StoresField(
+                    it[storeID],
+                    it[storeName],
+                    it[profileImage],
+                    it[paymentMethod],
+                    it[authKey],
+                    it[timeStamp],
+                    it[createAt],
+                    it[personID]
+                )
+            }
+        }
+    }
 
 
     suspend fun findStoresByUserID(userID: Int): StoresField? {

@@ -7,20 +7,21 @@ import java.io.File
 
 fun Route.PreviewImage() {
 
-    get("img/preview/img/1") {
+    get("product/preview/img/1") {
 
         val img1 = "/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/1.jpg"
         val img2 = "/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/2.jpg"
         val img3 = "/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/3.jpg"
         val img4 = "/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/4.jpg"
 
+
         val previewImages = getPreviewImageUrls("/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/")
         println(previewImages)
         call.respond(previewImages)
     }
 
-}
 
+}
 data class PreviewImg(
     val image1: String,
     val image2: String,
