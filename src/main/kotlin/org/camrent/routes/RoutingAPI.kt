@@ -11,11 +11,13 @@ import org.camrent.routes.api.test.testRoutingAPI
 fun Application.routingLayerAPI() {
 
     customerRoute()
+
     storesRoute()
+
     peopleRoute()
 
     productsRoute()
 
 
-    testRoutingAPI()
+    // testRoutingAPI()
 }

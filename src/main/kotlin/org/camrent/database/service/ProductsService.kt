@@ -51,8 +51,8 @@ object ProductsService {
     }
 
 
-    // ใหม่ 1
-    suspend fun findStoreByProductStoreID(targetID: Int): List<ProductsField> {
+    // ใช้เพื่อหาข้อมูลสินค้าที่มี StoreID เท่ากับ targetID ที่รับเข้ามาเป็น parameter และคืนค่าเป็น List ของ ProductsField objects ที่พบในฐานข้อมูล.
+    suspend fun findStoreByProductID(targetID: Int): List<ProductsField> {
         return dbQuery {
             ProductsTable.select { ProductsTable.storeID eq targetID }
                 .mapNotNull {
