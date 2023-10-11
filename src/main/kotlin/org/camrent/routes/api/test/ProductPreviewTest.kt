@@ -16,7 +16,7 @@ fun Route.ListProductPreview() {
         val storeData = StoresService.findStoresByUserID(targetID)
         val storeID = storeData?.storeID!!
 
-        val productData = ProductsService.findStoreByProductStoreID(storeID)
+        val productData = ProductsService.findStoreByProductID(storeID)
         println(productData)
         call.respond(productData)
     }

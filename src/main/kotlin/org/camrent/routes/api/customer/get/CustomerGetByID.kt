@@ -18,14 +18,15 @@ fun Route.CustomerGetByID() {
 
         try {
             // ดึงค่า Customer name จากพารามิเตอร์ที่ระบุใน URL และแปลงเป็น Int หรือ null ถ้าไม่สามารถแปลงได้
-            val id = call.parameters["id"]?.toIntOrNull() ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
+            val id = call.parameters["id"]?.toIntOrNull()
+                ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
 
             // ค้นหาข้อมูลลูกค้าด้วย ID
-            val customer = CustomerService.findCustomerByUserID(id) ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
+            val customer = CustomerService.findCustomerByUserID(id)
+                ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
 
             // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
             call.respond(HttpStatusCode.OK, customer)
-
 
         } catch (e: IllegalArgumentException) {
             // ตอบกลับด้วยสถานะ `400 Bad Request` ในกรณีที่มีข้อผิดพลาดเกี่ยวกับข้อมูลขาเข้าไม่ถูกต้อง
@@ -47,8 +48,6 @@ fun Route.CustomerGetByID() {
             )
         }
     }
-
-
 
 
 }

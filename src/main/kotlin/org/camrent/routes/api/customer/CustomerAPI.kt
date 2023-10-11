@@ -1,9 +1,7 @@
 package org.camrent.routes.api.customer
 
-
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
-
 import org.camrent.routes.api.customer.delete.CustomerDeleteByID
 import org.camrent.routes.api.customer.get.*
 import org.camrent.routes.api.customer.get.test.TestProfileURL
@@ -17,13 +15,10 @@ fun Application.customerRoute() {
 
         route("api/v1") {
 
-            TestProfileURL()
-
-
             // `GET` "/customers" : ใช้เพื่อเรียกดูข้อมูลจาก ตาราง `Customers` ทั้งหมด
             CustomerGet()
 
-            // `GET` "/customers/id/{id}"  ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `ID` ในการขอ
+            // `GET` "/customers/id/{id}" : ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `ID` ในการขอ
             CustomerGetByID()
 
             // `GET` "/customers/img/id/{id}" : ใช้สำหรับ ดึงรูป `Profile` ของ `Customer`
@@ -41,6 +36,8 @@ fun Application.customerRoute() {
             // `DELETE` "/customers/id/{id}"
             CustomerDeleteByID()
 
+
+            // TestProfileURL()
         }
     }
 
