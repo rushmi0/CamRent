@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS People
 (
     PersonID    INTEGER PRIMARY KEY AUTOINCREMENT,
-    FirstName   TEXT UNIQUE DEFAULT 'N/A',
+    FirstName   TEXT        DEFAULT 'N/A',
     LastName    TEXT UNIQUE DEFAULT 'N/A',
     Email       TEXT UNIQUE DEFAULT 'N/A',
     PhoneNumber TEXT UNIQUE DEFAULT 'N/A',
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Stores
     StoreID           INTEGER PRIMARY KEY AUTOINCREMENT,
     StoreName         TEXT NOT NULL UNIQUE,
     ProfileImage      TEXT     DEFAULT 'N/A',
-    PaymentMethod     TEXT     DEFAULT 'Lightining Network',
+    PaymentMethod     TEXT     DEFAULT 'Lightning Network',
     AuthKey           TEXT     DEFAULT 'N/A',
     TimeStamp         DATETIME DEFAULT 'N/A',
     CreateAccountDate DATETIME DEFAULT 'N/A',
@@ -100,11 +100,11 @@ CREATE TABLE IF NOT EXISTS Products
     Image2      TEXT          DEFAULT 'N/A',
     Image3      TEXT          DEFAULT 'N/A',
     Image4      TEXT          DEFAULT 'N/A',
-    Type        TEXT          DEFAULT 'N/A',
+    Type        TEXT          DEFAULT 'N/A',          -- Compact, Mirrorless, DSLR
     Price       INTEGER       DEFAULT 0,
     SpecDetail  TEXT          DEFAULT 'N/A',
     Description TEXT          DEFAULT 'N/A',
-    Status      TEXT NOT NULL DEFAULT ' Unavailable',
+    Status      TEXT NOT NULL DEFAULT ' Unavailable', -- Unavailable/ Available
     StoreID     INTEGER,
 
     FOREIGN KEY (StoreID) REFERENCES Stores (StoreID)
@@ -134,30 +134,6 @@ CREATE TABLE IF NOT EXISTS Fine
 
 
 
-SELECT name
-FROM sqlite_master
-WHERE type = 'table';
-
-SELECT *
-FROM Customers;
-SELECT *
-FROM People;
-SELECT *
-FROM Address;
-
--- DELETE  FROM Customers
--- WHERE CustomerID = 1;
-
-UPDATE Customers
-SET ProfileImage = 'N/A'
-WHERE CustomerID = 1;
-
-
-SELECT CustomerID
-FROM Customers
-WHERE PersonID = 1;
-
-
 -- [ คำสั่งลบตาราง ]
 -- DROP TABLE IF EXISTS People;
 -- DROP TABLE IF EXISTS Customers;
@@ -170,6 +146,79 @@ WHERE PersonID = 1;
 -- DROP TABLE IF EXISTS Fine;
 
 
+-- เพิ่มข้อมูลลงใน Products Table
+INSERT INTO Products (ProductName, Image1, Image2, Image3, Image4, Type, Price, SpecDetail, Description, Status,
+                      StoreID)
+VALUES ('กล้อง Canon 123', 'image1_canon123.jpg', 'image2_canon123.jpg', 'image3_canon123.jpg', 'image4_canon123.jpg',
+        'DSLR', 15000, 'Resolution: 24MP, ISO Range: 100-6400',
+        'กล้อง Canon 123 ที่มีความละเอียด 24MP และ ISO Range 100-6400', 'Available', 1),
+
+       ('กล้อง Nikon XYZ', 'image1_nikonxyz.jpg', 'image2_nikonxyz.jpg', 'image3_nikonxyz.jpg', 'image4_nikonxyz.jpg',
+        'Mirrorless', 18000, 'Resolution: 30MP, ISO Range: 100-12800',
+        'กล้อง Nikon XYZ ที่มีความละเอียด 30MP และ ISO Range 100-12800', 'Available', 2),
+
+       ('กล้อง Sony ABC', 'image1_sonyabc.jpg', 'image2_sonyabc.jpg', 'image3_sonyabc.jpg', 'image4_sonyabc.jpg',
+        'Mirrorless', 21000, 'Resolution: 28MP, ISO Range: 100-25600',
+        'กล้อง Sony ABC ที่มีความละเอียด 28MP และ ISO Range 100-25600', 'Available', 3),
+
+       ('กล้อง Panasonic DEF', 'image1_panasonicdef.jpg', 'image2_panasonicdef.jpg', 'image3_panasonicdef.jpg',
+        'image4_panasonicdef.jpg', 'Compact', 12000, 'Resolution: 20MP, Zoom: 10x',
+        'กล้อง Panasonic DEF ที่มีความละเอียด 20MP และซูม 10 เท่า', 'Available', 1),
+
+       ('กล้อง Olympus UVW', 'image1_olympusuvw.jpg', 'image2_olympusuvw.jpg', 'image3_olympusuvw.jpg',
+        'image4_olympusuvw.jpg', 'Compact', 10000, 'Resolution: 18MP, Zoom: 8x',
+        'กล้อง Olympus UVW ที่มีความละเอียด 18MP และซูม 8 เท่า', 'Available', 2);
+
+
+
+SELECT name
+FROM sqlite_master
+WHERE type = 'table';
+
+
+SELECT *
+FROM Products;
+
+SELECT *
+FROM Stores;
+
+SELECT *
+FROM Customers;
+
+SELECT *
+FROM People;
+
+SELECT *
+FROM Address;
+
+-- DELETE  FROM Customers
+-- WHERE CustomerID = 1;
+
+UPDATE Customers
+SET ProfileImage = 'N/A'
+WHERE CustomerID = 1;
+
+
+SELECT *
+FROM Customers
+WHERE PersonID = 1;
+
+
+SELECT CustomerID
+FROM Customers
+WHERE AuthKey = 'npub1qqtl9z9ypazwu2uy52fx6j8m3zadadanjs4sctdxdul70anyrampcc2urs2j';
+
+
+SELECT *
+FROM Products
+WHERE StoreID = 1;
+
+SELECT *
+FROM Products
+WHERE ProductID = 1;
+
+
+
 SELECT *
 FROM Customers
 ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
@@ -178,3 +227,44 @@ ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
 UPDATE Customers
 SET ProfileImage = 'image.jpg'
 WHERE CustomerID = 1;
+
+
+UPDATE Products
+SET
+    Image1 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/1.jpg',
+    Image2 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/2.jpg',
+    Image3 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/3.jpg',
+    Image4 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/4.jpg'
+WHERE ProductID = 1;
+
+UPDATE Products
+SET
+    Image1 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/5.jpg',
+    Image2 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/6.jpg',
+    Image3 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/7.jpg',
+    Image4 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/8.jpg'
+WHERE ProductID = 2;
+
+UPDATE Products
+SET
+    Image1 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/9.jpg',
+    Image2 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/10.jpg',
+    Image3 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/11.jpg',
+    Image4 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/12.jpg'
+WHERE ProductID = 3;
+
+UPDATE Products
+SET
+    Image1 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/13.jpg',
+    Image2 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/14.jpg',
+    Image3 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/15.jpg',
+    Image4 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/16.jpg'
+WHERE ProductID = 4;
+
+UPDATE Products
+SET
+    Image1 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/17.jpg',
+    Image2 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/18.jpg',
+    Image3 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/19.jpg',
+    Image4 = '/home/rushmi0/items/Store/ReactApp/Main/server/src/main/resources/images/preview/10.jpg'
+WHERE ProductID = 5;
