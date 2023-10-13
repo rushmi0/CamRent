@@ -47,8 +47,6 @@ fun Route.ProductPost() {
                 throw IllegalArgumentException("`Signature` หรือ `Witness` เป็น `null`")
             }
 
-
-
             if (
                XssDetector.containsXss(name) ||
                 XssDetector.containsXss(type) ||

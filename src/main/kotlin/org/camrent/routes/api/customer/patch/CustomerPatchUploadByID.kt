@@ -35,21 +35,24 @@ fun Route.CustomerUploadImage() {
             // รับข้อมูลจาก multipart request
             val multipart = call.receiveMultipart()
 
-
             var imageFile: File? = null
-            var uploadedValue: String? = null  // สร้างตัวแปรเพื่อเก็บค่า formItemValue
+            var reciveValue: String? = null
+            var reciveName: String? = null
 
             multipart.forEachPart { part ->
                 when (part) {
-                    is PartData.FileItem -> {
-                        // บันทึกไฟล์ภาพลงในระบบ
-                        imageFile = saveImage(id, "customers", "profileImage", part)
-                    }
 
                     is PartData.FormItem -> {
                         val formItemValue = part.value
+                        val formItemName = part.name
                         println("Name: ${part.name} Value: $formItemValue")
-                        uploadedValue = formItemValue  // บันทึกค่า formItemValue
+                        reciveValue = formItemValue  // บันทึกค่า formItemValue
+                        reciveName = formItemName
+                    }
+
+                    is PartData.FileItem -> {
+                        // บันทึกไฟล์ภาพลงในระบบ
+                        imageFile = saveImage(id, "customers", "profileImage", part)
                     }
 
                     is PartData.BinaryChannelItem, is PartData.BinaryItem -> {
@@ -75,7 +78,7 @@ fun Route.CustomerUploadImage() {
 
                     // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                     call.respond(HttpStatusCode.Created)
-                    println("ได้รับภาพ: $uploadedValue สถานะ: ${HttpStatusCode.Created}")
+                    println("ได้รับภาพ: $reciveName $reciveValue สถานะ: ${HttpStatusCode.Created}")
                 } else {
 
                     val success = deleteFilesInPathAndCheckExistence(profile)
@@ -89,7 +92,7 @@ fun Route.CustomerUploadImage() {
 
                         // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                         call.respond(HttpStatusCode.Created)
-                        println("ได้รับภาพ: $uploadedValue สถานะ: ${HttpStatusCode.Created}")
+                        println("ได้รับภาพ: $reciveName $reciveValue สถานะ: ${HttpStatusCode.Created}")
                     }
 
                 }

@@ -11,6 +11,8 @@ import org.camrent.utils.ShiftTo.buildUrl
 import java.io.File
 
 fun Route.ProductGetProductByID() {
+
+
     get("product/id/{id}/idx/{index}/{image}") {
         // ดึงค่า parameter index จาก URL
         val index = call.parameters["index"] ?: throw IllegalArgumentException("ไม่ได้ระบุค่า index")
@@ -20,7 +22,7 @@ fun Route.ProductGetProductByID() {
 
         try {
             // ค้นหาสินค้าด้วย id ในฐานข้อมูล
-            val product = ProductsService.findProductsByProductsID(id.toInt())
+            val product = ProductsService.findProductsByID(id.toInt())
                 ?: throw NotFoundException("ไม่พบสินค้าสำหรับ `ID`: $id")
 
             val imagePath = when (index) {
@@ -35,7 +37,7 @@ fun Route.ProductGetProductByID() {
                 // สร้างไฟล์จากที่อยู่รูปภาพ
                 val file = File(imagePath)
                 call.respondFile(file)  // ตอบกลับด้วยไฟล์ภาพ
-                println(imagePath)  // แสดงที่อยู่ของไฟล์ภาพ
+                // println(imagePath)
             } else {
                 call.respond(HttpStatusCode.NotFound, "ยังไม่มีรูป")
             }
@@ -58,7 +60,7 @@ fun Route.ProductGetProductByID() {
                 ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
 
             // ค้นหาสินค้าด้วย id ในฐานข้อมูล
-            val product = ProductsService.findProductsByProductsID(id)
+            val product = ProductsService.findProductsByID(id)
                 ?: throw NotFoundException("ไม่พบสินค้าสำหรับ `ID`: $id")
 
             val BASE_URL = "http://127.0.0.1:8080/api/v1/"
@@ -90,13 +92,22 @@ fun Route.ProductGetProductByID() {
 
         } catch (e: IllegalArgumentException) {
             // ดักจับข้อผิดพลาดที่เกี่ยวกับข้อมูลไม่ถูกต้อง
-            call.respond(HttpStatusCode.BadRequest, e.message ?: "ข้อมูลไม่ถูกต้อง")
+            call.respond(
+                HttpStatusCode.BadRequest,
+                e.message ?: "ข้อมูลไม่ถูกต้อง"
+            )
         } catch (e: ContentTransformationException) {
             // ดักจับข้อผิดพลาดที่เกี่ยวกับการแปลงข้อมูล
-            call.respond(HttpStatusCode.BadRequest, "รูปแบบข้อมูลไม่ถูกต้อง")
+            call.respond(
+                HttpStatusCode.BadRequest,
+                "รูปแบบข้อมูลไม่ถูกต้อง"
+            )
         } catch (e: Exception) {
             // ดักจับข้อผิดพลาดทั่วไป
-            call.respond(HttpStatusCode.InternalServerError, "เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ")
+            call.respond(
+                HttpStatusCode.InternalServerError,
+                "เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ"
+            )
         }
     }
 

@@ -36,19 +36,31 @@ fun Route.CustomerPatchByID() {
                 }
                 call.respondText("อัปเดตข้อมูลลูกค้าเรียบร้อยแล้ว")
             } else {
-                call.respond(HttpStatusCode.BadRequest, "Payload ไม่ได้ระบุข้อมูล")
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    "Payload ไม่ได้ระบุข้อมูล"
+                )
             }
 
 
         } catch (e: IllegalArgumentException) {
             // กรณีเกิดข้อผิดพลาดที่เกี่ยวกับข้อมูลที่ไม่ถูกต้อง
-            call.respond(HttpStatusCode.BadRequest, e.message ?: "ข้อมูลไม่ถูกต้อง")
+            call.respond(
+                HttpStatusCode.BadRequest,
+                e.message ?: "ข้อมูลไม่ถูกต้อง"
+            )
         } catch (e: ContentTransformationException) {
             // กรณีเกิดข้อผิดพลาดในกระบวนการแปลงข้อมูล
-            call.respond(HttpStatusCode.BadRequest, "รูปแบบข้อมูลไม่ถูกต้อง")
+            call.respond(
+                HttpStatusCode.BadRequest,
+                "รูปแบบข้อมูลไม่ถูกต้อง"
+            )
         } catch (e: Exception) {
             // กรณีเกิดข้อผิดพลาดทั่วไป
-            call.respond(HttpStatusCode.InternalServerError, "เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ")
+            call.respond(
+                HttpStatusCode.InternalServerError,
+                "เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ"
+            )
         }
     }
 }

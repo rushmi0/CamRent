@@ -24,6 +24,7 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 
+// สร้าง object เพื่อใช้ในการจัดการข้อมูลลูกค้า
 object ProductsService {
 
 
@@ -75,7 +76,7 @@ object ProductsService {
     }
 
 
-    suspend fun findProductsByProductsID(productsID: Int): ProductsField? {
+    suspend fun findProductsByID(productsID: Int): ProductsField? {
         return dbQuery {
             ProductsTable.select { productID eq productsID }
                 .mapNotNull {

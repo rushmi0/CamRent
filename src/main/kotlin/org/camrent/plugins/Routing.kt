@@ -27,7 +27,7 @@ fun Application.configureRouting() {
             SignUpNewAccount()
         }
 
-        get ("") {
+        get ("/") {
             val file = File("src/main/resources/images/preview/start/Start_Server.jpg")
 
             // ตรวจสอบว่าไฟล์มีอยู่จริงหรือไม่

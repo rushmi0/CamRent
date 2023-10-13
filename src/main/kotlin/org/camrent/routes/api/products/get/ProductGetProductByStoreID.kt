@@ -11,6 +11,7 @@ import org.camrent.utils.ShiftTo.buildUrl
 import java.io.File
 
 fun Route.ProductGetProductByStoreID() {
+
     get("product/store-id/{id}") {
         val id = call.parameters["id"]?.toIntOrNull()
             ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")
@@ -43,4 +44,5 @@ fun Route.ProductGetProductByStoreID() {
 
         call.respond(HttpStatusCode.OK, dataInfoList)
     }
+
 }
