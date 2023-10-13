@@ -4,6 +4,7 @@ val logback_version: String by project
 
 val exposed_version: String by project
 val h2_version: String by project
+
 plugins {
     kotlin("jvm") version "1.9.10"
     id("io.ktor.plugin") version "2.3.4"
@@ -58,15 +59,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     implementation("com.zaxxer:HikariCP:5.0.1")
 
-    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-serialization-json-jvm
-    runtimeOnly("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.0")
-
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     implementation("org.xerial:sqlite-jdbc:3.42.0.0")
-
-    // https://mvnrepository.com/artifact/org.ktorm/ktorm-core
-    implementation("org.ktorm:ktorm-core:3.5.0")
-
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
 }
