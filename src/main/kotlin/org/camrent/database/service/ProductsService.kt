@@ -18,11 +18,8 @@ import org.camrent.database.table.ProductsTable.specDetail
 import org.camrent.database.table.ProductsTable.status
 import org.camrent.database.table.ProductsTable.storeID
 import org.camrent.database.table.ProductsTable.productType
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.update
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 // สร้าง object เพื่อใช้ในการจัดการข้อมูลลูกค้า
 object ProductsService {
@@ -198,5 +195,27 @@ object ProductsService {
             updatedRowCount > 0 // คืนค่าเป็น true ถ้ามีการอัปเดตเรียบร้อย
         }
     }
+
+
+
+    suspend fun delete(targetID: Int): Boolean {
+        return dbQuery {
+            try {
+                // ลบข้อมูลสินค้าที่มี ProductID เท่ากับ productID ที่ระบุ
+                val deletedRowCount = ProductsTable.deleteWhere { productID eq targetID }
+                if (deletedRowCount > 0) {
+                    return@dbQuery true // คืนค่าเป็น true ถ้ามีการลบเรียบร้อย
+                } else {
+                    throw IllegalArgumentException("ไม่พบสินค้าที่ต้องการลบ (ProductID: $targetID)")
+                }
+            } catch (e: Throwable) {
+                // จัดการข้อผิดพลาดที่เกิดขึ้น
+                println("เกิดข้อผิดพลาดในการลบสินค้า: ${e.message}")
+                return@dbQuery false
+            }
+        }
+    }
+
+
 
 }

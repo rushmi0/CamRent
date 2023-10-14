@@ -189,10 +189,11 @@ object CustomerService {
 
     // เมธอดสำหรับลบข้อมูลลูกค้า
     suspend fun delete(id: Int): Boolean {
+        val personTarget = findCustomerByUserID(id)?.personID!!
         return try {
             dbQuery {
                 val customerDeleted = CustomersTable.deleteWhere { customerID eq id } > 0
-                val personDeleted = PeopleTable.deleteWhere { personID eq id } > 0
+                val personDeleted = PeopleTable.deleteWhere { personID eq personTarget } > 0
                 //val addressDeleted = AddressesTable.deleteWhere { addressID eq id } > 0
                 return@dbQuery customerDeleted && personDeleted //&& addressDeleted
             }

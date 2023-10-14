@@ -100,7 +100,10 @@ fun Route.ProductUploadImage() {
 
                         is PartData.BinaryChannelItem, is PartData.BinaryItem -> {
                             // ไม่รองรับข้อมูล Binary
-                            call.respond(HttpStatusCode.UnsupportedMediaType, "ไม่รองรับข้อมูล Binary")
+                            call.respond(
+                                HttpStatusCode.UnsupportedMediaType,
+                                "ไม่รองรับข้อมูล Binary"
+                            )
                             return@forEachPart
                         }
 

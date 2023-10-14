@@ -7,6 +7,7 @@ import org.camrent.routes.api.products.get.ProductGetProductByID
 import org.camrent.routes.api.products.get.ProductGetProductByStoreID
 import org.camrent.routes.api.products.patch.ProductPatchByID
 import org.camrent.routes.api.products.post.ProductPost
+import org.camrent.routes.api.products.post.ProductUploadImage
 
 
 fun Application.productsRoute() {
@@ -31,6 +32,9 @@ fun Application.productsRoute() {
 
             // `POST` "/product" : ใช้สำหรับ เพิ่มข้อมูลสินค่า
             ProductPost()
+
+            // `POST` "/products/img/id/{id}" : ใช้สำหรับ อัปโหลดรูปภาพสินค้า
+            ProductUploadImage()
 
             // `PATCH` "/product/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูป
             ProductPatchByID()

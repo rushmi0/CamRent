@@ -31,6 +31,7 @@ fun Route.ProductPost() {
             val type: String = payload.productType
             val price: Int = payload.productPrice.toInt()
             val spec: Map<String, Any> = payload.specDetail
+            val desc = payload.description
 
             // หมายเลข `ID` ที่จะใช้ในการ update ข้อมูล จาก `Product Table`
             val targetID = call.request.headers["StoresID"]?.toIntOrNull()!!
@@ -87,7 +88,8 @@ fun Route.ProductPost() {
                            name,
                            type,
                            price,
-                           spec
+                           spec,
+                            desc
                        )
                     )
 
