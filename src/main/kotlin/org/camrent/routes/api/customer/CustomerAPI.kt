@@ -6,7 +6,7 @@ import org.camrent.routes.api.customer.delete.CustomerDeleteByID
 import org.camrent.routes.api.customer.get.*
 import org.camrent.routes.api.customer.get.test.TestProfileURL
 import org.camrent.routes.api.customer.patch.CustomerPatchByID
-import org.camrent.routes.api.customer.patch.CustomerUploadImage
+import org.camrent.routes.api.customer.post.CustomerUploadImage
 
 
 fun Application.customerRoute() {
@@ -27,15 +27,14 @@ fun Application.customerRoute() {
             // `GET` "/customers/name/{name}" ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `User Name` ในการขอ
             CustomerByUserName()
 
+            // `POST` "/customers/img/id/{id}"  ใช้สำหรับ เพิ่มรูป Profile ลงฐานข้อมูล `Status code HTTP: 201`
+            CustomerUploadImage()
+
             // `PATCH` "/customers/id/{id}" : ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูป
             CustomerPatchByID()
 
-            // `PATCH` "/customers/img/id/{id}"  ใช้สำหรับ เพิ่มรูป ลงฐานข้อมูล `Status code HTTP: 201`
-            CustomerUploadImage()
-
             // `DELETE` "/customers/id/{id}"
             CustomerDeleteByID()
-
 
             // TestProfileURL()
         }

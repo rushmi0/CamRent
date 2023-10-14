@@ -1,12 +1,58 @@
 package org.camrent.utils
 
 import io.ktor.http.content.*
+import org.camrent.database.service.ProductsService
 import org.camrent.utils.AccountDirectory.createDirectory
 import java.io.File
 
 object AccountDirectory {
 
+
     fun getDirectoryPath(path: String): String = path
+
+
+    suspend fun saveImage(imagePart: PartData.FileItem, id: Int, typeAccount: String, typeImage: String, type: String = ""): File {
+        // กำหนดชื่อไฟล์
+        val fileName = imagePart.originalFileName ?: "image.jpg"
+
+        val filePath = when {
+            typeAccount == "customers" && typeImage == "profileImage" -> {
+                // กำหนดเส้นทางที่จะบันทึกไฟล์สำหรับลูกค้าและรูปโปรไฟล์
+                File("src/main/resources/images/account/$typeAccount/usr_$id/$typeImage/$fileName")
+            }
+
+            typeAccount == "stores" && typeImage == "profileImage" -> {
+                // กำหนดเส้นทางที่จะบันทึกไฟล์สำหรับลูกค้าและรูปโปรไฟล์
+                File("src/main/resources/images/account/$typeAccount/usr_$id/$typeImage/$fileName")
+            }
+
+            typeAccount == "stores" && typeImage == "camera" -> {
+                val itemID = ProductsService.findStoreByProductID(id)
+                File("src/main/resources/images/account/$typeAccount/usr_$id/products/$typeImage/$type/item_$id/$fileName")
+            }
+
+            typeAccount == "stores" && typeImage == "accessories" -> {
+                val itemID = ProductsService
+                File("src/main/resources/images/account/$typeAccount/usr_$id/products/$typeImage/$type/item_$id/$fileName")
+            }
+
+            else -> {
+                // หากระบุประเภทบัญชีหรือประเภทรูปภาพไม่ถูกต้อง
+                throw IllegalArgumentException("ประเภทบัญชีหรือประเภทรูปภาพไม่ถูกต้อง")
+            }
+        }
+
+        // ใช้ข้อมูลจาก stream provider เพื่อบันทึกไฟล์
+        imagePart.streamProvider().use { input ->
+            filePath.outputStream().buffered().use { output ->
+                input.copyTo(output)
+            }
+        }
+
+        // ส่งคืนไฟล์ภาพที่ถูกบันทึก
+        return filePath
+    }
+
 
     fun createDirectory(typeAccount: String, directoryID: Int): Boolean {
         // กำหนดเส้นทางของไดเร็กทอรีหลัก
@@ -41,7 +87,6 @@ object AccountDirectory {
     }
 
 
-
     fun deleteDirectory(typeUser: String, directoryID: Int): Boolean {
         val sanitizedPath = typeUser.replace(" ", "_")
         val fullPath = "src/main/resources/images/account/$sanitizedPath/usr_$directoryID"
@@ -61,35 +106,6 @@ object AccountDirectory {
             false // เกิดข้อผิดพลาด
         }
     }
-
-
-    fun saveImage(id: Int, typeAccount: String, typeImage: String, imagePart: PartData.FileItem): File {
-        val fileName = imagePart.originalFileName ?: "image.jpg"
-
-        val filePath = when {
-            typeAccount == "customers" && typeImage == "profileImage" -> {
-                File("src/main/resources/images/account/$typeAccount/usr_$id/$typeImage/$fileName")
-            }
-
-            typeAccount == "stores" && (typeImage == "profileImage" || typeImage == "camera" || typeImage == "accessories") -> {
-                File("src/main/resources/images/account/$typeAccount/usr_$id/products/$typeImage/$fileName")
-            }
-
-            else -> {
-                throw IllegalArgumentException("ประเภทบัญชีหรือประเภทรูปภาพไม่ถูกต้อง")
-            }
-        }
-
-        // ใช้ข้อมูลจาก stream provider เพื่อบันทึกไฟล์
-        imagePart.streamProvider().use { input ->
-            filePath.outputStream().buffered().use { output ->
-                input.copyTo(output)
-            }
-        }
-        // ส่งคืนไฟล์ภาพที่ถูกบันทึก
-        return filePath
-    }
-
 
 
     fun deleteFilesInPathAndCheckExistence(filePath: String): Boolean {

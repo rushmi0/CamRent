@@ -91,9 +91,8 @@ fun Route.ProductPost() {
                        )
                     )
 
-
                     // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
-                    call.respond(HttpStatusCode.OK)
+                    call.respond(HttpStatusCode.OK, productRecord)
                 } else {
                     // ถ้า `verify` เป็นเท็จ ให้ตอบกลับด้วยสถานะ `400 Bad Request`
                     call.respond(
