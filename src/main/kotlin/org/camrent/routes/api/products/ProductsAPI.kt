@@ -2,6 +2,7 @@ package org.camrent.routes.api.products
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import org.camrent.routes.api.products.delete.ProductDeleteByID
 import org.camrent.routes.api.products.get.ProductGet
 import org.camrent.routes.api.products.get.ProductGetProductByID
 import org.camrent.routes.api.products.get.ProductGetProductByStoreID
@@ -33,12 +34,14 @@ fun Application.productsRoute() {
             // `POST` "/product" : ใช้สำหรับ เพิ่มข้อมูลสินค่า
             ProductPost()
 
-            // `POST` "/products/img/id/{id}" : ใช้สำหรับ อัปโหลดรูปภาพสินค้า
+            // `POST` "/products/img/id/{id}" : ใช้สำหรับ อัปโหลดรูปภาพสินค้าตาม ID ที่ระบุ
             ProductUploadImage()
 
-            // `PATCH` "/product/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูป
+            // `PATCH` "/product/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูปตาม ID ที่ระบุ
             ProductPatchByID()
 
+            // `DELETE` "/product/id/{id}" : ใช้สำหรับ ลบข้อมูลสินค้าตาม ID ที่ระบุ
+            ProductDeleteByID()
         }
 
     }
