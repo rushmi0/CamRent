@@ -17,7 +17,7 @@ const ImageUpload = () => {
             try {
                 const formData = new FormData();
                 formData.append('file', file);
-                formData.append("Profile", "Customer")
+                formData.append("Customer", "Profile")
 
                 const apiUrl = 'http://127.0.0.1:8080/api/v1/customers/img/id/1';
 

@@ -23,13 +23,31 @@ const accountType= ["Customers", "Stores"]
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
 // `Account 2`
-const pass = "lala12345"
+// const pass = "lala12345"
+// const privateKey = ec.genPrivateKey(pass)
+//
+// const publicKey = ec.generateKeyPair(privateKey)
+// const authKey = b32encode(publicKey)
+//
+// const userName = "la la"
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
+// `Account 3`
+// const pass = "Mini1234"
+// const privateKey = ec.genPrivateKey(pass)
+//
+// const publicKey = ec.generateKeyPair(privateKey)
+// const authKey = b32encode(publicKey)
+//
+// const userName = "Mini1234"
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
+// `Account 4`
+const pass = "app-store"
 const privateKey = ec.genPrivateKey(pass)
 
 const publicKey = ec.generateKeyPair(privateKey)
 const authKey = b32encode(publicKey)
 
-const userName = "la la"
+const userName = "app-store"
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++ \\
 
 
