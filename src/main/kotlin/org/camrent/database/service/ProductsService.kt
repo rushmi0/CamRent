@@ -108,6 +108,8 @@ object ProductsService {
                     it[productType] = field.productType
                     it[productPrice] = field.productPrice
                     it[specDetail] = field.specDetail.toString()
+                    it[description] = field.description
+                    it[storeID] = field.storeID
                 }
             }
             true // สำเร็จ

@@ -2,7 +2,6 @@ package org.camrent.routes.api.products.post
 
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.*
 import io.ktor.server.request.*
 import io.ktor.server.request.ContentTransformationException
 import io.ktor.server.response.*
@@ -29,12 +28,12 @@ fun Route.ProductPost() {
 
             val name: String = payload.productName
             val type: String = payload.productType
-            val price: Int = payload.productPrice.toInt()
+            val price: Int = payload.productPrice
             val spec: Map<String, Any> = payload.specDetail
             val desc = payload.description
 
             // หมายเลข `ID` ที่จะใช้ในการ update ข้อมูล จาก `Product Table`
-            val targetID = call.request.headers["StoresID"]?.toIntOrNull()!!
+            val targetID = call.request.headers["StoresTarget"]?.toIntOrNull()!!
             println("Stores ID: $targetID")
 
             val store = StoresService.findStoresByUserID(targetID)
@@ -89,12 +88,13 @@ fun Route.ProductPost() {
                            type,
                            price,
                            spec,
-                            desc
+                            desc,
+                           targetID
                        )
                     )
 
                     // ตอบกลับด้วยข้อมูลลูกค้าถ้าพบ
-                    call.respond(HttpStatusCode.OK, productRecord)
+                    call.respond(HttpStatusCode.OK, "Product added successfully \n $productRecord")
                 } else {
                     // ถ้า `verify` เป็นเท็จ ให้ตอบกลับด้วยสถานะ `400 Bad Request`
                     call.respond(
@@ -110,13 +110,13 @@ fun Route.ProductPost() {
         } catch (e: ContentTransformationException) {
             call.respond(
                 HttpStatusCode.BadRequest,
-                "Invalid data format. Please provide data in the correct format."
+                "Invalid data format. Please provide data in the correct format. detail: ${e.message}"
             )
         } catch (e: Exception) {
             // กรณีเกิด Exception อื่น ๆ
             call.respond(
                 HttpStatusCode.InternalServerError,
-                "An error occurred while processing your request."
+                "An error occurred while processing your request. Please try again later. detail: ${e.message}"
             )
         }
 

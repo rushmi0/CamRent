@@ -18,7 +18,6 @@ fun Route.CustomerOpenImage() {
 
         try {
 
-
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
             val id = call.parameters["id"]?.toIntOrNull()
                 ?: throw IllegalArgumentException("`id` ไม่ถูกต้องหรือไม่ได้ระบุ")

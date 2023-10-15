@@ -4,6 +4,7 @@ import org.camrent.security.securekey.Base58
 import org.camrent.security.securekey.Bech32
 import org.camrent.utils.ShiftTo.DectoLittleEndian
 import org.camrent.utils.ShiftTo.littleEndianToDeci
+import java.io.File
 import java.math.BigInteger
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -205,6 +206,10 @@ object ShiftTo {
         return java.net.URLEncoder.encode(this, "UTF-8")
     }
 
+
+    fun getImageFileName(imagePath: String): String {
+        return if (imagePath == "N/A") "N/A" else File(imagePath).name
+    }
 
 }
 

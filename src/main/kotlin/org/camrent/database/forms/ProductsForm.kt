@@ -6,4 +6,5 @@ data class ProductsForm(
     val productPrice: Int,
     val specDetail: Map<String, Any>,
     val description: String,
+    val storeID: Int
 )
