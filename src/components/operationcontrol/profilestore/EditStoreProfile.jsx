@@ -10,7 +10,7 @@ function EditStoreProfile() {
 
             <main className=" w-full bg-white border-l ">
                 <div className="mx-6">
-                    <h1 className="my-6 text-3xl">EDIT YOUR PROFILE</h1>
+                    <h1 className="my-6 text-3xl flex justify-center">EDIT YOUR PROFILE</h1>
                 </div>
 
                 <section className="min-h-screen bg-white-100/50">
@@ -32,9 +32,10 @@ function EditStoreProfile() {
                                     Store info
                                 </h2>
                                 <div className="max-w-sm mx-auto md:w-2/3">
-                                    <div className=" relative ">
-                                        Store name
-                                        <input type="text" id="store-name" className="mb-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-md text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Change your store name"/>
+                                    Store name
+                                    <div className=" relative mb-4">
+                                        <input type="text" id="user-info-name" className=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 text-gray-700 placeholder-black shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Somsri Store" disabled/>
+                                        <div className="text-red-600">*ต้องการใบรับรองจากบริษัทในการเปลี่ยนชื่อ</div>
                                     </div>
                                     <div className=" relative ">
                                         Store address
@@ -59,7 +60,6 @@ function EditStoreProfile() {
                                         <div className=" relative ">
                                             <input type="text" id="user-info-name" className=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 text-gray-700 placeholder-black shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Doraemon" disabled/>
                                         </div>
-                                        <div className="text-red-600">* Can not change your name until validate</div>
                                     </div>
                                     <div>
                                         Tel.

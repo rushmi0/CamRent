@@ -17,13 +17,23 @@ function CustomerDeliveryInfo() {
                              alt="Profile picture"/>
                         <h2 className="text-center text-2xl font-semibold mt-3">User1</h2>
                         <p className="text-center text-gray-600 mt-1">#21394</p>
-                        <p className="text-center text-green-700 mt-1">Renting</p>
+                        <p className="text-center text-green-700 mt-1">กำลังเช่า</p>
                         <div className="flex justify-center mt-5">
                             <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">ดูหน้าโปรไฟล์</a>
                         </div>
                         <div className="mt-5">
-                            <h3 className="text-xl font-semibold">ที่อยู่</h3>
+                            <h3 className="text-xl font-semibold">ชื่อผู้เช่า</h3>
+                            <p className="text-gray-600 mt-2">นาย แดง แซงทางโค้ง</p>
+                        </div>
+                        <div className="mt-5">
+                            <h3 className="text-xl font-semibold">ที่อยู่จัดส่ง</h3>
                             <p className="text-gray-600 mt-2">1771/1 ถ. พัฒนาการ แขวงสวนหลวง เขตสวนหลวง กรุงเทพมหานคร 10250</p>
+                        </div>
+                        <div className="mt-5">
+                            <h3 className="text-xl font-semibold">รายละเอียดสินค้าที่เช่า</h3>
+                            <p className="text-gray-600 mt-2">กล้อง nikon z7</p>
+                            <p className="text-gray-600 mt-2">ราคาเช่า 20,000 บาท</p>
+                            <p className="text-gray-600 mt-2">ระยะการเช่า 21 วัน</p>
                         </div>
                         <div className="mt-5">
                             <h3 className="text-xl font-semibold">รายละเอียดเพิ่มเติม</h3>

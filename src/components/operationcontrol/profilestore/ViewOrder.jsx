@@ -91,7 +91,7 @@ function ViewOrder() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Sent</h2>
+                                                        <h2 className="text-sm font-normal">จัดส่งสำเร็จ</h2>
                                                     </div>
                                                 </td>
 
@@ -149,7 +149,7 @@ function ViewOrder() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Sending</h2>
+                                                        <h2 className="text-sm font-normal">กำลังจัดส่ง</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">1771/1 ถ. พัฒนาการ แขวงสวนหลวง เขตสวนหลวง กรุงเทพมหานคร 10250
@@ -205,7 +205,7 @@ function ViewOrder() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Sent</h2>
+                                                        <h2 className="text-sm font-normal">จัดส่งสำเร็จ</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -262,7 +262,7 @@ function ViewOrder() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Sent</h2>
+                                                        <h2 className="text-sm font-normal">จัดส่งสำเร็จ</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -320,7 +320,7 @@ function ViewOrder() {
                                                                 strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Returning</h2>
+                                                        <h2 className="text-sm font-normal">กำลังส่งคืน</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">

@@ -10,6 +10,7 @@ import StoreManagement from "./components/operationcontrol/profilestore/StoreMan
 import EditStoreProfile from "./components/operationcontrol/profilestore/EditStoreProfile.jsx";
 import ChargeFine from "./components/operationcontrol/profilestore/ChargeFine.jsx";
 import CustomerDeliveryInfo from "./components/operationcontrol/profilestore/CustomerDeliveryInfo.jsx";
+import StoreDashboard from "./components/operationcontrol/profilestore/StoreDashboard.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/EditStoreProfile" element={<EditStoreProfile />}></Route>
             <Route path="/ChargeFine" element={<ChargeFine />}></Route>
             <Route path="/CustomerDeliveryInfo" element={<CustomerDeliveryInfo />}></Route>
+            <Route path="/StoreDashboard" element={<StoreDashboard />}></Route>
 
 
           </Route>

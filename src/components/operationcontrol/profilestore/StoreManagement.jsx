@@ -118,7 +118,7 @@ function StoreManagement() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Renting</h2>
+                                                        <h2 className="text-sm font-normal">ยังอยู่</h2>
                                                     </div>
                                                 </td>
 
@@ -173,7 +173,7 @@ function StoreManagement() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Cancelled</h2>
+                                                        <h2 className="text-sm font-normal">กำลังปล่อยเช่า</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">หน้าเบลอ หลังเบลอ
@@ -226,7 +226,7 @@ function StoreManagement() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Renting</h2>
+                                                        <h2 className="text-sm font-normal">ยังอยู่</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -280,7 +280,7 @@ function StoreManagement() {
                                                                   strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Rening</h2>
+                                                        <h2 className="text-sm font-normal">ยังอยู่</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -335,7 +335,7 @@ function StoreManagement() {
                                                                 strokeLinejoin="round"/>
                                                         </svg>
 
-                                                        <h2 className="text-sm font-normal">Refunded</h2>
+                                                        <h2 className="text-sm font-normal">กำลังส่งคืน</h2>
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">

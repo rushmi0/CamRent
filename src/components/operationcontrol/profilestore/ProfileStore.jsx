@@ -55,7 +55,7 @@ function ProfileStore() {
                                                 Full name
                                             </dt>
                                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                DORA DORAEMON
+                                                สมศรี หนีห่าวมา
                                             </dd>
                                         </div>
                                         <div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -63,7 +63,7 @@ function ProfileStore() {
                                                 Store name
                                             </dt>
                                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                Tududu Dora
+                                                Somsri Store
                                             </dd>
                                         </div>
                                         <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -71,7 +71,7 @@ function ProfileStore() {
                                                 Email address
                                             </dt>
                                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                d.dora@example.com
+                                                somsri@example.com
                                             </dd>
                                         </div>
                                         <div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -98,12 +98,8 @@ function ProfileStore() {
                                 </a>
 
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </main>
             </div>
 
