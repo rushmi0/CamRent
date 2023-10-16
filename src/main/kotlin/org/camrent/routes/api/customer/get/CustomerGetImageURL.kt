@@ -24,7 +24,6 @@ fun Route.CustomerGetImageURL() {
             val customerData = CustomerService.findCustomerByUserID(id)
                 ?: throw NotFoundException("ไม่พบลูกค้าสำหรับ `ID`: $id")
 
-
             val file = customerData.profileImage
             println(file)
 
@@ -38,8 +37,6 @@ fun Route.CustomerGetImageURL() {
                     "ยังไม่รูป"
                 )
             }
-
-
 
         } catch (e: IllegalArgumentException) {
             call.respond(
