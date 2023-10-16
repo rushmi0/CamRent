@@ -14,9 +14,12 @@ import org.camrent.utils.ShiftTo.getImageFileName
 fun Route.ProductGet() {
 
     get("product") {
+
         try {
+
             // ดึงข้อมูลสินค้าทั้งหมดจากฐานข้อมูล
             val products = ProductsService.selectAllFromProducts()
+
             // กำหนด URL หลักของ API
             val BASE_URL = "http://127.0.0.1:8080/api/v1/"
 
@@ -24,7 +27,8 @@ fun Route.ProductGet() {
             println("> Host: ${call.request.headers["Host"]}")
 
             // สร้าง list ของข้อมูลสินค้าที่จะส่งใน response
-            val dataInfoList = products.mapIndexed { index, product ->
+            val dataInfoList = products.mapIndexed { _, product ->
+
                 // ดึงชื่อไฟล์รูปภาพของสินค้า
                 val img1 = getImageFileName(product.image1)
                 val img2 = getImageFileName(product.image2)

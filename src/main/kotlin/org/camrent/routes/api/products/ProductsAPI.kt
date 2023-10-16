@@ -35,7 +35,7 @@ fun Application.productsRoute() {
             ProductPost()
 
             // `POST` "/products/img/id/{id}" : ใช้สำหรับ อัปโหลดรูปภาพสินค้าตาม ID ที่ระบุ
-            ProductUploadImage()
+            ProductUploadImage() // ยังใช้งานไม่ได้
 
             // `PATCH` "/product/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูปตาม ID ที่ระบุ
             ProductPatchByID()

@@ -24,12 +24,14 @@ fun Route.ProductUploadImage() {
 
         try {
 
+            val targetImage = call.request.headers["ImageTarget"]
+                ?: throw IllegalArgumentException("`ImageTarget` ไม่ถูกต้องหรือไม่ได้ระบุ")
+
             val typeProduct = call.request.headers["ProductType"]
                 ?: throw IllegalArgumentException("`ProductType` ไม่ถูกต้องหรือไม่ได้ระบุ")
 
             val typeImage = call.request.headers["ImageType"]
                 ?: throw IllegalArgumentException("`ImageType` ไม่ถูกต้องหรือไม่ได้ระบุ")
-
 
             // ดึงค่า id จากพารามิเตอร์และแปลงเป็น Int ถ้าเป็นไปได้
             val id = call.parameters["id"]?.toIntOrNull()
@@ -37,6 +39,12 @@ fun Route.ProductUploadImage() {
 
             val productData = ProductsService.findProductsByID(id)
                 ?: throw NotFoundException("ไม่พบสินค้าสำหรับ `ID`: $id")
+
+
+            println(typeProduct)
+            println(typeImage)
+            println(id)
+            println(productData)
 
 
             // ดึงชื่อไฟล์รูปภาพของสินค้า
@@ -49,8 +57,6 @@ fun Route.ProductUploadImage() {
             val multipart = call.receiveMultipart()
 
             var imageFile: File? = null
-            var reciveName: String? = null
-            var reciveValue: String? = null
 
             multipart.forEachPart { part ->
                 when (part) {
@@ -58,14 +64,13 @@ fun Route.ProductUploadImage() {
                     is PartData.FormItem -> {
                         val formItemValue = part.value // ค่าฟิลด์
                         val formItemName = part.name // ชื่อฟิลด์
-                        println("Name: ${part.name} Value: $formItemValue")
-                        reciveValue = formItemValue  // บันทึกค่า formItemValue
-                        reciveName = formItemName // บันทึกค่า formItemName
+                        println("Name: ${formItemName} Value: $formItemValue")
+
 
 
                         // เงื่อนไขการทำงานตามชื่อฟิลด์ภาพ (Image1, Image2, Image3, Image4) และค่าที่รับมา (1, 2, 3, 4)
                         when {
-                            reciveName == "Image1" && reciveValue == "1" -> {
+                            targetImage == "Image1"  -> {
                                 // ถ้าชื่อฟิลด์เป็น Image1 และค่าที่รับมาเป็น 1
                                 if (img1 == "N/A") {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image1
@@ -75,7 +80,6 @@ fun Route.ProductUploadImage() {
                                         "Image1",
                                         "${imageFile?.absolutePath}"
                                     )
-                                    println("Inert Name Field: $reciveName Value Field: $reciveValue")
                                     call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                 } else {
                                     // ถ้ามีรูปภาพเดิมใน Image1
@@ -88,7 +92,6 @@ fun Route.ProductUploadImage() {
                                             "Image1",
                                             "${imageFile?.absolutePath}"
                                         )
-                                        println("Update Name Field: $reciveName Value Field: $reciveValue")
                                         call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                     } else {
                                         // ตอบกลับว่าไม่สามารถลบไฟล์รูปภาพเดิมได้
@@ -100,7 +103,7 @@ fun Route.ProductUploadImage() {
                                 }
                             }
 
-                            reciveName == "Image2" && reciveValue == "2" -> {
+                            targetImage == "Image2" -> {
                                 // ถ้าชื่อฟิลด์เป็น Image2 และค่าที่รับมาเป็น 2
                                 if (img1 == "N/A") {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image2
@@ -110,7 +113,6 @@ fun Route.ProductUploadImage() {
                                         "Image2",
                                         "${imageFile?.absolutePath}"
                                     )
-                                    println("Inert Name Field: $reciveName Value Field: $reciveValue")
                                     call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                 } else {
                                     // ถ้ามีรูปภาพเดิมใน Image2
@@ -123,7 +125,6 @@ fun Route.ProductUploadImage() {
                                             "Image2",
                                             "${imageFile?.absolutePath}"
                                         )
-                                        println("Update Name Field: $reciveName Value Field: $reciveValue")
                                         call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                     } else {
                                         // ตอบกลับว่าไม่สามารถลบไฟล์รูปภาพเดิมได้
@@ -135,7 +136,7 @@ fun Route.ProductUploadImage() {
                                 }
                             }
 
-                            reciveName == "Image3" && reciveValue == "3" -> {
+                            targetImage == "Image3" -> {
                                 // ถ้าชื่อฟิลด์เป็น Image3 และค่าที่รับมาเป็น 3
                                 if (img1 == "N/A") {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image3
@@ -145,7 +146,6 @@ fun Route.ProductUploadImage() {
                                         "Image3",
                                         "${imageFile?.absolutePath}"
                                     )
-                                    println("Inert Name Field: $reciveName Value Field: $reciveValue")
                                     call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                 } else {
                                     // ถ้ามีรูปภาพเดิมใน Image3
@@ -158,7 +158,6 @@ fun Route.ProductUploadImage() {
                                             "Image3",
                                             "${imageFile?.absolutePath}"
                                         )
-                                        println("Update Name Field: $reciveName Value Field: $reciveValue")
                                         call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                     } else {
                                         // ตอบกลับว่าไม่สามารถลบไฟล์รูปภาพเดิมได้
@@ -170,7 +169,7 @@ fun Route.ProductUploadImage() {
                                 }
                             }
 
-                            reciveName == "Image4" && reciveValue == "4" -> {
+                            targetImage == "Image4" -> {
                                 // ถ้าชื่อฟิลด์เป็น Image4 และค่าที่รับมาเป็น 4
                                 if (img1 == "N/A") {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image4
@@ -180,7 +179,6 @@ fun Route.ProductUploadImage() {
                                         "Image4",
                                         "${imageFile?.absolutePath}"
                                     )
-                                    println("Inert Name Field: $reciveName Value Field: $reciveValue")
                                     call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                 } else {
                                     // ถ้ามีรูปภาพเดิมใน Image4
@@ -193,7 +191,6 @@ fun Route.ProductUploadImage() {
                                             "Image4",
                                             "${imageFile?.absolutePath}"
                                         )
-                                        println("Update Name Field: $reciveName Value Field: $reciveValue")
                                         call.respond(HttpStatusCode.Created)  // ตอบกลับว่าอัปโหลดไฟล์เรียบร้อย
                                     } else {
                                         // ตอบกลับว่าไม่สามารถลบไฟล์รูปภาพเดิมได้
@@ -205,8 +202,8 @@ fun Route.ProductUploadImage() {
                                 }
                             }
                         }
-
                     }
+
 
                     is PartData.FileItem -> {
                         // บันทึกไฟล์ภาพลงในระบบ
