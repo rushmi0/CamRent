@@ -1,77 +1,14 @@
 import React from 'react'
+import Sidebar from "./Sidebar.jsx";
 
 function StoreManagement() {
 
     return (
         <>
             <div className="flex bg-white mt-5 shadow-md border-2">
-                <div className="md:flex w-2/5 md:w-1/4 h-screen bg-white border-r hidden pt-20">
-                    <div className="mx-auto py-10">
-                        <h1 className="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">CamRent</h1>
-                        <ul>
-                            <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"/>
-                                </svg>
-                                <a href="./ProfileStore" className="font-semibold">PROFILE</a>
-                            </li>
-                            <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"/>
-                                </svg>
-                                <a href="#" className="font-semibold">PRODUCT</a>
-                            </li>
-                            <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        d="M18.303,4.742l-1.454-1.455c-0.171-0.171-0.475-0.171-0.646,0l-3.061,3.064H2.019c-0.251,0-0.457,0.205-0.457,0.456v9.578c0,0.251,0.206,0.456,0.457,0.456h13.683c0.252,0,0.457-0.205,0.457-0.456V7.533l2.144-2.146C18.481,5.208,18.483,4.917,18.303,4.742 M15.258,15.929H2.476V7.263h9.754L9.695,9.792c-0.057,0.057-0.101,0.13-0.119,0.212L9.18,11.36h-3.98c-0.251,0-0.457,0.205-0.457,0.456c0,0.253,0.205,0.456,0.457,0.456h4.336c0.023,0,0.899,0.02,1.498-0.127c0.312-0.077,0.55-0.137,0.55-0.137c0.08-0.018,0.155-0.059,0.212-0.118l3.463-3.443V15.929z M11.241,11.156l-1.078,0.267l0.267-1.076l6.097-6.091l0.808,0.808L11.241,11.156z"/>
-                                </svg>
-                                <a href="./ViewOrder" className="font-semibold">ORDERS</a>
-                            </li>
-                            <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z"/>
-                                </svg>
-                                <span className="font-semibold">DASHBOARD</span>
-                            </li>
-                            <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"/>
-                                </svg>
-                                <span className="font-semibold">ADD PRODUCT</span>
-                            </li>
-                            <button className="w-full mt-20 bg-[#EC5252] rounded-full py-1.5 text-white pt">Sign Out
-                            </button>
-                        </ul>
-                    </div>
-                </div>
+                <Sidebar/>
 
                 <main className="min-h-screen w-full bg-white border-l">
-                    <nav className="flex items-center justify-between px-10 bg-white py-6 border-b">
-                        <div className="flex items-center bg-gray-100 px-4 py-2 rounded-md space-x-3 w-96">
-                            <input type="text" placeholder="ค้นหาร้านค้า" className="bg-gray-100 outline-none w-full"/>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer text-gray-500"
-                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <img className="w-8 rounded-full"
-                                 src="https://wallpapers.com/images/hd/funny-profile-picture-1l2l3tmmbobjqd53.jpg"
-                                 alt="Elon Musk"/>
-                            <p className="hidden md:block">Kaiwa</p>
-                        </div>
-                    </nav>
                     <div className="mx-6">
                         <h1 className="my-6 text-3xl">STORE PRODUCTS</h1>
                         <div className="flex items-center bg-gray-100 px-4 py-2 rounded-md space-x-3 w-96 float-right">
@@ -99,8 +36,6 @@ function StoreManagement() {
                                                 <th scope="col"
                                                     className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                     <div className="flex items-center gap-x-3">
-                                                        <input type="checkbox"
-                                                               className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"></input>
                                                         <button className="flex items-center gap-x-2">
                                                             <span>Product ID</span>
 
@@ -188,7 +123,7 @@ function StoreManagement() {
                                                 </td>
 
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                    กล้องโง่ๆ สเปคกากๆ
+                                                    กล้องธรรมดาๆ
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">

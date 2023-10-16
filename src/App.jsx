@@ -8,6 +8,8 @@ import ProfileStore from "./components/operationcontrol/profilestore/ProfileStor
 import ViewOrder from "./components/operationcontrol/profilestore/ViewOrder.jsx";
 import StoreManagement from "./components/operationcontrol/profilestore/StoreManagement.jsx";
 import EditStoreProfile from "./components/operationcontrol/profilestore/EditStoreProfile.jsx";
+import ChargeFine from "./components/operationcontrol/profilestore/ChargeFine.jsx";
+import CustomerDeliveryInfo from "./components/operationcontrol/profilestore/CustomerDeliveryInfo.jsx";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
             <Route path="/ViewOrder" element={<ViewOrder />}></Route>
             <Route path="/StoreManagement" element={<StoreManagement />}></Route>
             <Route path="/EditStoreProfile" element={<EditStoreProfile />}></Route>
+            <Route path="/ChargeFine" element={<ChargeFine />}></Route>
+            <Route path="/CustomerDeliveryInfo" element={<CustomerDeliveryInfo />}></Route>
+
 
           </Route>
           {/* RootLayout-end */}
