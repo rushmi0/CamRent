@@ -23,7 +23,6 @@ fun Route.CustomerGet() {
         val dataInfoList = customers.mapIndexed { _, customer ->
 
             val profileImage = getImageFileName(customer.profileImage!!)
-
             CustomersField(
                 customerID = customer.customerID,
                 userName = customer.userName,

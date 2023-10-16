@@ -133,7 +133,6 @@ CREATE TABLE IF NOT EXISTS Fine
 );
 
 
-
 -- [ คำสั่งลบตาราง ]
 -- DROP TABLE IF EXISTS People;
 -- DROP TABLE IF EXISTS Customers;
@@ -150,6 +149,7 @@ CREATE TABLE IF NOT EXISTS Fine
 -- DELETE FROM Products WHERE ProductID = 3;
 -- DELETE FROM Products WHERE ProductID = 4;
 -- DELETE FROM Products WHERE ProductID = 5;
+
 
 -- เพิ่มข้อมูลลงใน Products Table
 INSERT INTO Products (ProductName, Image1, Image2, Image3, Image4, Type, Price, SpecDetail, Description, Status,
@@ -279,7 +279,8 @@ SET ProductName = 'กล้อง Fujifilm X-E4',
     Type        = 'Mirrorless',
     Price      = 15000,
     SpecDetail = 'Resolution: 20MP, Zoom: 3x ISO Range: 100-12800',
-    Description = 'กล้อง Fujifilm X-E4 ที่มีความละเอียด 20MP และซูม 3 เท่า และ ISO Range 100-12800'
+    Description = 'กล้อง Fujifilm X-E4 ที่มีความละเอียด 20MP และซูม 3 เท่า และ ISO Range 100-12800',
+    StoreID = 1
 WHERE ProductID = 7;
 
 UPDATE Products
@@ -291,7 +292,8 @@ SET ProductName = 'กล้อง Panasonic Lumix GH5',
     Type        = 'Mirrorless',
     Price     = 20000,
     SpecDetail = 'Resolution: 24MP, Zoom: 5x ISO Range: 100-6400',
-    Description = 'กล้อง Panasonic Lumix GH5 ที่มีความละเอียด 24MP และซูม 5 เท่า และ ISO Range 100-6400'
+    Description = 'กล้อง Panasonic Lumix GH5 ที่มีความละเอียด 24MP และซูม 5 เท่า และ ISO Range 100-6400',
+    StoreID = 1
 WHERE ProductID = 8;
 
 UPDATE Products
@@ -303,7 +305,8 @@ SET ProductName = 'กล้อง Sony Alpha A6500',
     Type        = 'Mirrorless',
     Price      = 25000,
     SpecDetail = 'Resolution: 30MP, Zoom: 10x ISO Range: 100-12800',
-    Description = 'กล้อง Sony Alpha A6500 ที่มีความละเอียด 30MP และซูม 10 เท่า และ ISO Range 100-12800'
+    Description = 'กล้อง Sony Alpha A6500 ที่มีความละเอียด 30MP และซูม 10 เท่า และ ISO Range 100-12800',
+    StoreID = 1
 WHERE ProductID = 9;
 
 

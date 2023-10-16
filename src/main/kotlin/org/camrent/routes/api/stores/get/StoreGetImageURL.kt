@@ -50,6 +50,4 @@ fun Route.StoreGetImageURL() {
         }
     }
 
-    }
-
 }
