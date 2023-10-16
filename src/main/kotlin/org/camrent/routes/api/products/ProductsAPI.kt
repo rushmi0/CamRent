@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import org.camrent.routes.api.products.delete.ProductDeleteByID
 import org.camrent.routes.api.products.get.ProductGet
+import org.camrent.routes.api.products.get.ProductGetImageURL
 import org.camrent.routes.api.products.get.ProductGetProductByID
 import org.camrent.routes.api.products.get.ProductGetProductByStoreID
 import org.camrent.routes.api.products.patch.ProductPatchByID
@@ -30,6 +31,9 @@ fun Application.productsRoute() {
              * WHERE StoreID = ID;
              * */
             ProductGetProductByStoreID()
+
+            // `GET` "/product/id/{id}/idx/{index}/{image}" : ใช้สำหรับ ดึงรูปภาพสินค้าตาม ID ที่ระบุ
+            ProductGetImageURL()
 
             // `POST` "/product" : ใช้สำหรับ เพิ่มข้อมูลสินค่า
             ProductPost()

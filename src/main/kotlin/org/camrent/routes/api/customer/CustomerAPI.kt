@@ -21,8 +21,11 @@ fun Application.customerRoute() {
             // `GET` "/customers/id/{id}" : ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `ID` ในการขอ
             CustomerGetByID()
 
+            // `GET` "/customers/img/id/{id}/idx/{idx}/{image}" : ใช้สำหรับ ดึงรูป `Profile` ของ `Customer`
+            CustomerGetImageURL()
+
             // `GET` "/customers/img/id/{id}" : ใช้สำหรับ ดึงรูป `Profile` ของ `Customer`
-            CustomerOpenImage()
+            //CustomerOpenImage()
 
             // `GET` "/customers/name/{name}" ใช้สำหรับ ดึงขอมูล ของ `Customer` โดยใช้หมายเลข `User Name` ในการขอ
             CustomerByUserName()
