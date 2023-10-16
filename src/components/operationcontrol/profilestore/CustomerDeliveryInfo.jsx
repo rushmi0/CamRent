@@ -17,6 +17,7 @@ function CustomerDeliveryInfo() {
                              alt="Profile picture"/>
                         <h2 className="text-center text-2xl font-semibold mt-3">User1</h2>
                         <p className="text-center text-gray-600 mt-1">#21394</p>
+                        <p className="text-center text-green-700 mt-1">Renting</p>
                         <div className="flex justify-center mt-5">
                             <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">ดูหน้าโปรไฟล์</a>
                         </div>
