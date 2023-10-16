@@ -1,0 +1,18 @@
+#bgImg {
+    background-image: url('https://images.unsplash.com/photo-1589872338621-8f85acadd204?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
+    background-position: center;
+    background-size: cover;
+}
+
+.registerBox {
+    @apply flex  opacity-95 flex-col justify-center items-center w-auto mx-auto my-auto p-[3rem] rounded shadow-lg bg-slate-100
+}
+
+.infoInput {
+    @apply input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5
+}
+
+
+form h3 {
+    @apply text-lg mb-2
+}

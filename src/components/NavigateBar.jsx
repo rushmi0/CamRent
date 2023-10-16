@@ -23,10 +23,10 @@ function classNames(...classes) {
 
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-[#2c4450] top-0 z-50 sticky">
+    <Disclosure as="nav" className="bg-[#5a6680] top-0 sticky z-50">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -63,7 +63,7 @@ export default function Example() {
                           item.current
                             ? "text-white underline"
                             : "text-gray-300 hover:bg-gray-500 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                          "rounded-md px-3 py-2 text-sm font-bold"
                         )}
                         aria-current={item.current ? "page" : undefined}
                         active={window.location.pathname == item.href ? item.current=true: item.current=false}
@@ -77,12 +77,12 @@ export default function Example() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
                   <HiOutlineShoppingCart
-                    className="h-6 w-6"
+                    className="h-6 w-6 text-white"
                     aria-hidden="true"
                   />
                 </button>
@@ -139,13 +139,13 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/login"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Sign out
+                            Sign In
                           </a>
                         )}
                       </Menu.Item>
