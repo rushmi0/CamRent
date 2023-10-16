@@ -7,9 +7,9 @@ import classes from "./Banner.module.css";
 
 
 //png
-import bannerImg1 from "../../assets/Homepage/bannerImg1.png";
-import bannerImg2 from "../../assets/Homepage/bannerImg2.png";
-import bannerImg3 from "../../assets/Homepage/bannerImg3.png";
+import bannerImg1 from "../../assets/Homepage/bannerimg1.png";
+import bannerImg2 from "../../assets/Homepage/bannerimg2.png";
+import bannerImg3 from "../../assets/Homepage/bannerimg3.png";
 
 
 function Banner() {

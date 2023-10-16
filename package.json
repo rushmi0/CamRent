@@ -21,8 +21,7 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
     "reactjs-popup": "^2.0.6",
-    "react-password-strength-bar": "^0.4.1",
-    "react-router-dom": "^6.15.0"
+    "react-password-strength-bar": "^0.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
