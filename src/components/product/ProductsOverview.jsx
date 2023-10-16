@@ -1,8 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ProductDetail from "./ProductsDetail.jsx";
 import ProductsDetail from "./ProductsDetail.jsx";
+import axios from 'axios';
+
+
 
 const ProductsOverview = () => {
+    // const [productData, setProductData] = useState(null);
+    //
+    // const fetchProductData = async () => {
+    //     try {
+    //         const userID = 1;
+    //         const url = `http://127.0.0.1:8080/api/v1/customers/id/${userID}`;
+    //         const response = await axios.get(url);
+    //         setProductData(response.data);
+    //     } catch (error) {
+    //         console.error('Error fetching product data:', error);
+    //     }
+    // };
+    //
+    // useEffect(() => {
+    //     fetchProductData();
+    // }, []);
+
+
     return (
         <>
             <div className="container mx-auto mt-6">
@@ -53,7 +74,6 @@ const ProductsOverview = () => {
                                 </a>
                             </div>
                         </div>
-
                     </div>
                     <div>
                         <div
@@ -108,8 +128,8 @@ const ProductsOverview = () => {
                                     </div>
 
                                     <div className="flex">
-                                        <button className="btn btn-success mr-3">RENT</button>
-                                        <button className="btn btn-info">Add to cart</button>
+                                        <button className="bg-[#5a6680] px-6 py-3 text-lg font-medium text-white">RENT</button>
+                                        <button className="ml-2 bg-[#5a6680] px-6 py-3 text-lg font-medium text-white">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
