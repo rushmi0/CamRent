@@ -1,0 +1,37 @@
+
+//    val idBytes = maxCustomerId?.stringToSignedIntArray()
+//    println(Arrays.toString(idBytes))
+
+
+//    transaction {
+//        // SELECT
+//        val result: Query = CustomersTable.selectAll()
+//
+//        // SELECT WHERE
+//        val filteredResult = CustomersTable.select { customerID eq "CTM-00013" }.toList()
+//
+//        // SELECT MAX
+//        val maxCustomerID = CustomersTable.slice(customerID.max()).selectAll()
+//            .single()[customerID.max()].toString()
+//
+//        // SELECT MIN
+//        val minCustomerID = CustomersTable.slice(customerID.min()).selectAll()
+//            .single()[customerID.min()].toString()
+//
+//        // SELECT SUM
+//        val sumOfCustomerIDs = CustomersTable.slice(customerID.sum()).selectAll()
+//            .single()[customerID.sum()].toString()
+//
+//        // Print results
+//        println("SELECT All: $result")
+//        println("SELECT WHERE: $filteredResult")
+//        println("MAX CustomerID: $maxCustomerID")
+//        println("MIN CustomerID: $minCustomerID")
+//        println("SUM of CustomerIDs: $sumOfCustomerIDs")
+//
+//        val prefix = maxCustomerID.substring(0, 4)
+//        val suffix = maxCustomerID.substring(4)
+//        val newID = prefix + (suffix.toInt() + 1).DectoLittleEndian(3)
+//        newID
+//        //println("Prefix: $prefix \n Suffix: ${ (suffix.toInt() +1).DectoLittleEndian(3) }")
+//    }

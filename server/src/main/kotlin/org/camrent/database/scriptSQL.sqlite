@@ -1,0 +1,373 @@
+-- [ People Table ]
+CREATE TABLE IF NOT EXISTS People
+(
+    PersonID    INTEGER PRIMARY KEY AUTOINCREMENT,
+    FirstName   TEXT        DEFAULT 'N/A',
+    LastName    TEXT UNIQUE DEFAULT 'N/A',
+    Email       TEXT UNIQUE DEFAULT 'N/A',
+    PhoneNumber TEXT UNIQUE DEFAULT 'N/A',
+    AddressID   INTEGER,
+
+    FOREIGN KEY (AddressID) REFERENCES Address (AddressID)
+);
+
+-- [ Customers Table ]
+CREATE TABLE IF NOT EXISTS Customers
+(
+    CustomerID        INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserName          TEXT NOT NULL UNIQUE,
+    ProfileImage      TEXT     DEFAULT 'N/A',
+    AuthKey           TEXT     DEFAULT 'N/A',
+    TimeStamp         DATETIME DEFAULT 'N/A',
+    CreateAccountDate DATETIME DEFAULT 'N/A',
+    PersonID          INTEGER,
+
+    FOREIGN KEY (PersonID) REFERENCES People (PersonID)
+);
+
+-- [ Stores Table ]
+CREATE TABLE IF NOT EXISTS Stores
+(
+    StoreID           INTEGER PRIMARY KEY AUTOINCREMENT,
+    StoreName         TEXT NOT NULL UNIQUE,
+    ProfileImage      TEXT     DEFAULT 'N/A',
+    PaymentMethod     TEXT     DEFAULT 'Lightning Network',
+    AuthKey           TEXT     DEFAULT 'N/A',
+    TimeStamp         DATETIME DEFAULT 'N/A',
+    CreateAccountDate DATETIME DEFAULT 'N/A',
+    PersonID          INTEGER,
+
+    FOREIGN KEY (PersonID) REFERENCES People (PersonID)
+);
+
+-- [ Address Table ]
+CREATE TABLE IF NOT EXISTS Address
+(
+    AddressID    INTEGER PRIMARY KEY AUTOINCREMENT,
+    LocationName TEXT NOT NULL DEFAULT 'N/A',
+    City         TEXT NOT NULL DEFAULT 'N/A',
+    Province     TEXT NOT NULL DEFAULT 'N/A',
+    PostalNumber TEXT NOT NULL DEFAULT 'N/A',
+    StreetName   TEXT NOT NULL DEFAULT 'N/A'
+);
+
+-- [ CreditScore Table ]
+CREATE TABLE IF NOT EXISTS CreditScore
+(
+    ScoreID    INTEGER PRIMARY KEY AUTOINCREMENT,
+    Score      INTEGER DEFAULT 0,
+    StoreID    INTEGER,
+    CustomerID INTEGER,
+
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+);
+
+-- [ OrderContract Table ]
+CREATE TABLE IF NOT EXISTS OrderContract
+(
+    OrderID    INTEGER PRIMARY KEY AUTOINCREMENT,
+    Quantity   INTEGER DEFAULT 0,
+    Duration   TEXT    DEFAULT 'N/A',
+    CustomerID INTEGER,
+    AddressID  INTEGER,
+    ProductID  INTEGER,
+
+    FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+    FOREIGN KEY (AddressID) REFERENCES Address (AddressID)
+);
+
+-- [ Transactions Table ]
+CREATE TABLE IF NOT EXISTS Transactions
+(
+    TxID       INTEGER PRIMARY KEY AUTOINCREMENT,
+    TotalPrice INTEGER NOT NULL DEFAULT 0,
+    Status     TEXT             DEFAULT 'Pending', -- 'Pending'  / 'Confirmed'
+    TimeStamp  DATETIME         DEFAULT 'N/A',
+    Date       DATETIME         DEFAULT 'N/A',
+    OrderID    INTEGER,
+
+    FOREIGN KEY (OrderID) REFERENCES OrderContract (OrderID)
+);
+
+-- [ Products Table ]
+CREATE TABLE IF NOT EXISTS Products
+(
+    ProductID   INTEGER PRIMARY KEY AUTOINCREMENT,
+    ProductName TEXT NOT NULL,
+    Image1      TEXT          DEFAULT 'N/A',
+    Image2      TEXT          DEFAULT 'N/A',
+    Image3      TEXT          DEFAULT 'N/A',
+    Image4      TEXT          DEFAULT 'N/A',
+    Type        TEXT          DEFAULT 'N/A',          -- Compact, Mirrorless, DSLR
+    Price       INTEGER       DEFAULT 0,
+    SpecDetail  TEXT          DEFAULT 'N/A',
+    Description TEXT          DEFAULT 'N/A',
+    Status      TEXT NOT NULL DEFAULT ' Unavailable', -- Unavailable/ Available
+    StoreID     INTEGER,
+
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID)
+);
+
+-- [ FineTable ]
+CREATE TABLE IF NOT EXISTS Fine
+(
+    FineID      INTEGER PRIMARY KEY AUTOINCREMENT,
+    Description TEXT          DEFAULT 'N/A',
+    Image1      TEXT          DEFAULT 'N/A',
+    Image2      TEXT          DEFAULT 'N/A',
+    Image3      TEXT          DEFAULT 'N/A',
+    Image4      TEXT          DEFAULT 'N/A',
+    PenaltyFee  INTEGER       DEFAULT 0,
+    TimeStamp   DATETIME      DEFAULT 'N/A',
+    Date        DATETIME      DEFAULT 'N/A',
+    Status      TEXT NOT NULL DEFAULT 'Pending',
+    StoreID     INTEGER,
+    ProductID   INTEGER,
+    CustomerID  INTEGER,
+
+    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+    FOREIGN KEY (StoreID) REFERENCES Stores (StoreID),
+    FOREIGN KEY (ProductID) REFERENCES Products (ProductID)
+);
+
+
+-- [ คำสั่งลบตาราง ]
+-- DROP TABLE IF EXISTS People;
+-- DROP TABLE IF EXISTS Customers;
+-- DROP TABLE IF EXISTS Stores;
+-- DROP TABLE IF EXISTS Address;
+-- DROP TABLE IF EXISTS CreditScore;
+-- DROP TABLE IF EXISTS OrderContract;
+-- DROP TABLE IF EXISTS Transactions;
+-- DROP TABLE IF EXISTS Products;
+-- DROP TABLE IF EXISTS Fine;
+
+-- DELETE FROM Products WHERE ProductID = 1;
+-- DELETE FROM Products WHERE ProductID = 2;
+-- DELETE FROM Products WHERE ProductID = 3;
+-- DELETE FROM Products WHERE ProductID = 4;
+-- DELETE FROM Products WHERE ProductID = 5;
+
+
+-- เพิ่มข้อมูลลงใน Products Table
+INSERT INTO Products (ProductName, Image1, Image2, Image3, Image4, Type, Price, SpecDetail, Description, Status,
+                      StoreID)
+VALUES ('กล้อง Canon 123', 'image1_canon123.jpg', 'image2_canon123.jpg', 'image3_canon123.jpg', 'image4_canon123.jpg',
+        'DSLR', 15000, 'Resolution: 24MP, ISO Range: 100-6400',
+        'กล้อง Canon 123 ที่มีความละเอียด 24MP และ ISO Range 100-6400', 'Available', 1),
+
+       ('กล้อง Nikon XYZ', 'image1_nikonxyz.jpg', 'image2_nikonxyz.jpg', 'image3_nikonxyz.jpg', 'image4_nikonxyz.jpg',
+        'Mirrorless', 18000, 'Resolution: 30MP, ISO Range: 100-12800',
+        'กล้อง Nikon XYZ ที่มีความละเอียด 30MP และ ISO Range 100-12800', 'Available', 2),
+
+       ('กล้อง Sony ABC', 'image1_sonyabc.jpg', 'image2_sonyabc.jpg', 'image3_sonyabc.jpg', 'image4_sonyabc.jpg',
+        'Mirrorless', 21000, 'Resolution: 28MP, ISO Range: 100-25600',
+        'กล้อง Sony ABC ที่มีความละเอียด 28MP และ ISO Range 100-25600', 'Available', 3),
+
+       ('กล้อง Panasonic DEF', 'image1_panasonicdef.jpg', 'image2_panasonicdef.jpg', 'image3_panasonicdef.jpg',
+        'image4_panasonicdef.jpg', 'Compact', 12000, 'Resolution: 20MP, Zoom: 10x',
+        'กล้อง Panasonic DEF ที่มีความละเอียด 20MP และซูม 10 เท่า', 'Available', 1),
+
+       ('กล้อง Nikon XYZ', 'image1_nikonxyz.jpg', 'image2_nikonxyz.jpg', 'image3_nikonxyz.jpg', 'image4_nikonxyz.jpg',
+        'Mirrorless', 18000, 'Resolution: 30MP, ISO Range: 100-12800',
+        'กล้อง Nikon XYZ ที่มีความละเอียด 30MP และ ISO Range 100-12800', 'Available', 2),
+
+       ('กล้อง Sony ABC', 'image1_sonyabc.jpg', 'image2_sonyabc.jpg', 'image3_sonyabc.jpg', 'image4_sonyabc.jpg',
+        'Mirrorless', 21000, 'Resolution: 28MP, ISO Range: 100-25600',
+        'กล้อง Sony ABC ที่มีความละเอียด 28MP และ ISO Range 100-25600', 'Available', 3),
+
+       ('กล้อง Panasonic DEF', 'image1_panasonicdef.jpg', 'image2_panasonicdef.jpg', 'image3_panasonicdef.jpg',
+        'image4_panasonicdef.jpg', 'Compact', 12000, 'Resolution: 20MP, Zoom: 10x',
+        'กล้อง Panasonic DEF ที่มีความละเอียด 20MP และซูม 10 เท่า', 'Available', 1),
+
+       ('กล้อง Panasonic DEF', 'image1_panasonicdef.jpg', 'image2_panasonicdef.jpg', 'image3_panasonicdef.jpg',
+        'image4_panasonicdef.jpg', 'Compact', 12000, 'Resolution: 20MP, Zoom: 10x',
+        'กล้อง Panasonic DEF ที่มีความละเอียด 20MP และซูม 10 เท่า', 'Available', 1),
+
+       ('กล้อง Olympus UVW', 'image1_olympusuvw.jpg', 'image2_olympusuvw.jpg', 'image3_olympusuvw.jpg',
+        'image4_olympusuvw.jpg', 'Compact', 10000, 'Resolution: 18MP, Zoom: 8x',
+        'กล้อง Olympus UVW ที่มีความละเอียด 18MP และซูม 8 เท่า', 'Available', 2);
+
+
+-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --
+
+
+UPDATE Products
+SET ProductName = 'กล้อง Canon PowerShot G7X Mark III',
+    Image1      = 'src/main/resources/demo/img/camera/compact/Canon PowerShot G7X Mark III/canon_g7x_mark_ii_1670463918_a95ce52a_progressive.jpeg',
+    Image2      = 'src/main/resources/demo/img/camera/compact/Canon PowerShot G7X Mark III/canon_gx_mark_ii_1672110796_369ce747_progressive.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/compact/Canon PowerShot G7X Mark III/canon_powershot_g7x_mark_ii_1680141258_e746e717_progressive.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/compact/Canon PowerShot G7X Mark III/canon_powershot_g7x_mark_iii_1627395379_aec749f1_progressive.jpg',
+    Type        = 'Compact',
+    Price      = 10000,
+    SpecDetail = 'Resolution: 20MP, Zoom: 4x, ISO Range: 100-12800',
+    Description = 'กล้อง Canon PowerShot G7X Mark III ที่มีความละเอียด 20MP และซูม 4 เท่า และ ISO Range 100-12800'
+WHERE ProductID = 1;
+
+UPDATE Products
+SET ProductName = 'กล้อง Fujifilm X100V',
+    Image1      = 'src/main/resources/demo/img/camera/compact/Fujifilm X100V/Fujifilm X100V.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/compact/Fujifilm X100V/KSK07235.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/compact/Fujifilm X100V/KSK07244.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/compact/Fujifilm X100V/KSK07271.jpg',
+    Type        = 'Compact',
+    Price      = 12000,
+    SpecDetail = 'Resolution: 30MP, Zoom: 8x, ISO Range: 100-12800',
+    Description = 'กล้อง Fujifilm X100V ที่มีความละเอียด 30MP และซูม 8 เท่า และ ISO Range 100-12800'
+WHERE ProductID = 2;
+
+UPDATE Products
+SET ProductName = 'กล้อง Ricoh GR III',
+    Image1      = 'src/main/resources/demo/img/camera/compact/Ricoh GR III/maxresdefault (2).jpg',
+    Image2      = 'src/main/resources/demo/img/camera/compact/Ricoh GR III/Ricoh GR III.webp',
+    Image3      = 'src/main/resources/demo/img/camera/compact/Ricoh GR III/ricoh_gr_iii_07.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/compact/Ricoh GR III/ricoh_gr_iii_12.jpg',
+    Type        = 'Compact',
+    Price      = 15000,
+    SpecDetail = 'Resolution: 90MP, Zoom: 18x, ISO Range: 100-3800',
+    Description = 'กล้อง Ricoh GR III ที่มีความละเอียด 90MP และซูม 18 เท่า และ ISO Range 100-3800'
+WHERE ProductID = 3;
+
+
+
+UPDATE Products
+SET ProductName = 'กล้อง Canon EOS R5',
+    Image1      = 'src/main/resources/demo/img/camera/dslr/Canon EOS R5/13cd3c59af2bd7103d29768675506508.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/dslr/Canon EOS R5/92e7d3a9884040254a175764e548d517.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/dslr/Canon EOS R5/608d09cd1111779ff46ac5b6d0ad33ef.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/dslr/Canon EOS R5/Canon EOS series Z7.jpeg',
+    Type        = 'DSLR',
+    Price      = 20000,
+    SpecDetail = 'Resolution: 20MP, Zoom: 9x ISO Range: 100-87900',
+    Description = 'กล้อง Canon EOS R5 ที่มีความละเอียด 20MP และซูม 9 เท่า และ ISO Range 100-87900'
+WHERE ProductID = 4;
+
+
+UPDATE Products
+SET ProductName = 'กล้อง Nikon Z7',
+    Image1      = 'src/main/resources/demo/img/camera/dslr/Nikon Z7/08b12533997892a62bba7007c064e62e.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/dslr/Nikon Z7/514a9ff8d14b56d31d316b8432df21c3.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/dslr/Nikon Z7/6861bb9ac73c80067f6827a6d94982d4.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/dslr/Nikon Z7/9035f124d9ab6802ccd1693dcffa7421.jpg',
+    Type        = 'DSLR',
+    Price      = 25000,
+    SpecDetail = 'Resolution: 24MP, Zoom: 4x ISO Range: 100-6400',
+    Description = 'กล้อง Nikon Z7 ที่มีความละเอียด 24MP และซูม 4 เท่า และ ISO Range 100-6400'
+WHERE ProductID = 5;
+
+UPDATE Products
+SET ProductName = 'กล้อง Sony Alpha A1',
+    Image1      = 'src/main/resources/demo/img/camera/dslr/Sony Alpha A1/939956d68087fdc5dd08dd5eedd74c46.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/dslr/Sony Alpha A1/b671c803ae1cd964da56698b542cc262.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/dslr/Sony Alpha A1/bc6bdc345a8795c2d3d4e5966c337c73.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/dslr/Sony Alpha A1/Sony Alpha A1.jpeg',
+    Type        = 'DSLR',
+    Price      = 30000,
+    SpecDetail = 'Resolution: 30MP, Zoom: 20x ISO Range: 100-92800',
+    Description = 'กล้อง Sony Alpha A1 ที่มีความละเอียด 30MP และซูม 20 เท่า และ ISO Range 100-92800'
+WHERE ProductID = 6;
+
+
+UPDATE Products
+SET ProductName = 'กล้อง Fujifilm X-E4',
+    Image1      = 'src/main/resources/demo/img/camera/mirrorless/Fujifilm X-E4/0dc4c11c1952e417255ee69bcf73c80a.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/mirrorless/Fujifilm X-E4/7d11456699d74cd7022fd1ae31106cca.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/mirrorless/Fujifilm X-E4/8e7a0afa29485e7a7da0506bbbbce3cd.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/mirrorless/Fujifilm X-E4/e8d3c234d948d57b0ee640c40656bf34.jpg',
+    Type        = 'Mirrorless',
+    Price      = 15000,
+    SpecDetail = 'Resolution: 20MP, Zoom: 3x ISO Range: 100-12800',
+    Description = 'กล้อง Fujifilm X-E4 ที่มีความละเอียด 20MP และซูม 3 เท่า และ ISO Range 100-12800',
+    StoreID = 1
+WHERE ProductID = 7;
+
+UPDATE Products
+SET ProductName = 'กล้อง Panasonic Lumix GH5',
+    Image1      = 'src/main/resources/demo/img/camera/mirrorless/Panasonic Lumix GH5/1fe2ceef65d759f8ebd31a316b37076e.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/mirrorless/Panasonic Lumix GH5/98e63e446fb4722e497dc75e728507b9.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/mirrorless/Panasonic Lumix GH5/b337ed02918dd051736f39009e7c0e9c.jpg',
+    Image4      = 'N/A',
+    Type        = 'Mirrorless',
+    Price     = 20000,
+    SpecDetail = 'Resolution: 24MP, Zoom: 5x ISO Range: 100-6400',
+    Description = 'กล้อง Panasonic Lumix GH5 ที่มีความละเอียด 24MP และซูม 5 เท่า และ ISO Range 100-6400',
+    StoreID = 1
+WHERE ProductID = 8;
+
+UPDATE Products
+SET ProductName = 'กล้อง Sony Alpha A6500',
+    Image1      = 'src/main/resources/demo/img/camera/mirrorless/Sony Alpha A6500/7d8988a855625afae2ea2da50e1a0de4.jpg',
+    Image2      = 'src/main/resources/demo/img/camera/mirrorless/Sony Alpha A6500/99b4be896da3e2943f39edd4b115ac4a.jpg',
+    Image3      = 'src/main/resources/demo/img/camera/mirrorless/Sony Alpha A6500/d8c97d458c463518482c74d7f5e10261.jpg',
+    Image4      = 'src/main/resources/demo/img/camera/mirrorless/Sony Alpha A6500/daa78ee0eafcee444a6340ad61d97b29.jpg',
+    Type        = 'Mirrorless',
+    Price      = 25000,
+    SpecDetail = 'Resolution: 30MP, Zoom: 10x ISO Range: 100-12800',
+    Description = 'กล้อง Sony Alpha A6500 ที่มีความละเอียด 30MP และซูม 10 เท่า และ ISO Range 100-12800',
+    StoreID = 1
+WHERE ProductID = 9;
+
+
+-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --
+
+UPDATE Stores
+SET
+    StoreName = 'ShotPro',
+    ProfileImage = 'src/main/resources/demo/img/shotpro.jpg'
+WHERE StoreID = 1;
+
+
+SELECT name
+FROM sqlite_master
+WHERE type = 'table';
+
+
+SELECT *
+FROM Products;
+
+SELECT *
+FROM Stores;
+
+SELECT *
+FROM Customers;
+
+SELECT *
+FROM People;
+
+SELECT *
+FROM Address;
+
+-- DELETE  FROM Customers
+-- WHERE CustomerID = 1;
+
+-- DELETE FROM Products
+-- WHERE ProductID = 8;
+
+UPDATE Customers
+SET ProfileImage = 'src/main/resources/images/preview/18.jpg'
+WHERE CustomerID = 1;
+
+SELECT CustomerID
+FROM Customers
+WHERE AuthKey = 'npub1qqtl9z9ypazwu2uy52fx6j8m3zadadanjs4sctdxdul70anyrampcc2urs2j';
+
+
+SELECT *
+FROM Customers
+WHERE PersonID = 1;
+
+SELECT *
+FROM Products
+WHERE StoreID = 1;
+
+SELECT *
+FROM Products
+WHERE ProductID = 1;
+
+
+SELECT *
+FROM Customers
+ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
+
