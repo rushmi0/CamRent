@@ -49,7 +49,7 @@ export default function Sidebar() {
                             </svg>
                             <a href="./ChargeFine" className="font-semibold">ChargeFine</a>
                         </li>
-                        <a href="#" className="flex justify-center mt-20 px-5 w-full bg-[#EC5252] rounded-full py-1.5 text-white">Sign Out
+                        <a href="/login" className="flex justify-center mt-20 px-5 w-full bg-[#EC5252] rounded-full py-1.5 text-white">Sign Out
                         </a>
                     </ul>
                 </div>

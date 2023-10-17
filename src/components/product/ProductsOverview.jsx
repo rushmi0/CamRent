@@ -122,9 +122,115 @@ const ProductsOverview = () => {
                                         </div>
                                     </div>
 
+                                    <p className="text-lg">Price: ฿ 10000/hr</p>
+
                                     <div className="flex">
-                                        <button className="bg-[#5a6680] px-6 py-3 text-lg font-medium text-white">RENT</button>
-                                        <button className="ml-2 bg-[#5a6680] px-6 py-3 text-lg font-medium text-white">Add to cart</button>
+                                        <button className="bg-[#5a6680] px-6 py-3 text-lg font-medium text-white"
+                                                onClick={() => document.getElementById("my_modal_3").showModal()}
+                                        >RENT</button>
+                                        <dialog id="my_modal_3" className="modal">
+                                            <div className="modal-box">
+                                                <form>
+                                                    <div className="grid grid-cols-2">
+                                                        <h3>First Name</h3>
+                                                        <h3>Last Name</h3>
+                                                    </div>
+                                                    <div className="grid grid-cols-2 gap-4">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="FIRST NAME"
+                                                            className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                            required
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            placeholder="LAST NAME"
+                                                            className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                            required
+                                                        />
+                                                    </div>
+
+                                                    <h3>Address Line 1</h3>
+                                                    <input
+                                                        type="text"
+                                                        placeholder=". . ."
+                                                        className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                        required
+                                                    />
+                                                    <h3>Address Line 2</h3>
+                                                    <input
+                                                        type="text"
+                                                        placeholder=". . ."
+                                                        className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                    />
+                                                    <h3>Town/City</h3>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="TOWN/CITY"
+                                                        className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                        required
+                                                    />
+                                                    <div className="grid grid-cols-2">
+                                                        <h3>Post Code</h3>
+                                                        <h3>Phone Number</h3>
+                                                    </div>
+                                                    <div className="grid grid-cols-2 gap-4">
+                                                        <input
+                                                            type="number"
+                                                            placeholder="POST CODE"
+                                                            className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                            required
+                                                        />
+
+                                                        <input
+                                                            type="number"
+                                                            placeholder="+66"
+                                                            className="input input-bordered w-full bg-slate-200 mb-2 p-2 xl:p-5"
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="flex justify-between ">
+                                                        <p className="text-xl">Cash</p>
+                                                        <input type="checkbox" className="toggle toggle-success" />
+                                                    </div>
+                                                    <div className="flex justify-between ">
+                                                        <p className="text-xl">Mobile Banking</p>
+                                                        <input type="checkbox" className="toggle toggle-success" />
+                                                    </div>
+                                                    <div className="flex justify-between ">
+                                                        <p className="text-xl">Promptpay</p>
+                                                        <input type="checkbox" className="toggle toggle-success" />
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center mt-5">
+
+                                                        <button className="btn btn-success w-[200px] rounded text-lg text-white hover:border-4 hover:border-green-200 border-0 "
+                                                                onClick={() => {
+                                                                    alert("Success!!"); window.location.href('/Customerrentorders');
+                                                                } }
+                                                        >
+
+                                                            Confirm
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <form method="dialog" className="modal-backdrop">
+                                                <button>close</button>
+                                            </form>
+                                        </dialog>
+                                        <button className="ml-2 bg-[#5a6680] px-6 py-3 text-lg font-medium text-white"
+                                                onClick={() => document.getElementById("my_modal_2").showModal()}
+                                        >Add to cart</button>
+                                        <dialog id="my_modal_2" className="modal">
+                                            <div className="modal-box">
+                                                <h3 className="font-bold text-lg">Added!</h3>
+                                                <p className="py-4">Successfully added to cart!</p>
+                                            </div>
+                                            <form method="dialog" className="modal-backdrop">
+                                                <button>close</button>
+                                            </form>
+                                        </dialog>
                                     </div>
                                 </div>
                             </div>

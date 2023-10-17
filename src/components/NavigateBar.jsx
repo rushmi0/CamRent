@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-
+import { useNavigate } from "react-router-dom";
 //icons
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -21,6 +21,10 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const navigate = useNavigate();
+  const toCart = () => {
+      navigate('/Cart')
+  }
   return (
     <Disclosure as="nav" className="bg-[#5a6680] top-0 sticky z-50">
       {({ open }) => (
@@ -77,6 +81,9 @@ export default function Example() {
                 <button
                   type="button"
                   className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={() =>
+                      toCart()
+                  }
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -85,6 +92,7 @@ export default function Example() {
                     aria-hidden="true"
                   />
                 </button>
+
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -122,19 +130,7 @@ export default function Example() {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <a

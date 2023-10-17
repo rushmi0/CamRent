@@ -87,7 +87,7 @@ function ProfileStore() {
                                                 Address
                                             </dt>
                                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                ที่ไหนสักที่ ที่ไหนสักที่ ที่ไหนสักที่
+                                                1771/1 ถ. พัฒนาการ แขวงสวนหลวง เขตสวนหลวง กรุงเทพมหานคร 10250
                                             </dd>
                                         </div>
                                     </dl>
