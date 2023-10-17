@@ -121,7 +121,8 @@ function AddNewProduct() {
             Save
           </button>
           <button
-            type="button"
+              id="CancelButton"
+            type="cancel"
             className="remove-btn bg-red-600 hover:bg-blue-700 text-white font-bold w-14 h-8 ml-2 mb-4 mt-4 lg:col-span-1"
           >
             <span>Clear</span>

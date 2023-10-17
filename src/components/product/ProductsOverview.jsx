@@ -31,7 +31,7 @@ const ProductsOverview = () => {
                     <div className="carousel carousel-center rounded-box">
                         <div id="slide1" className="carousel-item relative w-full">
                             <img
-                                src="https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                 className="w-full"
                             />
                             <div
@@ -46,7 +46,7 @@ const ProductsOverview = () => {
                         </div>
                         <div id="slide2" className="carousel-item relative w-full">
                             <img
-                                src="https://images.unsplash.com/photo-1494168684379-764b46e4be02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2046&q=80"
+                                src="https://www.zoomcamera.net/wp-content/uploads/2019/08/Canon-PowerShot-G7-X-Mark-III-Digital-Camera-5.jpg"
                                 className="w-full"
                             />
                             <div
@@ -61,7 +61,7 @@ const ProductsOverview = () => {
                         </div>
                         <div id="slide3" className="carousel-item relative w-full">
                             <img
-                                src="https://images.unsplash.com/photo-1495707902641-75cac588d2e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                src="https://www.ec-mall.com/wp-content/uploads/2019/08/Canon-PowerShot-G7-X-Mark-III_5-768x768.jpg"
                                 className="w-full"
                             />
                             <div
@@ -80,17 +80,12 @@ const ProductsOverview = () => {
                             className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                             <div className="lg:col-span-2 lg:pr-8">
                                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                                    Nikon Z7
+                                    Canon PowerShot G7X Mark III
                                 </h1>
 
                                 <div className="space-y-6 mt-7">
                                     <p className="text-base text-gray-900">
-                                        Nikon Z7
-                                        เรือธงใหม่ของค่ายนิคอนที่เป็นกล้องฟูลเฟรมมิลเอลร์เลสรุ่นแรกของค่ายที่มาพร้อมกับ
-                                        Z6
-                                        ที่มีสเปคเป็นรองกว่าพี่ใหญ่ทั้งจุดโฟกัสและรายละเอียดเล็กๆน้อยรวมถึงราคาที่ห่างกัน
-                                        เพื่อเป็นการทำความรู้จักกับ Z7 ให้ดีมากขึ้น
-                                        ลองไปดูรายละเอียดกันว่าจุดเด่นจุดแข็งของพี่ใหญ่คนนี้เป็นอย่างไร
+                                        Canon PowerShot G7 X Mark III ขนาดกะทัดรัดให้ความสามารถที่น่าตื่นเต้นจากบริการ Live Streaming * โดยตรงไปยัง YouTube ™ไปจนถึงการถ่ายวิดีโอแนวตั้งในมือของคุณ ความละเอียด 20.1 ล้านพิกเซล เซ็นเซอร์ CMOS  ขนาด 1.0 นิ้ว Processor DIGIC 8 ที่ทรงพลังช่วยในการสร้างคุณภาพสูง
                                     </p>
 
                                     <div className="mt-10">
@@ -105,22 +100,22 @@ const ProductsOverview = () => {
                                             >
                                                 <li className="text-gray-400">
                           <span className="text-gray-600">
-                            ราคาเฉพาะบอดี้ 170,000 บาท
+                            เซ็นเซอร์ CMOS Stacked ขนาด 1″ ความละเอียด 20.1 ล้านพิกเซล
                           </span>
                                                 </li>
                                                 <li className="text-gray-400">
                           <span className="text-gray-600">
-                            45.7 ล้านพิคเซล เซนเซอร์ฟูลเฟรม CMOS
+                            DIGIC 8 Image Processor
                           </span>
                                                 </li>
                                                 <li className="text-gray-400">
                           <span className="text-gray-600">
-                            จุดโฟกัส 493 จุด ระบบ Hybrid AF
+                            เลนส์ซูมออปติคอล 4.2x (24-100 มม. f / 1.8-2.8)
                           </span>
                                                 </li>
                                                 <li className="text-gray-400">
                           <span className="text-gray-600">
-                            ถ่ายภาพต่อเนื่องได้ 9 fps
+                            วิดีโอ 4K 30p
                           </span>
                                                 </li>
                                             </ul>

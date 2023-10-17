@@ -19,7 +19,7 @@ function ProfileStore() {
 
                             <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md rounded-2xl mr-3">
                                 <div className="flex justify-between">
-                                    <span className="text-xl font-semibold block">Welcome to, Tududu Dora</span>
+                                    <span className="text-xl font-semibold block">Welcome to, Somsri</span>
                                 </div>
                                 {/*<span className="text-gray-600">Change your profile avatar here!</span>*/}
                                 <div className="p-8 mx-2 flex justify-center">

@@ -15,10 +15,10 @@ function Shop() {
   const loadDataFunction = async () => {
     try {
       await axios
-        .get("https://fakestoreapi.com/products")
+        .get("http://127.0.0.1:8080/api/v1/product")
         .then((res) => {
           setData(res.data);
-        }) //store data from fakestoreapi to data
+        }) //get data from fakestoreapi to data
         .catch(function (error) {
           if (error.response) {
             // The request was made and the server responded with a status code
@@ -66,8 +66,8 @@ function Shop() {
               {currentPosts.map((val) => (
                 <ShopStyleOne
                   id={val.id}
-                  cate={val.category}
-                  img={val.image}
+                  prod_name={val.name}
+                  img={val.img1}
                   price={val.price}
                 />
               ))}

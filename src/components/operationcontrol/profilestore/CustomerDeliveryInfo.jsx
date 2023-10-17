@@ -19,7 +19,7 @@ function CustomerDeliveryInfo() {
                         <p className="text-center text-gray-600 mt-1">#21394</p>
                         <p className="text-center text-green-700 mt-1">กำลังเช่า</p>
                         <div className="flex justify-center mt-5">
-                            <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">ดูหน้าโปรไฟล์</a>
+                            <a href="/profile" className="text-blue-500 hover:text-blue-700 mx-3">ดูหน้าโปรไฟล์</a>
                         </div>
                         <div className="mt-5">
                             <h3 className="text-xl font-semibold">ชื่อผู้เช่า</h3>
