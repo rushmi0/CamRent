@@ -1,8 +1,8 @@
 package org.camrent.database.field
 
 data class ProductsField(
-    val productID: Int,
-    val productName: String,
+    val id: Int,
+    val name: String,
     val image1: String,
     val image2: String,
     val image3: String,
