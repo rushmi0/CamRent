@@ -14,9 +14,13 @@ import java.io.File
 fun Application.configureRouting() {
     install(StatusPages) {
         exception<Throwable> { call, cause ->
-            call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
+            call.respondText(
+                text = "500: $cause",
+                status = HttpStatusCode.InternalServerError
+            )
         }
     }
+
     routing {
 
         route("api/v1") {
@@ -27,7 +31,7 @@ fun Application.configureRouting() {
             SignUpNewAccount()
         }
 
-        get ("/") {
+        get("/") {
             val file = File("src/main/resources/images/preview/start/Start_Server.jpg")
 
             // ตรวจสอบว่าไฟล์มีอยู่จริงหรือไม่

@@ -13,7 +13,7 @@ import org.camrent.utils.ShiftTo.getImageFileName
 
 fun Route.ProductGet() {
 
-    get("product") {
+    get("products") {
 
         try {
 

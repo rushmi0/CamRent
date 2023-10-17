@@ -18,18 +18,13 @@ fun Application.productsRoute() {
 
         route("api/v1") {
 
-            // `GET` "/product" : ใช้เรียกดูรายการสินค้า ทั้งหมดในฐานข้อมูล
+            // `GET` "/products" : ใช้เรียกดูรายการสินค้า ทั้งหมดในฐานข้อมูล
             ProductGet()
 
             // `GET` "/product/id/{id}"
             ProductGetProductByID()
 
             // `GET` "/product/store-id/{id}" : ใช้เพื่อหาข้อมูลสินค้าที่มี `StoreID` เท่ากับ หายเลข `ID` ที่รับเข้ามาและคืนค่าเป็น `List objects` ที่พบในฐานข้อมูล
-            /**
-             * SELECT *
-             * FROM Products
-             * WHERE StoreID = ID;
-             * */
             ProductGetProductByStoreID()
 
             // `GET` "/product/id/{id}/idx/{index}/{image}" : ใช้สำหรับ ดึงรูปภาพสินค้าตาม ID ที่ระบุ
@@ -39,7 +34,7 @@ fun Application.productsRoute() {
             ProductPost()
 
             // `POST` "/products/img/id/{id}" : ใช้สำหรับ อัปโหลดรูปภาพสินค้าตาม ID ที่ระบุ
-            ProductUploadImage() // ยังใช้งานไม่ได้
+            // ! ProductUploadImage() // ยังใช้งานไม่ได้
 
             // `PATCH` "/product/id/{id}" ใช้สำหรับ ข้อมูลต่างๆ ยกเว้นรูปตาม ID ที่ระบุ
             ProductPatchByID()
