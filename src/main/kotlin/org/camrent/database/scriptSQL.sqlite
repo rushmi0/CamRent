@@ -312,6 +312,13 @@ WHERE ProductID = 9;
 
 -- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --
 
+UPDATE Stores
+SET
+    StoreName = 'ShotPro',
+    ProfileImage = 'src/main/resources/demo/img/shotpro.jpg'
+WHERE StoreID = 1;
+
+
 SELECT name
 FROM sqlite_master
 WHERE type = 'table';
@@ -339,7 +346,7 @@ FROM Address;
 -- WHERE ProductID = 8;
 
 UPDATE Customers
-SET ProfileImage = 'src/main/resources/images/preview/17.jpg'
+SET ProfileImage = 'src/main/resources/images/preview/18.jpg'
 WHERE CustomerID = 1;
 
 SELECT CustomerID
@@ -363,9 +370,4 @@ WHERE ProductID = 1;
 SELECT *
 FROM Customers
 ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
-
-
-UPDATE Customers
-SET ProfileImage = 'image.jpg'
-WHERE CustomerID = 1;
 
