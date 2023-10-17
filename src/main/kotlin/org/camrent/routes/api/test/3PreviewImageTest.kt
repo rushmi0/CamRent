@@ -45,10 +45,10 @@ fun Route.PreviewImage3() {
         try {
             // ค้นหาที่อยู่ของไฟล์ภาพ โดยการค้นหาที่อยู่ของไฟล์ภาพขึ้นอยู่กับค่า index
             val imagePath = when (index) {
-                1 -> ProductsService.findProductsByID(index)?.image1 // หาก index เป็น 1
-                2 -> ProductsService.findProductsByID(index)?.image2 // หาก index เป็น 2
-                3 -> ProductsService.findProductsByID(index)?.image3 // หาก index เป็น 3
-                4 -> ProductsService.findProductsByID(index)?.image4 // หาก index เป็น 4
+                1 -> ProductsService.findProductsByID(index)?.img1 // หาก index เป็น 1
+                2 -> ProductsService.findProductsByID(index)?.img2 // หาก index เป็น 2
+                3 -> ProductsService.findProductsByID(index)?.img3 // หาก index เป็น 3
+                4 -> ProductsService.findProductsByID(index)?.img4 // หาก index เป็น 4
                 else -> null // หาก index ไม่ตรงกับเงื่อนไขข้างต้น
             }
 

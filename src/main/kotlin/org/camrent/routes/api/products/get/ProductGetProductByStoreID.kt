@@ -22,18 +22,18 @@ fun Route.ProductGetProductByStoreID() {
         val BASE_URL = "http://127.0.0.1:8080/api/v1/"
 
         val dataInfoList = products.mapIndexed { index, product ->
-            val img1 = File(product.image1).name
-            val img2 = File(product.image2).name
-            val img3 = File(product.image3).name
-            val img4 = File(product.image4).name
+            val img1 = File(product.img1).name
+            val img2 = File(product.img2).name
+            val img3 = File(product.img3).name
+            val img4 = File(product.img4).name
 
             ProductsField(
-                productID = product.productID,
-                productName = product.productName,
-                image1 = "${BASE_URL}product/id/$id/idx/img1/${img1.buildUrl()}",
-                image2 = "${BASE_URL}product/id/$id/idx/img2/${img2.buildUrl()}",
-                image3 = "${BASE_URL}product/id/$id/idx/img3/${img3.buildUrl()}",
-                image4 = "${BASE_URL}product/id/$id/idx/img4/${img4.buildUrl()}",
+                id = product.id,
+                name = product.name,
+                img1 = "${BASE_URL}product/id/$id/idx/img1/${img1.buildUrl()}",
+                img2 = "${BASE_URL}product/id/$id/idx/img2/${img2.buildUrl()}",
+                img3 = "${BASE_URL}product/id/$id/idx/img3/${img3.buildUrl()}",
+                img4 = "${BASE_URL}product/id/$id/idx/img4/${img4.buildUrl()}",
                 type = product.type,
                 price = product.price,
                 specDetail = product.specDetail,

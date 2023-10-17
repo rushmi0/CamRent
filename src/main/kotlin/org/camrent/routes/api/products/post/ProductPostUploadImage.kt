@@ -48,10 +48,10 @@ fun Route.ProductUploadImage() {
 
 
             // ดึงชื่อไฟล์รูปภาพของสินค้า
-            val img1 = productData.image1
-            val img2 = productData.image2
-            val img3 = productData.image3
-            val img4 = productData.image4
+            val img1 = productData.img1
+            val img2 = productData.img2
+            val img3 = productData.img3
+            val img4 = productData.img4
 
             // รับข้อมูลจาก multipart request
             val multipart = call.receiveMultipart()
@@ -76,7 +76,7 @@ fun Route.ProductUploadImage() {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image1
                                     // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเพิ่มรูปภาพใหม่
                                     ProductsService.update(
-                                        productData.productID,
+                                        productData.id,
                                         "Image1",
                                         "${imageFile?.absolutePath}"
                                     )
@@ -88,7 +88,7 @@ fun Route.ProductUploadImage() {
                                     if (success) {
                                         // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเปลี่ยนรูปภาพ
                                         ProductsService.update(
-                                            productData.productID,
+                                            productData.id,
                                             "Image1",
                                             "${imageFile?.absolutePath}"
                                         )
@@ -109,7 +109,7 @@ fun Route.ProductUploadImage() {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image2
                                     // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเพิ่มรูปภาพใหม่
                                     ProductsService.update(
-                                        productData.productID,
+                                        productData.id,
                                         "Image2",
                                         "${imageFile?.absolutePath}"
                                     )
@@ -121,7 +121,7 @@ fun Route.ProductUploadImage() {
                                     if (success) {
                                         // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเปลี่ยนรูปภาพ
                                         ProductsService.update(
-                                            productData.productID,
+                                            productData.id,
                                             "Image2",
                                             "${imageFile?.absolutePath}"
                                         )
@@ -142,7 +142,7 @@ fun Route.ProductUploadImage() {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image3
                                     // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเพิ่มรูปภาพใหม่
                                     ProductsService.update(
-                                        productData.productID,
+                                        productData.id,
                                         "Image3",
                                         "${imageFile?.absolutePath}"
                                     )
@@ -154,7 +154,7 @@ fun Route.ProductUploadImage() {
                                     if (success) {
                                         // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเปลี่ยนรูปภาพ
                                         ProductsService.update(
-                                            productData.productID,
+                                            productData.id,
                                             "Image3",
                                             "${imageFile?.absolutePath}"
                                         )
@@ -175,7 +175,7 @@ fun Route.ProductUploadImage() {
                                     // ถ้าไม่มีรูปภาพเดิม (N/A) ใน Image4
                                     // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเพิ่มรูปภาพใหม่
                                     ProductsService.update(
-                                        productData.productID,
+                                        productData.id,
                                         "Image4",
                                         "${imageFile?.absolutePath}"
                                     )
@@ -187,7 +187,7 @@ fun Route.ProductUploadImage() {
                                     if (success) {
                                         // อัปเดตข้อมูลสินค้าในฐานข้อมูลเพื่อเปลี่ยนรูปภาพ
                                         ProductsService.update(
-                                            productData.productID,
+                                            productData.id,
                                             "Image4",
                                             "${imageFile?.absolutePath}"
                                         )

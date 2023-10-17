@@ -23,10 +23,10 @@ fun Route.ProductGetImageURL() {
 
             // ตรวจสอบ index และดึง path ของรูปภาพ
             val imagePath = when (index) {
-                "img1" -> product.image1
-                "img2" -> product.image2
-                "img3" -> product.image3
-                "img4" -> product.image4
+                "img1" -> product.img1
+                "img2" -> product.img2
+                "img3" -> product.img3
+                "img4" -> product.img4
                 else -> null
             }
 

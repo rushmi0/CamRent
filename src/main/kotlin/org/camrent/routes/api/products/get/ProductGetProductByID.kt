@@ -28,20 +28,20 @@ fun Route.ProductGetProductByID() {
             val BASE_URL = "http://127.0.0.1:8080/api/v1/"
 
             // ดึงชื่อไฟล์รูปภาพของสินค้า
-            val img1 = getImageFileName(product.image1)
-            val img2 = getImageFileName(product.image2)
-            val img3 = getImageFileName(product.image3)
-            val img4 = getImageFileName(product.image4)
+            val img1 = getImageFileName(product.img1)
+            val img2 = getImageFileName(product.img2)
+            val img3 = getImageFileName(product.img3)
+            val img4 = getImageFileName(product.img4)
 
             // สร้าง object ของ ProductsField โดยแทนที่ชื่อไฟล์รูปภาพในข้อมูลสำหรับ response ด้วยค่า "N/A" ถ้าชื่อไฟล์เป็น "N/A"
             val dataInfo = ProductsField(
-                productID = product.productID,
-                productName = product.productName,
+                id = product.id,
+                name = product.name,
                 // แทนที่ชื่อไฟล์รูปภาพในข้อมูลสำหรับ response ด้วยค่า "N/A" ถ้าชื่อไฟล์เป็น "N/A"
-                image1 = if (img1 != "N/A") "${BASE_URL}product/id/$id/idx/img1/${img1.buildUrl()}" else "N/A",
-                image2 = if (img2 != "N/A") "${BASE_URL}product/id/$id/idx/img2/${img2.buildUrl()}" else "N/A",
-                image3 = if (img3 != "N/A") "${BASE_URL}product/id/$id/idx/img3/${img3.buildUrl()}" else "N/A",
-                image4 = if (img4 != "N/A") "${BASE_URL}product/id/$id/idx/img4/${img4.buildUrl()}" else "N/A",
+                img1 = if (img1 != "N/A") "${BASE_URL}product/id/$id/idx/img1/${img1.buildUrl()}" else "N/A",
+                img2 = if (img2 != "N/A") "${BASE_URL}product/id/$id/idx/img2/${img2.buildUrl()}" else "N/A",
+                img3 = if (img3 != "N/A") "${BASE_URL}product/id/$id/idx/img3/${img3.buildUrl()}" else "N/A",
+                img4 = if (img4 != "N/A") "${BASE_URL}product/id/$id/idx/img4/${img4.buildUrl()}" else "N/A",
                 type = product.type,
                 price = product.price,
                 specDetail = product.specDetail,
