@@ -24,7 +24,7 @@ function StoreDashboard() {
                                             </svg>
                                         </span>
                                     <p className="ml-2 text-2xl font-semibold text-gray-700 border-b border-gray-200 dark:text-white">
-                                        TOTAL CASH
+                                        รายได้ทั้งหมด
                                     </p>
                                 </div>
                                 <div className="mt-6 text-xl font-bold text-black border-b border-gray-200 md:mt-0 dark:text-white">
@@ -40,7 +40,7 @@ function StoreDashboard() {
                                     25
                                 </p>
                                 <p className="text-sm text-gray-400">
-                                    Total camera rented
+                                    จำนวนการเช่าไปแล้ว
                                 </p>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ function StoreDashboard() {
                                 </span>
                             </div>
                             <p className="text-sm text-gray-400">
-                                Total Price of this month
+                                รายได้ทั้งหมดขของเดือนนี้
                             </p>
                             <span className="absolute p-4 bg-green-500 rounded-full top-2 right-4">
                                     <svg width="40" fill="currentColor" height="40" className="absolute h-4 text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +114,7 @@ function StoreDashboard() {
                                 ฿0
                             </p>
                             <p className="text-sm text-gray-400">
-                                Total charge fine of this month
+                                ค่าปรับทั้งหมดของเดือนนี้
                             </p>
                             <span className="absolute p-4 bg-red-500 rounded-full top-2 right-4">
                                     <svg width="40" fill="currentColor" height="40" className="absolute h-4 text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">

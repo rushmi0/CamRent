@@ -14,11 +14,11 @@ function ManageProduct() {
   return (
     <>
     <form className="p-5 round border">
-      <h1 className="text-4xl">Add New Product</h1>
+      <h1 className="text-4xl">Edit Product</h1>
       <div className="grid md:grid-cols-3 lg:flex space-x-1 lg:justify-center">
         <div className="grid justify-center lg:justify-normal">
           <img
-            src="https://www.digitaltrends.com/wp-content/uploads/2018/10/nikon-z7-review-5179.jpg?resize=1483%2C989&p=1"
+            src="https://www.ec-mall.com/wp-content/uploads/2018/09/Nikon-Z-7-1.jpg"
             alt="profile img"
             className="object-cover w-80"
           />
@@ -53,10 +53,10 @@ function ManageProduct() {
             </div>
           </div> 
           <div className='mx-auto mt-4'>
-          <button
+            <button
             id="SaveButton"
             type="save"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-14 h-8" 
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-14 h-8"
           >
             Save
           </button>

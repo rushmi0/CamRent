@@ -1,8 +1,14 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import {useNavigate} from "react-router-dom";
 
 // Done!
 function ShopList() {
+  const navigate = useNavigate();
+
+  const toShop = () => {
+    navigate('/profilestore')
+  }
   return (
     <>
       <section>
@@ -28,6 +34,7 @@ function ShopList() {
                 placeholder="Search..."
                 className="input input-bordered w-full max-w-xs rounded-full bg-slate-200"
               />
+            <button onClick={toShop} className="rounded-full p-3 bg-base-200">Search</button>
             </div>
             <div className="flex justify-start md:justify-end items-center">
               <h3 className="text-lg font-medium">SORT BY: </h3>

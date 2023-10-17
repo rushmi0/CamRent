@@ -1,13 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 import PasswordStrengthBar from 'react-password-strength-bar';
-
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/Cam_black2.svg";
 import classes from "./SignUp.module.css";
 
 
 function SignUp() {
-  
+  const navigate = useNavigate();
+
+  const toSignIn = () => {
+    navigate("/login")
+  }
   return (
     <>
         <div id={classes.bgImg} className="flex justify-center items-center h-screen">
@@ -19,7 +23,7 @@ function SignUp() {
               className="w-[100px] mb-4"
             />
             <h1 className="text-4xl font-medium mb-[1rem]">Register</h1>
-            <form action="/POST">
+            <form>
               <h3>Username</h3>
               <input
                 type="text"
@@ -118,7 +122,7 @@ function SignUp() {
                   Login
                 </a>
               </label>
-              <button className="btn btn-success w-[200px] rounded-full text-lg text-white hover:border-4 hover:border-green-200 border-0 ">
+              <button className="btn btn-success w-[200px] rounded-full text-lg text-white hover:border-4 hover:border-green-200 border-0 " onClick={toSignIn}>
                 Sign Up
               </button>
               </div>

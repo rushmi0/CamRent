@@ -1,4 +1,5 @@
 import React from 'react';
+import {FaHistory} from "react-icons/fa";
 
 const CustomerProfile = () => {
   return (
@@ -6,7 +7,10 @@ const CustomerProfile = () => {
         <div className="flex bg-white mt-5 shadow-md border-2">
           <div className="md:flex w-2/5 md:w-1/4 h-screen bg-white border-r hidden pt-20">
             <div className="mx-auto py-10">
-              <h1 className="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">CamRent</h1>
+              <a href="http://localhost:5173/">
+                <h1 className="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">CamRent</h1>
+              </a>
+
               <ul>
                 <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,15 +20,15 @@ const CustomerProfile = () => {
                 </li>
                 <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z" />
+                    <FaHistory/>
                   </svg>
-                  <a href="./StoreManagement" className="font-semibold">PRODUCT</a>
+                  <a href="/CustomerHistory" className="font-semibold">HISTORY</a>
                 </li>
                 <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M18.303,4.742l-1.454-1.455c-0.171-0.171-0.475-0.171-0.646,0l-3.061,3.064H2.019c-0.251,0-0.457,0.205-0.457,0.456v9.578c0,0.251,0.206,0.456,0.457,0.456h13.683c0.252,0,0.457-0.205,0.457-0.456V7.533l2.144-2.146C18.481,5.208,18.483,4.917,18.303,4.742 M15.258,15.929H2.476V7.263h9.754L9.695,9.792c-0.057,0.057-0.101,0.13-0.119,0.212L9.18,11.36h-3.98c-0.251,0-0.457,0.205-0.457,0.456c0,0.253,0.205,0.456,0.457,0.456h4.336c0.023,0,0.899,0.02,1.498-0.127c0.312-0.077,0.55-0.137,0.55-0.137c0.08-0.018,0.155-0.059,0.212-0.118l3.463-3.443V15.929z M11.241,11.156l-1.078,0.267l0.267-1.076l6.097-6.091l0.808,0.808L11.241,11.156z" />
                   </svg>
-                  <a href="./ViewOrder" className="font-semibold">ORDERS</a>
+                  <a href="/customerrentorders" className="font-semibold">ORDERS</a>
                 </li>
                 <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,7 +36,7 @@ const CustomerProfile = () => {
                   </svg>
                   <span className="font-semibold">DASHBOARD</span>
                 </li>
-                <button className="w-full mt-20 bg-[#EC5252] rounded-full py-1.5 text-white pt">Sign Out</button>
+                <a href="/login"><button className="w-full mt-20 bg-[#EC5252] rounded-full py-1.5 text-white pt">Sign Out</button></a>
               </ul>
             </div>
           </div>
@@ -52,7 +56,7 @@ const CustomerProfile = () => {
               <div className="border-b-2 block md:flex">
                 <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
                   <div className="p-8 mx-2 flex justify-center">
-                    <img id="showImage" className="max-w-xs w-41 items-center border rounded-lg" src="http://127.0.0.1:8080/api/v1/customers/img/id/1" alt="" />
+                    <img id="showImage" className="max-w-xs w-41 items-center border rounded-lg" src="https://th.bing.com/th?id=OIP.oLS4rHOOEqv8160l-sfRuAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="" />
                   </div>
 
                   <div className="pb-6">
@@ -77,7 +81,7 @@ const CustomerProfile = () => {
                     <dl>
                       <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">
-                          Full name
+                          Name
                         </dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                           DORA
@@ -85,7 +89,7 @@ const CustomerProfile = () => {
                       </div>
                       <div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">
-                          Store name
+                          Full name
                         </dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                           Tududu Dora
@@ -118,8 +122,10 @@ const CustomerProfile = () => {
                     </dl>
                   </div>
 
-                  <button className=" px-6 py-2 mt-5 mb-5 mr-5 float-right transition ease-in duration-200 uppercase rounded-full hover:bg-red-600 hover:text-white border-2 border-red-600 focus:outline-none text-red-600">
-                    Edit
+                  <button className="px-6 py-2 mt-5 mb-5 mr-5 float-right transition ease-in duration-200 uppercase rounded-full hover:bg-red-600 hover:text-white border-2 border-red-600 focus:outline-none text-red-600">
+                    <a href="/editprofile">
+                      Edit
+                    </a>
                   </button>
 
                 </div>

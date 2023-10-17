@@ -19,8 +19,10 @@ function StoreManagement() {
                                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
+                        <a href="/AddNewProduct">
                         <button
                             className="py-2 px-4 mb-2 bg-transparent text-red-600 font-semibold border border-red-600 rounded hover:bg-red-600 hover:text-white hover:border-transparent transition ease-in duration-200">Add Product</button>
+                        </a>
                     </div>
 
 
@@ -97,11 +99,11 @@ function StoreManagement() {
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                     <div className="flex items-center gap-x-2">
                                                         <img className="object-cover w-8 h-8 rounded-full"
-                                                             src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                                             src="https://www.ec-mall.com/wp-content/uploads/2018/09/Nikon-Z-7-1.jpg"
                                                              alt=""/>
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Rainbow Camera</h2>
-                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">#0001</p>
+                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Nikon Z7</h2>
+                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">Nikon</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -123,15 +125,16 @@ function StoreManagement() {
                                                 </td>
 
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                    กล้องธรรมดาๆ
+                                                    Full-Frame, FX Format, Mirrorless, Nikon, กล้องดิจิตอล
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">
-                                                        <button
-                                                            className="text-blue-700 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                            Edit
-                                                        </button>
-
+                                                        <a href="/editproduct">
+                                                            <button
+                                                                className="text-blue-700 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                                Edit
+                                                            </button>
+                                                        </a>
                                                         <button
                                                             className="text-red-700 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                                             Delete
@@ -152,11 +155,11 @@ function StoreManagement() {
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                     <div className="flex items-center gap-x-2">
                                                         <img className="object-cover w-8 h-8 rounded-full"
-                                                             src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                                             src="https://www.ec-mall.com/wp-content/uploads/2019/10/Canon-EOS-1D-X-Mark-III-1-768x768.jpg"
                                                              alt=""/>
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Blur Camera</h2>
-                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">#0002</p>
+                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Panasonic Lumix DC-G100</h2>
+                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">Panasonic</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -176,7 +179,7 @@ function StoreManagement() {
                                                         <h2 className="text-sm font-normal">กำลังปล่อยเช่า</h2>
                                                     </div>
                                                 </td>
-                                                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">หน้าเบลอ หลังเบลอ
+                                                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Live, Micro Four Thirds, Mirrorless, Panasonic, Vlog
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">
@@ -185,10 +188,10 @@ function StoreManagement() {
                                                             Edit
                                                         </button>
 
-                                                        <button
+                                                        <a href="/RemoveProduct"
                                                             className="text-red-700 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                                             Delete
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -205,11 +208,11 @@ function StoreManagement() {
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                     <div className="flex items-center gap-x-2">
                                                         <img className="object-cover w-8 h-8 rounded-full"
-                                                             src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                                             src="https://www.ec-mall.com/wp-content/uploads/2020/03/Canon-EOS-850D-1-768x768.jpg"
                                                              alt=""/>
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Supan Camera</h2>
-                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">#0003</p>
+                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Olympus OM System OM-5 Mirrorless</h2>
+                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">Olympus</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -230,7 +233,7 @@ function StoreManagement() {
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                    กล้องสุภรรณ
+                                                    Micro Four Thirds, Mirrorless, Olympus, กล้องดิจิตอล
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">
@@ -259,11 +262,11 @@ function StoreManagement() {
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                     <div className="flex items-center gap-x-2">
                                                         <img className="object-cover w-8 h-8 rounded-full"
-                                                             src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                                             src="https://www.ec-mall.com/wp-content/uploads/2022/08/Fujifilm-Instax-Mini-EVO-1-510x510.webp"
                                                              alt=""/>
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Film Camera</h2>
-                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">#0004</p>
+                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Fujifilm Instax Mini EVO</h2>
+                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">Fuji</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -284,7 +287,7 @@ function StoreManagement() {
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                    No caption
+                                                    Fujifilm, Instax Mini, Polaroid
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">
@@ -313,11 +316,11 @@ function StoreManagement() {
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                     <div className="flex items-center gap-x-2">
                                                         <img className="object-cover w-8 h-8 rounded-full"
-                                                             src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                                             src="https://www.ec-mall.com/wp-content/uploads/2023/09/Olympus-OM-SYSTEM-Tough-TG-7-Waterproof-Camera-6-510x510.webp"
                                                              alt=""/>
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Real Camera</h2>
-                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">#0005</p>
+                                                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Olympus OM SYSTEM Tough TG-7</h2>
+                                                            <p className="text-xs font-normal text-gray-600 dark:text-gray-400">Olympus</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -339,7 +342,7 @@ function StoreManagement() {
                                                     </div>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                    กล้องดีๆสำหรับคนเทสดี
+                                                    Olympus, OM System, Tough TG-7, Waterproof, กล้องดิจิตอล
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center gap-x-6">

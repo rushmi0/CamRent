@@ -9,18 +9,18 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
   }
 
   return (
-    <nav className="mb-[3rem] mt-[3rem] flex justify-center">
+    <nav className="mb-[3rem] mt-[3rem] flex justify-center ">
       <ul className="join">
-      <button className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0" onClick={() => paginate(1)}>First</button>
+      <button className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0 text-white" onClick={() => paginate(1)}>First</button>
   
         {pageNumbers.map((number) => (
           <>
-            <button key={number} className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0" onClick={() => paginate(number)}>
+            <button key={number} className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0 text-white" onClick={() => paginate(number)}>
                 {number}
             </button>
           </>
         ))}
-        <button className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0 " onClick={() => paginate(pageNumbers.length)}>Last</button>
+        <button className="join-item btn bg-[#353535] hover:bg-white hover:text-[#353535] border-0 text-white" onClick={() => paginate(pageNumbers.length)}>Last</button>
       </ul>
     </nav>
   );

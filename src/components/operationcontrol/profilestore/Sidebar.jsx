@@ -5,7 +5,9 @@ export default function Sidebar() {
         <>
             <div className="md:flex w-2/5 md:w-1/4 h-screen bg-white border-r hidden pt-20">
                 <div className="mx-auto py-10">
-                    <h1 className="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">CamRent</h1>
+                    <a href="http://localhost:5173/">
+                        <h1 className="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">CamRent</h1>
+                    </a>
                     <ul>
                         <li className="flex space-x-2 mt-10 cursor-pointer hover:text-[#EC5252] duration-150">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
