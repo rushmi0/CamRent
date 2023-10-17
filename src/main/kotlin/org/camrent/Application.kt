@@ -20,6 +20,7 @@ fun Application.module() {
     configureSecurity()
     configureSerialization()
     configureSockets()
+    configureHTTP()
     routingLayerAPI()
     configureRouting()
 
