@@ -18,7 +18,7 @@ function ShopStyleOne({ id, prod_name, img, price }) {
             </div>
             <div className="flex flex-col justify-center items-center">
               <p className="font-bold text-2xl">{prod_name}</p>
-              <p className="font-medium text-lg">${price}/hr</p>
+              <p className="font-medium text-lg">฿{price}/hr</p>
             </div>
             <Link to="/productdetail" className="btn bg-[#5a6680] border-0 rounded flex text-white hover:bg-[#f7bdb2]">View Details</Link>
           </div>

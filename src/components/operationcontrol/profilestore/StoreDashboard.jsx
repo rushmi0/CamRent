@@ -135,7 +135,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
@@ -187,7 +187,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
@@ -239,7 +239,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
@@ -291,7 +291,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
@@ -343,7 +343,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
@@ -395,7 +395,7 @@ function StoreDashboard() {
                             </p>
                             <div className="flex my-4 space-x-2">
                                 <img className="object-cover w-32 h-32 mx-auto rounded-full"
-                                     src="https://img.freepik.com/premium-photo/funny-ultra-soft-photo-camera-isolated-pink-background-pastel-colors-colorful-poster-banner-cartoon-minimal-air-style-3d-illustration_76964-5273.jpg?w=2000"
+                                     src="https://www.jib.co.th/img_master/product/original/20180828153939_30039_24_1.png"
                                      alt=""/>
                             </div>
                             <div className="dark:text-white">
