@@ -370,4 +370,3 @@ WHERE ProductID = 1;
 SELECT *
 FROM Customers
 ORDER BY CAST(SUBSTR(CustomerID, 5) AS INTEGER);
-
