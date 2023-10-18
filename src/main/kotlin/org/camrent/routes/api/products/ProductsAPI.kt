@@ -18,7 +18,7 @@ fun Application.productsRoute() {
 
         route("api/v1") {
 
-            // `GET` "/products" : ใช้เรียกดูรายการสินค้า ทั้งหมดในฐานข้อมูล
+            // `GET` "/product" : ใช้เรียกดูรายการสินค้า ทั้งหมดในฐานข้อมูล
             ProductGet()
 
             // `GET` "/product/id/{id}"
