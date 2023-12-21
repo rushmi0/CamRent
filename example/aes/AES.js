@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 import { Buffer } from 'buffer';
 
-class AESEncryption {
-    static encrypt(data, sharedKey) {
+const AES = () => {
+    const encrypt = (data, sharedKey) => {
         // Convert JSON data to string
         const jsonString = JSON.stringify(data);
 
@@ -10,7 +10,7 @@ class AESEncryption {
         let iv = crypto.randomFillSync(new Uint8Array(16));
 
         // Create a cipher
-        const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(sharedKey, 'hex'), iv);
+        const cipher = crypto.createCipheriv('aes-256-cbc', sharedKey, iv);
 
         // Encrypt the data
         let encryptedData = cipher.update(jsonString, 'utf8', 'base64');
@@ -23,9 +23,9 @@ class AESEncryption {
         let dataToSend = encryptedData + '?iv=' + ivBase64;
 
         return { dataToSend };
-    }
+    };
 
-    static decrypt(encryptedData, sharedKey) {
+    const decrypt = (encryptedData, sharedKey) => {
         // Split encrypted data and IV
         let [encryptedString, ivBase64] = encryptedData.split('?iv=');
 
@@ -33,35 +33,39 @@ class AESEncryption {
         let ivDecoded = Buffer.from(ivBase64, 'base64');
 
         // Create a decipher
-        const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(sharedKey, 'hex'), ivDecoded);
+        const decipher = crypto.createDecipheriv('aes-256-cbc', sharedKey, ivDecoded);
 
         // Decrypt the data
         let decryptedString = decipher.update(encryptedString, 'base64', 'utf8');
         decryptedString += decipher.final('utf8');
 
         // Parse JSON string to object
-        let decryptedData = JSON.parse(decryptedString);
+        return JSON.parse(decryptedString);
+    };
 
-        return decryptedData;
-    }
-}
+    return {
+        encrypt,
+        decrypt
+    };
+};
+
+export default AES;
 
 // Example usage
-let sharedKey = "8fda492e3522673b0b0561526e4b1b96b3bdf81484ca5a1db4f30125fc04be54";
+let sharedKey = Buffer.from("8fda492e3522673b0b0561526e4b1b96b3bdf81484ca5a1db4f30125fc04be54", 'hex');
 let data = {
     "name": "Mai na",
     "age": 12
 };
 
-console.log(data)
-
+console.log(data);
 
 // Encrypt
-let { dataToSend } = AESEncryption.encrypt(data, sharedKey);
+let { dataToSend } = AES().encrypt(data, sharedKey);
 console.log('Encrypted data:', dataToSend);
 
 // Decrypt
-let decryptedData = AESEncryption.decrypt("W/LwC5hEtdT2P/cyqXkr4hRkCnNDOQrZEgManO5Ruak=?iv=jgYVljNNJZh/Ywycul65Aw==", sharedKey);
+let decryptedData = AES().decrypt("W/LwC5hEtdT2P/cyqXkr4hRkCnNDOQrZEgManO5Ruak=?iv=jgYVljNNJZh/Ywycul65Aw==", sharedKey);
 console.log('Decrypted data:', decryptedData);
 
 // Access only the property
@@ -70,6 +74,7 @@ console.log('Name:', name);
 
 let age = decryptedData.age;
 console.log('Age:', age);
+
 
 
 // let event = {
