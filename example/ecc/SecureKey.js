@@ -30,8 +30,7 @@ const EllipticCurve = () => {
     // ฟังก์ชันสำหรับสร้างคู่คีย์จาก private key
     const generateKeyPair = (privateKey) => {
         let keyPair = ec.keyFromPrivate(privateKey);
-        let pubKey = keyPair.getPublic().encodeCompressed("hex");
-        return pubKey.slice(2, pubKey.length);
+        return keyPair.getPublic().encodeCompressed("hex");
     }
 
     // ฟังก์ชันสำหรับเซ็นข้อความ

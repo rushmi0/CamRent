@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import { Buffer } from 'buffer';
 
 const AES = () => {
+
     const encrypt = (data, sharedKey) => {
         // Convert JSON data to string
         const jsonString = JSON.stringify(data);
