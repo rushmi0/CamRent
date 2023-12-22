@@ -77,7 +77,24 @@ const EllipticCurve = () => {
         return der.toString('hex');
     };
 
+
+    // ฟังก์ชันสำหรับคำนวณคีย์ที่แชร์ระหว่าง Private Key และ Public Key
+    const calculateSharedKey = (privateKey, publicKey) => {
+        const keyPair = ec.keyFromPrivate(privateKey);
+        const otherPublicKey = ec.keyFromPublic(publicKey, 'hex');
+        const sharedKey = keyPair.derive(otherPublicKey.getPublic());
+
+        // ดึงค่าที่แชร์จากข้อมูล
+        const sharedKeyBuffer = Buffer.from(sharedKey.toArray('be'), 'hex');
+
+        // หรือคุณสามารถนำ sharedKeyBuffer ไปใช้ต่อไปได้ตามที่คุณต้องการ
+
+        return sharedKeyBuffer.toString('hex');
+    };
+
+
     return {
+        calculateSharedKey,
         genPrivateKey,
         generateKeyPair,
         signMessage,
@@ -97,14 +114,12 @@ console.log(`Private Key: ${key}`)
 const publickey = ecc.generateKeyPair("a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20")
 console.log(`Public Key: ${publickey}`)
 
-const massage = "a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20"
 
-let sig = "304402204dbe6452e2299a3c3792af796cd250880835ad0d89e40b8058a94abe16c95ae9022030368ee50fdcb7936a2ce2be2ef376fedb8c4f62744774f20755aafb26f08bad"
+// ใช้ calculateSharedKey เพื่อคำนวณคีย์ที่แชร์
+const sharedKey = ecc.calculateSharedKey(
+    "a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20",
+    "02d98ec7e615933c501c64f790e3c516538c1612ced15bdcac9f9db705efb0fac6"
+);
 
-// let verify_sig = ecc.verifySignature(
-//     "03890e341656f3219ad43e0b2bab3cca109c240051242bca92b2e28efa7fecb84b",
-//     "a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20",
-//     "3044022008e8f57ed2e08c5434fa7187c008785e61ed342c1d62bace1f4be18ca94145390220797b7eea7ca62a019f8738bea43d4da98dcef389d7a452540875023ce1d5ab26"
-// )
-//
-// console.log(verify_sig)
+console.log(`Shared Key: ${sharedKey}`);
+
