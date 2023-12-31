@@ -1,6 +1,7 @@
 import elliptic from 'elliptic';
 import sha256 from "./Sha256.js";
 import { Buffer } from 'buffer';
+import AES from "../aes/AES.js";
 
 const EllipticCurve = () => {
 
@@ -107,19 +108,36 @@ const EllipticCurve = () => {
 export default EllipticCurve;
 
 const ecc = EllipticCurve();
+const aes = AES();
 
 const key = ecc.genPrivateKey("1234", "root")
-console.log(`Private Key: ${key}`)
+//console.log(`Private Key: ${key}`)
 
-const publickey = ecc.generateKeyPair("a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20")
+const publickey = ecc.generateKeyPair("e143924567f4a20128f4b3457d97145a7e1922864e9a1cf47d7efff8b7d85979")
 console.log(`Public Key: ${publickey}`)
 
 
 // ใช้ calculateSharedKey เพื่อคำนวณคีย์ที่แชร์
 const sharedKey = ecc.calculateSharedKey(
-    "a66679d60de1659086f2138bd275e1d0ef53f143ca814442eb97b94ca9668a20",
-    "02d98ec7e615933c501c64f790e3c516538c1612ced15bdcac9f9db705efb0fac6"
+    "e143924567f4a20128f4b3457d97145a7e1922864e9a1cf47d7efff8b7d85979",
+    "0347d5cb133e59866bd1adf84adc291bf00fb05e03fb5355deda66e91815e320a8"
 );
+
+const private_key = Buffer.from(sharedKey, 'hex');
 
 console.log(`Shared Key: ${sharedKey}`);
 
+
+let data = {
+    "firstName": "สมหมาย",
+    "lastName": "ใจหมา",
+    "email": "sample1@gmail.com",
+    "phoneNumber": "0987654321",
+    "userType": "Normal"
+}
+
+let {dataToSend} = aes.encrypt(data, private_key);
+console.log('Encrypted data:', dataToSend);
+
+let decryptedData = aes.decrypt(dataToSend, private_key)
+console.log(decryptedData)

@@ -17,13 +17,13 @@ const ImageUpload = () => {
             try {
                 const formData = new FormData();
                 formData.append('file', file);
-                formData.append("Customer", "Profile")
 
-                const apiUrl = 'http://127.0.0.1:8080/api/v1/customers/img/id/1';
+                const apiUrl = 'http://localhost:8080/api/v1/auth/user/upload';
 
                 await axios.post(apiUrl, formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
+                        'Access-Token' : 'eyJ1c2VyTmFtZSI6IkF1cmEiLCJwZXJtaXNzaW9uIjoiZnVsbC1jb250cm9sIiwiZXhwIjo4NjQwMDE3MDM2OTI1NzgzNDMsImlhdCI6MTcwMzY5MjY2NDc0Mywic2lnbmF0dXJlIjoiMzA0NDAyMjA3OTQyYTg1NDQyYjE3ZTAyYjUxMjcwOWY1MjZkZjhhYmIyMjJkZWFiNmVhNjAzODY1ZWI1ZTc3YWNhOGRmNWJjMDIyMDM5YmMzZjBhM2MxZGEwMGUyM2FjMjJiMzQ5MmVkYTBiNjk1NGE1ZTBjYzc0MTQ3MTBhN2RiMDIyMzc4MWU3ODYifQ=='
                     }
                 });
 
