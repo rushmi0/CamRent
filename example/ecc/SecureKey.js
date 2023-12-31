@@ -106,38 +106,3 @@ const EllipticCurve = () => {
 };
 
 export default EllipticCurve;
-
-const ecc = EllipticCurve();
-const aes = AES();
-
-const key = ecc.genPrivateKey("1234", "root")
-//console.log(`Private Key: ${key}`)
-
-const publickey = ecc.generateKeyPair("e143924567f4a20128f4b3457d97145a7e1922864e9a1cf47d7efff8b7d85979")
-console.log(`Public Key: ${publickey}`)
-
-
-// ใช้ calculateSharedKey เพื่อคำนวณคีย์ที่แชร์
-const sharedKey = ecc.calculateSharedKey(
-    "e143924567f4a20128f4b3457d97145a7e1922864e9a1cf47d7efff8b7d85979",
-    "0347d5cb133e59866bd1adf84adc291bf00fb05e03fb5355deda66e91815e320a8"
-);
-
-const private_key = Buffer.from(sharedKey, 'hex');
-
-console.log(`Shared Key: ${sharedKey}`);
-
-
-let data = {
-    "firstName": "สมหมาย",
-    "lastName": "ใจหมา",
-    "email": "sample1@gmail.com",
-    "phoneNumber": "0987654321",
-    "userType": "Normal"
-}
-
-let {dataToSend} = aes.encrypt(data, private_key);
-console.log('Encrypted data:', dataToSend);
-
-let decryptedData = aes.decrypt(dataToSend, private_key)
-console.log(decryptedData)
