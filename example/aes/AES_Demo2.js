@@ -29,6 +29,15 @@ console.log('Encrypted data:', result2);
 
 // ---------------------------------------------------
 
+const data_update_1 = {
+    "email": "rushmathorn@gmail.com",
+    "phoneNumber": "9991113344",
+}
 
+const ref3 = JSON.stringify(data_update_1);
+console.log(ref3);
+
+let result3 = aes.encrypt(ref3, sharedKey);
+console.log('Encrypted data:', result3);
 
 
