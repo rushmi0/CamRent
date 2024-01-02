@@ -11,7 +11,6 @@ const EllipticCurve = () => {
 
     const genPrivateKey = (pass, username) => {
         if (!pass || !username) {
-            // หรือจะทำอย่างอื่นตามที่คุณต้องการ เช่น การโยน error, สร้างค่าเริ่มต้น, ฯลฯ
             throw new Error("Invalid pass or username");
         }
 
@@ -26,15 +25,11 @@ const EllipticCurve = () => {
     }
 
 
-
-
-    // ฟังก์ชันสำหรับสร้างคู่คีย์จาก private key
     const generateKeyPair = (privateKey) => {
         let keyPair = ec.keyFromPrivate(privateKey);
         return keyPair.getPublic().encodeCompressed("hex");
     }
 
-    // ฟังก์ชันสำหรับเซ็นข้อความ
     const signMessage = (msg, privateKey) => {
         // หา hash ของข้อความ
         const msgHash = sha256.hash(msg);
@@ -44,18 +39,16 @@ const EllipticCurve = () => {
         return derEncode(signature);
     };
 
-    // ฟังก์ชันสำหรับกู้คืน public key
     const recoverPublicKey = (msgHash, signature) => {
         const hexToDecimal = (x) => ec.keyFromPrivate(x, 'hex').getPrivate().toString(10);
         return ec.recoverPubKey(hexToDecimal(msgHash), signature, signature.recoveryParam, 'hex');
     };
 
-    // ฟังก์ชันสำหรับตรวจสอบลายเซ็น
     const verifySignature = (pubKey, msgHash, signature) => {
         return ec.verify(msgHash, signature, pubKey);
     };
 
-    // ฟังก์ชันสำหรับทำการ encode ลายเซ็นให้เป็นรูปแบบ DER
+
     const derEncode = (signature) => {
 
         const r = signature.r.toArrayLike(Buffer, 'be', 32);
@@ -79,7 +72,7 @@ const EllipticCurve = () => {
     };
 
 
-    // ฟังก์ชันสำหรับคำนวณคีย์ที่แชร์ระหว่าง Private Key และ Public Key
+    //
     const calculateSharedKey = (privateKey, publicKey) => {
         const keyPair = ec.keyFromPrivate(privateKey);
         const otherPublicKey = ec.keyFromPublic(publicKey, 'hex');
@@ -89,7 +82,6 @@ const EllipticCurve = () => {
         const sharedKeyBuffer = Buffer.from(sharedKey.toArray('be'), 'hex');
 
         // หรือคุณสามารถนำ sharedKeyBuffer ไปใช้ต่อไปได้ตามที่คุณต้องการ
-
         return sharedKeyBuffer.toString('hex');
     };
 

@@ -6,7 +6,12 @@ const AES = () => {
     const encrypt = (data, sharedKey) => {
 
         let iv = crypto.randomFillSync(new Uint8Array(16));
-        const cipher = crypto.createCipheriv('aes-256-cbc', sharedKey, iv);
+
+        const cipher = crypto.createCipheriv(
+            'aes-256-cbc',
+            Buffer.from(sharedKey, 'hex'),
+            iv
+        );
 
         let encryptedData = cipher.update(data, 'utf8', 'base64');
         encryptedData += cipher.final('base64');
