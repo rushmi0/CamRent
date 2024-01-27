@@ -23,7 +23,7 @@ const ImageUpload = () => {
                 await axios.post(apiUrl, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Access-Token' : 'eyJ1c2VyTmFtZSI6IkF1cmEiLCJwZXJtaXNzaW9uIjoiZnVsbC1jb250cm9sIiwiZXhwIjo4NjQwMDE3MDM2OTI1NzgzNDMsImlhdCI6MTcwMzY5MjY2NDc0Mywic2lnbmF0dXJlIjoiMzA0NDAyMjA3OTQyYTg1NDQyYjE3ZTAyYjUxMjcwOWY1MjZkZjhhYmIyMjJkZWFiNmVhNjAzODY1ZWI1ZTc3YWNhOGRmNWJjMDIyMDM5YmMzZjBhM2MxZGEwMGUyM2FjMjJiMzQ5MmVkYTBiNjk1NGE1ZTBjYzc0MTQ3MTBhN2RiMDIyMzc4MWU3ODYifQ=='
+                        'Access-Token' : 'eyJ1c2VyTmFtZSI6IlJ1c2htaTAiLCJwZXJtaXNzaW9uIjoiZWRpdCIsImV4cCI6ODY0MDAwMDAwMDE3MDU0MTM1NTM3NzIsImlhdCI6MTcwNTQxMzY0MDE3Miwic2lnbmF0dXJlIjoiMzA0NTAyMjEwMGQ5YWMzODc2YWMyMzc5NTQyM2Q4ODhmNjZlMjk1Nzc0OWI4YmJmMzhlM2FiNWMwNjgyZmM5Njk1NDIwYjdmYmMwMjIwMGRhNmE4ZWRiNWI0Y2Y4Mjk2MjQwZGEzMGFhOWJjNDAwYTFlYjU2ZDNlNGRjZDc2NGExYmM2ZTVjNmUzMDNiOSJ9'
                     }
                 });
 
