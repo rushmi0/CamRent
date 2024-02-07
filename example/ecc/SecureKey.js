@@ -9,12 +9,9 @@ const EllipticCurve = () => {
     const ec = new elliptic.ec('secp256k1');
     const LIMIT = 7200;
 
-    const genPrivateKey = (pass, username) => {
-        if (!pass || !username) {
-            throw new Error("Invalid pass or username");
-        }
+    const genPrivateKey = (pass) => {
 
-        let encodedValue = Buffer.from(username.toString() + pass.toString());
+        let encodedValue = Buffer.from(pass.toString());
 
         for (let i = 0; i < LIMIT; i++) {
             const hashResult = sha256.hash(encodedValue);
